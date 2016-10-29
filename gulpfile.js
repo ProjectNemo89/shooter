@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
 	postcss = require("gulp-postcss"),
 	precss = require('precss'),
-	postcssImport = require('postcss-import');
+	postcssImport = require('postcss-import'),
+	webpack = require("webpack");
 
 
 
@@ -17,10 +18,19 @@ gulp.task("css", function() {
 	.pipe(gulp.dest('./build/css'));
 });
 
-
+gulp.task('js', function() {
+	webpack(require("./webpack.config.js"), function(err, stats) {
+		if(err) {
+			console.log(err.toString());
+		} else {
+			console.log(stats.toString());
+		}
+	});
+});
 
 gulp.task("default", function() {
-	gulp.watch("./assets/style.css", ["css"]); 
+	gulp.watch("./assets/style.css", ["css"]);
+	gulp.watch("./assets/js/app.js", ["js"]); 
 });
 
 

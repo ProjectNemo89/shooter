@@ -1,7 +1,6 @@
 // $(document).foundation();
 //Google map
-
-   var map;
+     var map;
      var marker;
      var latLng = {lat: 44.574888, lng: 21.141979};
 
