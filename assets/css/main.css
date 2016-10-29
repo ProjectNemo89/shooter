@@ -2,7 +2,6 @@
 =           FONTS            =
 =============================*/
 
-@import 'https://fonts.googleapis.com/css?family=Exo+2:400,700|Roboto&subset=cyrillic-ext,latin-ext';
 abbr {
     font-family: "Exo 2", sans-serif;
     letter-spacing: .05rem;
