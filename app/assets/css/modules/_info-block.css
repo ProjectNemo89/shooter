@@ -1,0 +1,20 @@
+.info-block {
+	max-width: 33.3333%;
+	float: left;
+	padding: 4rem 4rem;
+
+	&:first-child {
+		background: url('../../assets/img/news_left_811x540.jpg') no-repeat center center;
+		background-size: cover;
+	}
+
+	&:last-child {
+	background: url('../../assets/img/news_right_809x540.jpg') no-repeat center center;
+	background-size: cover;
+	}
+
+	&--black {
+		background-color: #161415;
+	}
+}
+

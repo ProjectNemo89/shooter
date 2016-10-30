@@ -1,0 +1,9 @@
+@import "normalize.css";
+@import "css/modules/_mixins.css";
+@import "css/modules/_base.css";
+@import "css/modules/_header.css";
+@import "css/modules/_wrapper.css";
+@import "css/modules/_main-hero.css";
+@import "css/modules/_info-block.css";
+@import "css/modules/_row.css";
+@import "css/modules/_equipment.css";

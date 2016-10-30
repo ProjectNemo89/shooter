@@ -1,0 +1,29 @@
+.main-header {
+	padding-top: 1rem;
+	position: absolute;
+	top: 0;
+	width: 100%;
+
+	&__nav-items {
+		list-style: none;
+	}
+	&__nav-items > li {
+		display: inline-block;
+	}
+
+	&__nav {
+		float: right;
+		padding-right: 2rem;
+	}
+
+	&__logo {
+		float: left;
+	}
+
+	&__logo-img {
+		width: 300px;
+		height: auto;
+		padding-left: 1rem;
+	}
+
+}
