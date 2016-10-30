@@ -1,8 +1,10 @@
+var webpackUglify = require('webpack-uglify-js-plugin');
 
 module.exports = {
 
-	entry: "./assets/js/app.js",
-
+	entry: {
+		app: "./assets/js/app.js"
+	},
 	output: {
 		path: "./build/js",
 		filename: "bundle.js"
@@ -20,5 +22,20 @@ module.exports = {
 			}
 		}
 		]
-	}
+	},
+	plugins: [
+		new webpackUglify({
+ 			cacheFolder: 'assets/js/cached_uglify/',
+			debug: true,
+			minimize: true,
+			sourceMap: false,
+			output: {
+			    comments: false
+			},
+			compressor: {
+			    warnings: false
+			}
+})
+
+	]
 };
