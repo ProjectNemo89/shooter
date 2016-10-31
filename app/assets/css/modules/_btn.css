@@ -1,0 +1,11 @@
+.btn {
+	background-color: $mainBtn;
+	border: none;
+	padding: .8rem 1.7rem;
+	font-family: "Exo 2", sans-serif;
+	font-weight: 400;
+	font-size: .9rem;
+	text-transform: uppercase;
+	color: $fontWhite;
+	cursor: pointer;
+}

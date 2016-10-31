@@ -1,5 +1,7 @@
 @import "normalize.css";
+@import url('https://fonts.googleapis.com/css?family=Exo+2:400,700|Roboto&subset=latin-ext');
 @import "css/modules/_mixins.css";
+@import "css/modules/_variables.css";
 @import "css/modules/_base.css";
 @import "css/modules/_header.css";
 @import "css/modules/_wrapper.css";
@@ -7,3 +9,4 @@
 @import "css/modules/_info-block.css";
 @import "css/modules/_row.css";
 @import "css/modules/_equipment.css";
+@import "css/modules/_btn.css";

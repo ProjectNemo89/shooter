@@ -12,21 +12,59 @@
 
 	&__callout {
 		position: absolute;
-		top: 50%;
-		left: 20%;
-		transform: translateY(-50%);
+
+
+		@mixin atSmall {
+			top: 80%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+
+		@mixin atLarge {
+			top: 28%;
+			left: 15%;
+			transform: none;
+		}
+		
+
 	}
 
 	&__main-heading {
 		text-transform: uppercase;
-		font-size: 3rem;
 		color: #fff;
+		margin-bottom: 0;
+		font-family: "Exo 2", sans-serif;
+		font-weight: 700;
+		text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+
+
+		@mixin atSmall {
+			font-size: 1rem;
+			text-align: center;
+		}
+
+		@mixin atLarge {
+			font-size: 4.5rem;
+			text-align: left;
+		}
 	}
 
 	&__subheading {
+		font-family: "Exo 2", sans-serif;
+		font-weight: 400;
 		text-transform: uppercase;
-		font-size: 2rem;
 		color: #fff;
+		text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+
+		@mixin atSmall {
+			font-size: 1rem;
+			text-align: center;
+		}
+
+		@mixin atLarge {
+			font-size: 2.5rem;
+			text-align: left;
+		}
 	}
 
 	&__info-section {

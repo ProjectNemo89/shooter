@@ -9,6 +9,20 @@
 	}
 	&__nav-items > li {
 		display: inline-block;
+		padding-right: 1rem;
+	}
+	&__nav-items li > a {
+		text-decoration: none;
+		color: $black;
+		font-family: "Exo 2", sans-serif;
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 1.2rem;
+		text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+		&:hover {
+			color: $warmBlack;
+			border-top: 3px solid $fontGold;
+		}
 	}
 
 	&__nav {
@@ -18,6 +32,16 @@
 
 	&__logo {
 		float: left;
+
+		@mixin atSmall {
+			width: 200px;
+			height: auto;
+		}
+
+		@mixin atLarge {
+			width: auto;
+			height: auto;
+		}
 	}
 
 	&__logo-img {
