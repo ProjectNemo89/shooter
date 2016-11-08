@@ -1,0 +1,25 @@
+.equipment {
+	&__items {
+		position: relative;
+		z-index: -1;
+		
+	}
+
+	&__items > img {
+		display: block;
+	}
+
+	&__link {
+		text-decoration: none;
+		color: #fff;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		text-transform: uppercase;
+		transform: translateX(-50%);
+
+	}
+
+	@mixin clearfix;
+
+}

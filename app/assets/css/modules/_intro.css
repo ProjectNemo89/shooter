@@ -1,0 +1,21 @@
+.layer1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: #235aa6;
+    background: linear-gradient(270deg,#235aa6,#26408b);
+    z-index: 99;
+}
+
+.layer2 {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100vh;
+    background-color: #f06449;
+    background: linear-gradient(270deg,#f06449,#ef3636);
+    z-index: 98;
+}

@@ -1,0 +1,43 @@
+.info-block {
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+
+	@mixin atSmall {
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+		padding: 1rem 1.8rem 0;
+		font-size: 0.9rem;
+	}
+
+	@mixin atLarge {
+		width: 33.3333%;
+		max-height: 18.75rem;
+		float: left;
+		padding: 2rem 4rem 3rem;
+		text-align: left;
+		font-size: 1rem;
+	}
+
+	&__heading {
+		font-family: "Exo 2", sans-serif;
+		text-transform: uppercase;
+	}
+
+	&:first-child {
+		background: url('../../assets/img/news_left_811x540.jpg') no-repeat center center;
+		background-size: cover;
+	}
+
+	&:last-child {
+	background: url('../../assets/img/news_right_809x540.jpg') no-repeat center center;
+	background-size: cover;
+	}
+
+	&--black {
+		background-color: $black;
+		color: $fontWhite;
+	}
+
+}
+

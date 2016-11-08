@@ -1,0 +1,53 @@
+.main-header {
+	padding-top: 1rem;
+	position: absolute;
+	top: 0;
+	width: 100%;
+
+	&__nav-items {
+		list-style: none;
+	}
+	&__nav-items > li {
+		display: inline-block;
+		padding-right: 1rem;
+	}
+	&__nav-items li > a {
+		text-decoration: none;
+		color: $fontWhite;
+		font-family: "Exo 2", sans-serif;
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 1.2rem;
+		text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+		&:hover {
+			color: $fontGold;
+			border-top: 3px solid $fontGold;
+		}
+	}
+
+	&__nav {
+		float: right;
+		padding-right: 2rem;
+	}
+
+	&__logo {
+		float: left;
+
+		@mixin atSmall {
+			width: 200px;
+			height: auto;
+		}
+
+		@mixin atLarge {
+			width: auto;
+			height: auto;
+		}
+	}
+
+	&__logo-img {
+		width: 300px;
+		height: auto;
+		padding-left: 1rem;
+	}
+
+}
