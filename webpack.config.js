@@ -25,7 +25,7 @@ module.exports = {
 	},
 	plugins: [
 		new webpackUglify({
- 			cacheFolder: 'assets/js/cached_uglify/',
+ 			cacheFolder: './app/assets/js/cached_uglify/',
 			debug: true,
 			minimize: true,
 			sourceMap: false,
