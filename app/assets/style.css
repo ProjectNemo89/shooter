@@ -1,5 +1,5 @@
 @import "normalize.css";
-@import url('https://fonts.googleapis.com/css?family=Exo+2:400,700|Roboto&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Exo+2:400,700|Kaushan+Script|Roboto&subset=latin-ext');
 @import "css/modules/_mixins.css";
 @import "css/modules/_variables.css";
 @import "css/modules/_base.css";
@@ -10,3 +10,6 @@
 @import "css/modules/_row.css";
 @import "css/modules/_equipment.css";
 @import "css/modules/_btn.css";
+@import "css/modules/_images.css";
+@import "css/modules/_story.css";
+@import "css/modules/_intro.css";

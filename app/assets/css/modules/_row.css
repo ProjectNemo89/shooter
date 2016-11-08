@@ -1,10 +1,23 @@
 .row {
+
+	&--centered {
+			margin: 0 auto;
+			display: block;
+			position: relative;
+	}
+
 	&__column {
+		position: relative;
 		@mixin clearfix;
+		z-index: 5;
 	}
 
 	&__6 {
 		width: 50%;
+	}
+
+	&__8 {
+		width: 66.666667%;
 	}
 
 	&--pull-right {

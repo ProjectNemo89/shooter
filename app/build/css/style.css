@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css?family=Exo+2:400,700|Roboto&subset=latin-ext');/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css *//**
+@import url('https://fonts.googleapis.com/css?family=Exo+2:400,700|Kaushan+Script|Roboto&subset=latin-ext');/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css *//**
  * 1. Change the default font family in all browsers (opinionated).
  * 2. Correct the line height in all browsers.
  * 3. Prevent adjustments of font size after orientation changes in
@@ -238,6 +238,8 @@
   display: none;
 }/*Colors*/* {
 	box-sizing: border-box;
+}body {
+	background-color: #f3f3f3;
 }img {
 	max-width: 100%;
 	height: auto;
@@ -254,14 +256,14 @@
   padding-right: 1rem;
 }.main-header__nav-items li > a{
   text-decoration: none;
-  color: #161415;
+  color: #fcfcfc;
   font-family: "Exo 2", sans-serif;
   text-transform: uppercase;
   font-weight: 700;
   font-size: 1.2rem;
   text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 }.main-header__nav-items li > a:hover{
-  color: #220000;
+  color: #cd926d;
   border-top: 3px solid #cd926d;
 }.main-header__nav{
   float: right;
@@ -282,6 +284,17 @@
   padding-left: 1rem;
 }.wrapper {
 	padding: 0 2rem 0;
+	position: relative
+}.wrapper--lines::after{
+  top: 0;
+  left: 50%;
+  position: absolute;
+  height: 100%;
+  content: "";
+  width: 65%;
+  max-width: 920px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg,rgba(28,29,37,.05) 0,rgba(28,29,37,.05) 1px,transparent 1px,transparent calc(50% - 1px),rgba(28,29,37,.05) calc(50% - 1px),rgba(28,29,37,.05) 50%,transparent 50%,transparent calc(100% - 1px),rgba(28,29,37,.05) calc(100% - 1px),rgba(28,29,37,.05) 100%);
 }.main-hero {
 	position: relative;
 	width: 100%
@@ -303,6 +316,15 @@
     left: 15%;
     transform: none;
   }
+}.main-hero__callout__loader{
+  position: relative;
+}.main-hero__callout__loader__mask{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
 }.main-hero__main-heading{
   text-transform: uppercase;
   color: #fff;
@@ -315,13 +337,12 @@
     text-align: center;
   }
 }@media screen and (min-width: 64rem){.main-hero__main-heading{
-    font-size: 4.5rem;
+    font-size: 4rem;
     text-align: left;
   }
 }.main-hero__subheading{
-  font-family: "Exo 2", sans-serif;
+  font-family: 'Kaushan Script', cursive;
   font-weight: 400;
-  text-transform: uppercase;
   color: #fff;
   text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 }@media screen and (min-width: 18.75rem){.main-hero__subheading{
@@ -329,13 +350,14 @@
     text-align: center;
   }
 }@media screen and (min-width: 64rem){.main-hero__subheading{
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     text-align: left;
   }
 }.main-hero__info-section{
   position: absolute;
   top: 85%;
   padding: 0 2rem;
+  z-index: 5;
 }.info-block {
 	font-family: "Roboto", sans-serif;
 	font-weight: 400
@@ -368,13 +390,21 @@
   background-color: #161415;
   color: #fcfcfc;
 }.row {
+}.row--centered{
+  margin: 0 auto;
+  display: block;
+  position: relative;
 }.row__column{
+  position: relative;
+  z-index: 5;
 }.row__column::after{
   content: "";
   display: table;
   clear: both;
 }.row__6{
   width: 50%;
+}.row__8{
+  width: 66.666667%;
 }.row--pull-right{
   float: right;
 }.row--pull-left{
@@ -414,4 +444,91 @@
 	text-transform: uppercase;
 	color: #fcfcfc;
 	cursor: pointer;
+}.image--shadow {
+    box-shadow: 0 20px 80px 0 rgba(0,0,0,.45);
+}.image--overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #1c1d25;
+	opacity: .6;
+	z-index: 6;
+	max-width: 952px;
+	max-height: 535px;
+	left: 50%;
+	transform: translateX(-50.04%);
+}.story {
+}.story__image{
+  position: relative;
+  z-index: 6;
+  width: 70%;
+  max-width: 949px;
+  max-height: 534px;
+}.story__mask{
+  content: "";
+  width: 0%;
+  height: 100%;
+  max-width: 949px;
+  max-height: 534px;
+  z-index: 6;
+  background: linear-gradient(270deg,rgba(35,90,166,.7),rgba(16,27,59,.7));
+  position: absolute;
+  left: 0;
+}.story__desc{
+  position: absolute;
+  z-index: 7;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 500px;
+  color: #fcfcfc;
+}.story__desc > h1{
+  font-family: "Exo 2", sans-serif;
+  font-size: 2.5rem;
+}.story__desc--left{
+  left: 15%;
+}.story__desc--right{
+  text-align: right;
+  right: 15%;
+}.story__text{
+  font-family: "Exo 2", sans-serif;
+  text-shadow: 5px 5px 11px rgba(74,74,74,.5);
+  color: #fff;
+  font-size: 13rem;
+  line-height: 1;
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  right: -4%;
+  z-index: 7;
+  opacity: 0;
+}.story__text--left{
+  top: -7%;
+  left: -2.5%;
+}.story__text__overlay{
+  color: #fff;
+  opacity: .2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+}.layer1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: #235aa6;
+    background: linear-gradient(270deg,#235aa6,#26408b);
+    z-index: 99;
+}.layer2 {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100vh;
+    background-color: #f06449;
+    background: linear-gradient(270deg,#f06449,#ef3636);
+    z-index: 98;
 }

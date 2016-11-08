@@ -26,6 +26,18 @@
 			transform: none;
 		}
 		
+		&__loader {
+			position: relative;
+
+			&__mask {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 100%;
+				height: 100%;
+				background: #fff;
+			}
+		}
 
 	}
 
@@ -44,15 +56,14 @@
 		}
 
 		@mixin atLarge {
-			font-size: 4.5rem;
+			font-size: 4rem;
 			text-align: left;
 		}
 	}
 
 	&__subheading {
-		font-family: "Exo 2", sans-serif;
+		font-family: 'Kaushan Script', cursive;
 		font-weight: 400;
-		text-transform: uppercase;
 		color: #fff;
 		text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 
@@ -62,7 +73,7 @@
 		}
 
 		@mixin atLarge {
-			font-size: 2.5rem;
+			font-size: 1.8rem;
 			text-align: left;
 		}
 	}
@@ -71,6 +82,7 @@
 		position: absolute;
 		top: 85%;
 		padding: 0 2rem;
+		z-index: 5;
 	}
 }
 

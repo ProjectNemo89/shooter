@@ -50,7 +50,7 @@ gulp.task('refresh', () => {
 
 gulp.task("default", ["refresh"], () => {
 	gulp.watch(["./app/assets/css/modules/*.css", "./app/assets/*.css"], ["css"]);
-	gulp.watch("./app/assets/js/app.js", ["js"], () => sync.reload()); 
+	gulp.watch(["./app/assets/js/app.js", "./app/assets/js/modules/*.js"], ["js"], () => sync.reload()); 
 	gulp.watch("./app/index.html", () => sync.reload());
 });
 

@@ -3,10 +3,10 @@ var webpackUglify = require('webpack-uglify-js-plugin');
 module.exports = {
 
 	entry: {
-		app: "./assets/js/app.js"
+		app: "./app/assets/js/app.js"
 	},
 	output: {
-		path: "./build/js",
+		path: "./app/build/js",
 		filename: "bundle.js"
 
 	},
