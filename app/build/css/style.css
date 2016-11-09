@@ -419,10 +419,16 @@
 
 }.equipment__items{
   position: relative;
-  z-index: -1;
+  overflow: hidden;
 }.equipment__items > img{
   display: block;
+  transition: opacity .5s ease-in, transform .5s ease-in;
+}.equipment__items > img:hover{
+  transform: scale3d(1.1, 1.1, 1);
+  opacity: .98;
 }.equipment__link{
+  font-family: "Exo 2", sans-serif;
+  font-size: 1.5rem;
   text-decoration: none;
   color: #fff;
   position: absolute;
