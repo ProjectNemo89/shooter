@@ -7,52 +7,82 @@ import webpack from 'webpack';
 import del from 'del';
 import sync from 'browser-sync';
 
-const srcCSS = "./app/assets/style.css";
-const destCSS = "./app/build/css";
 const webpackConfig = require("./webpack.config.js");
+
 const syncOpts = {
 	server: {
 		baseDir: 'app'	
 	}	
 };
 
-gulp.task("css", () => {
-	return gulp.src(srcCSS)
-	.pipe(postcss([postcssImport, precss]))
-	.on('error', (err) => {
-		if(err) {
-			console.log(err.toString());
-		}
-		this.emit('end');
-	})
-	.pipe(gulp.dest(destCSS))
-	.pipe(sync.stream());
-});
+const config = {
+	style: {
+		src: "./app/assets/style.css",
+		srcDir: "./app/assets/**/*.css",
+		dest: "./app/build/css"
+	},
+	js: {
+		webpackConfig: require("./webpack.config.js"),
+		srcDir: "./app/assets/js/**/*.js",
+		dest: "./app/build/js/bundle.js"
+	},
+	html: {
+		src: "./app/index.html"
+	}
+}
 
-gulp.task('js', () => {
+gulp.task("dev:style", styleDev);
+gulp.task("dev:scripts", jsDev);
+gulp.task("dev", devWatch);
+gulp.task("prod", gulp.parallel("dev:scripts", styleMin));
+gulp.task("clean", clean);
+gulp.task("dev:refresh", pageRefresh);
+
+
+function styleDev() {
+	return gulp.src(config.style.src)
+			.pipe(postcss([postcssImport, precss]))
+			.pipe(gulp.dest(config.style.dest))
+			.pipe(sync.stream());
+}
+
+function jsDev(done) {
 	webpack(webpackConfig, (err, stats) => {
 		if(err) {
 			console.log(err.toString());
-		} else {
-			console.log(stats.toString());
 		}
 	});
-});
+	done();
+}
 
-gulp.task('clean', () => {
-	del(["./app/build/**", "!./app/build"]);
-});
+function clean() {
+	return del(["./app/build/**", "!./app/build"]);
+}
 
-gulp.task('refresh', () => {
+function pageRefresh() {
+	return sync.reload(config.js.srcDir);
+}
+
+function devWatch() {
 	sync(syncOpts);
-});
+	gulp.watch(config.style.srcDir, gulp.series('dev:style'));
+	gulp.watch(config.js.srcDir, gulp.series("dev:scripts", (done) => {
+		sync.reload();
+		done();
+		})
+	);
+	gulp.watch(config.html.src, (done) => {
+		sync.reload();
+		done();
+	});
+}
 
-
-gulp.task("default", ["refresh"], () => {
-	gulp.watch(["./app/assets/css/modules/*.css", "./app/assets/*.css"], ["css"]);
-	gulp.watch(["./app/assets/js/app.js", "./app/assets/js/modules/*.js"], ["js"], () => sync.reload()); 
-	gulp.watch("./app/index.html", () => sync.reload());
-});
+function styleMin() {
+		return gulp.src(config.style.src)
+			.pipe(postcss([postcssImport, precss]))
+			.pipe(cssmin({compatibility: "ie8"}))
+			.pipe(gulp.dest(config.style.dest))
+}
 
 
 	// .pipe(cssmin({compatibility: "ie8", debug: true}, (details) => {

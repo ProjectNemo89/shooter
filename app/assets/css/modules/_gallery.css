@@ -1,0 +1,32 @@
+.gallery__items {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.gallery__item {
+	margin: 0 1rem 1rem 0;
+	position: relative;
+
+	&:hover {
+		.gallery__item-overlay {
+			width: 100%;
+		}
+	}
+
+	& > img {
+		border-radius: 30%;
+	}
+	
+}
+
+.gallery__item-overlay {
+	position: absolute;
+	width: 0%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: $warmBlack;
+	opacity: .8;
+	transition: width .5s ease-in;
+}

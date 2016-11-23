@@ -14,8 +14,21 @@
 			transform: scale3d(1.1, 1.1, 1);
 			opacity: .98;
 		}
+	}
 
+	&__heading {
+		font-family: "Exo 2", sans-serif;
+		text-align: center;
+		font-size: 3rem;
+		text-transform: uppercase;
+		padding-bottom: 2rem;
+	}
 
+	&__subheading {
+		font-family: "Kaushan Script", cursive;
+		font-size: 1.2rem;
+		text-align: center;
+		color: $fontGold;
 	}
 
 	&__link {

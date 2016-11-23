@@ -12,12 +12,17 @@
 
 	&__callout {
 		position: absolute;
+		text-align: center;
+		top: 10%;
+		left: 50%;
+		transform: translateX(-50%);
 
 
 		@mixin atSmall {
-			top: 80%;
+			top: 10%;
 			left: 50%;
-			transform: translate(-50%,-50%);
+			text-align: left;
+
 		}
 
 		@mixin atLarge {
@@ -52,12 +57,10 @@
 
 		@mixin atSmall {
 			font-size: 1rem;
-			text-align: center;
 		}
 
 		@mixin atLarge {
 			font-size: 4rem;
-			text-align: left;
 		}
 	}
 
@@ -69,20 +72,22 @@
 
 		@mixin atSmall {
 			font-size: 1rem;
-			text-align: center;
 		}
 
 		@mixin atLarge {
 			font-size: 1.8rem;
-			text-align: left;
 		}
 	}
 
 	&__info-section {
-		position: absolute;
+		position: relative;
 		top: 85%;
-		padding: 0 2rem;
-		z-index: 5;
+		padding: 2rem 2rem 0 2rem;
+		z-index: 5; 
+
+		@mixin atSmall {
+			position: absolute;
+		}
 	}
 }
 

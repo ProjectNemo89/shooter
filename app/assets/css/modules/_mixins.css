@@ -9,7 +9,7 @@
 }
 
 @define-mixin atSmall {
-	@media screen and (min-width: 18.75rem) {
+	@media screen and (min-width: 50rem) {
 		@mixin-content;
 	}
 }
