@@ -4,7 +4,7 @@ export const Equipment = () => {
 	return (
 		<div className="wrapper equipment">
 			<section className="equipment row--gutter-smaller-top-btm row">
-				<h2 className="equipment__subheading">Sve što vam je neophodno</h2>
+				<h4 className="equipment__subheading">Sve što vam je neophodno</h4>
 				<h1 className="equipment__heading">GHOST&trade; Oprema</h1>
 				<a className="equipment__items row__6 row--pull-left" href="#">
 					<img src="assets/img/holsters.jpg" alt="Holsteri" />

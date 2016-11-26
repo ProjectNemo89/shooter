@@ -14,6 +14,7 @@
 
 	&__6 {
 		width: 50%;
+		float: left;
 	}
 
 	&__8 {
@@ -29,7 +30,7 @@
 	}
 
 	&--gutter-top {
-		padding-top: 12rem;
+		padding-top: 8rem;
 	}
 
 	&--gutter-smaller-top-btm {

@@ -6,7 +6,8 @@ import postcssImport from 'postcss-import';
 import webpack from 'webpack';
 import del from 'del';
 import sync from 'browser-sync';
-
+import webpackUglify from "webpack-uglify-js-plugin";
+import path from "path";
 const webpackConfig = require("./webpack.config.js");
 
 const syncOpts = {
@@ -22,7 +23,7 @@ const config = {
 		dest: "./app/build/css"
 	},
 	js: {
-		webpackConfig: require("./webpack.config.js"),
+		webpackConfig,
 		srcDir: "./app/assets/js/**/*.js",
 		dest: "./app/build/js/bundle.js"
 	},
@@ -34,7 +35,7 @@ const config = {
 gulp.task("dev:style", styleDev);
 gulp.task("dev:scripts", jsDev);
 gulp.task("dev", devWatch);
-gulp.task("prod", gulp.parallel("dev:scripts", styleMin));
+gulp.task("prod", gulp.parallel(jsProd, styleMin));
 gulp.task("clean", clean);
 gulp.task("dev:refresh", pageRefresh);
 
@@ -47,12 +48,47 @@ function styleDev() {
 }
 
 function jsDev(done) {
-	webpack(webpackConfig, (err, stats) => {
+	//mutiranje konfiguracije
+	const config = configInstance();
+	config.devtool = "source-map";
+	
+	//pokretanje webpack-a
+	const compiler = webpack(config);
+	compiler.run((err, stats) => {
 		if(err) {
 			console.log(err.toString());
 		}
+		console.log(stats.toString({
+			colors: true,
+			exclude: ["node_modules"]
+		}));	
+
 	});
 	done();
+}
+
+function jsProd(done) {
+	const config = configInstance();
+	config.plugins.push(
+		new webpackUglify({
+				cacheFolder: path.resolve('./app/assets/js/cached_uglify/'),
+				debug: true,
+				minimize: true,
+				sourceMap: false,
+				output: {
+					comments: false
+				},
+				compressor: {
+					warnings: false
+				}
+		})	
+	);
+	const compiler = webpack(config);
+	compiler.run((err, stats) => {
+		if(err) console.log(err.toString({colors: true}));
+	});	
+	done();
+
 }
 
 function clean() {
@@ -84,12 +120,8 @@ function styleMin() {
 			.pipe(gulp.dest(config.style.dest))
 }
 
+function configInstance() {
+	const config = webpackConfig.clone();
 
-	// .pipe(cssmin({compatibility: "ie8", debug: true}, (details) => {
-	// 	console.log(details.name + ': ' + details.stats.originalSize + " bytes");
- //        console.log(details.name + ': ' + details.stats.minifiedSize + " bytes");
-	// }))
-
-
-
-
+	return config;
+}

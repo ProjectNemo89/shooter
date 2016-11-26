@@ -1,11 +1,33 @@
 .btn {
 	background-color: $mainBtn;
 	border: none;
-	padding: .8rem 1.7rem;
 	font-family: "Exo 2", sans-serif;
 	font-weight: 400;
-	font-size: .9rem;
 	text-transform: uppercase;
 	color: $fontWhite;
 	cursor: pointer;
+
+	&--hero {
+		@mixin atSmall {
+			margin-top: 3.5rem;
+		}
+
+		@mixin atMedium {
+			margin: 0;
+		}		
+		
+	}
+
+	@mixin atSmall {
+		font-size: .7rem;
+		padding: 1rem 1.7rem;
+	}
+
+	@mixin atLarge {
+		font-size: .9rem;
+		padding: .8rem 1.7rem;
+	}
+
 }
+
+

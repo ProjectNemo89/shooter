@@ -1,47 +1,41 @@
 var webpackUglify = require('webpack-uglify-js-plugin');
+var path = require("path");
 
-module.exports = {
 
-	entry: {
-		app: "./app/assets/js/app.js"
-	},
-	output: {
-		path: "./app/build/js",
-		filename: "bundle.js"
+function config() {
+	return {
+		devtool: "source-map",
+		entry: {
+			app: path.resolve("./app/assets/js/app.js")
+		},
+		output: {
+			path: path.join(__dirname, "app/build", "js"),
+			filename: "bundle.js"
 
-	},
+		},
 
-	module: {
-		loaders: [
-		{
-			test: /\.js$/,
-			loader: "babel-loader",
-			exclude: /node_modules/,
-			query: {
-				presets: ["es2015", "react"]
-			}
+		module: {
+			loaders: [
+				{
+					test: /\.js$/,
+					loader: "babel-loader",
+					exclude: /node_modules/,
+					query: {
+						presets: ["es2015", "react"]
+					}
+				}
+			]
+		},
+		plugins: [],
+
+		devServer: {
+			inline: true,
+			hot: true,
+			contentBase: "./app"
 		}
-		]
-	},
-	plugins: [
-		new webpackUglify({
- 			cacheFolder: './app/assets/js/cached_uglify/',
-			debug: true,
-			minimize: true,
-			sourceMap: false,
-			output: {
-			    comments: false
-			},
-			compressor: {
-			    warnings: false
-			}
-})
+	};
+}
 
-	],
+module.exports = config();
+module.exports.clone = config;
 
-	devServer: {
-		inline: true,
-		hot: true,
-		contentBase: "./app"
-	}
-};

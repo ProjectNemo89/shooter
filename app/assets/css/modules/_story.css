@@ -1,5 +1,18 @@
 .story {
-	
+
+	& > h1 {
+		font-family: "Exo 2", sans-serif;
+		text-align: center;
+		text-transform: uppercase;
+		padding-bottom: 4rem;
+	}
+
+	& > h4 {
+		font-family: "Kaushan script", cursive;
+		text-align: center;
+		color: $fontGold;
+	}
+
 	&--left {
 		transform: translateX(25px);
 	}

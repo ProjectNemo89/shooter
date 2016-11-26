@@ -22,5 +22,4 @@ ReactDOM.render(routes, document.querySelector(".app"));
 const intro = new Intro();
 const overlays = new Overlay();
 
-console.log("Tess");
 

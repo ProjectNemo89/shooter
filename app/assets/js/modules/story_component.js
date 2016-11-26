@@ -4,6 +4,8 @@ export const Story = () => {
 	return (
 		<div className="wrapper">
 			<section className="story row row--gutter-top wrapper--lines">
+				<h4>Brzina, snaga i moć</h4>
+				<h1>Glavni moto obuke</h1>
 				<div className="row__column story--left">
 					<div className="row row--centered">
 						<div className="story__image row row--centered" data-overlay-1>
