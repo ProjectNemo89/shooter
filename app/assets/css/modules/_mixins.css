@@ -21,7 +21,7 @@
 }
 
 @define-mixin atLarge {
-	@media screen and (min-width: 64rem) {
+	@media screen and (min-width: 75rem) {
 		@mixin-content;
 	}
 }

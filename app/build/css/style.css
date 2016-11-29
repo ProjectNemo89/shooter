@@ -269,7 +269,7 @@
 }.main-header__nav-items{
   list-style: none;
   display: none;
-}@media screen and (min-width: 64rem){.main-header__nav-items{
+}@media screen and (min-width: 75rem){.main-header__nav-items{
     display: block;
   }
 }.main-header__nav-items > li{
@@ -295,7 +295,7 @@
     width: 200px;
     height: auto;
   }
-}@media screen and (min-width: 64rem){.main-header__logo{
+}@media screen and (min-width: 75rem){.main-header__logo{
     width: auto;
     height: auto;
   }
@@ -332,9 +332,11 @@
 }@media screen and (min-width: 18.75rem){.main-hero__callout{
     text-align: center;
   }
-}@media screen and (min-width: 64rem){.main-hero__callout{
+}@media screen and (min-width: 40rem){.main-hero__callout{/*top: 52%;*/
+  }
+}@media screen and (min-width: 75rem){.main-hero__callout{
     text-align: right;
-    top: 45%;
+    top: 48%;
   }
 }.main-hero__callout__loader{
   position: relative;
@@ -360,7 +362,7 @@
     font-size: 2.2rem;
     text-align: center;
   }
-}@media screen and (min-width: 64rem){.main-hero__main-heading{
+}@media screen and (min-width: 75rem){.main-hero__main-heading{
     font-size: 4rem;
     text-align: right;
   }
@@ -379,7 +381,7 @@
     font-size: 1.3rem;
     text-align: center;
   }
-}@media screen and (min-width: 64rem){.main-hero__subheading{
+}@media screen and (min-width: 75rem){.main-hero__subheading{
     font-size: 2rem;
     text-align: right;
   }
@@ -405,7 +407,7 @@
 }@media screen and (min-width: 40rem){.info-section__info-block{
     padding: 8% 10%;
   }
-}@media screen and (min-width: 64rem){.info-section__info-block{
+}@media screen and (min-width: 75rem){.info-section__info-block{
     width: 33.3333%;
     float: left;
     padding: 2% 4%;
@@ -504,7 +506,7 @@
     font-size: .7rem;
     padding: 1rem 1.7rem;
   }
-}@media screen and (min-width: 64rem){.btn{
+}@media screen and (min-width: 75rem){.btn{
     font-size: .9rem;
     padding: .8rem 1.7rem;
   }
@@ -666,7 +668,7 @@
 }@media screen and (min-width: 18.75rem){.about__description > h2{
     text-align: center;
   }
-}@media screen and (min-width: 64rem){.about__description > h2{
+}@media screen and (min-width: 75rem){.about__description > h2{
     text-align: left;
   }
 }@media screen and (min-width: 18.75rem){.about__description{
@@ -676,7 +678,7 @@
     width: 80%;
     text-align: center;
   }
-}@media screen and (min-width: 64rem){.about__description{
+}@media screen and (min-width: 75rem){.about__description{
     padding-right: 13rem;
     float: left;
     width: 50%;
@@ -689,7 +691,7 @@
     margin: 0 auto;
     padding: 0;
   }
-}@media screen and (min-width: 64rem){.about__image{
+}@media screen and (min-width: 75rem){.about__image{
     padding-top: 4rem;
     padding-left: 23%;
     float: left;

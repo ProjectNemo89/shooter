@@ -29,6 +29,9 @@ const config = {
 	},
 	html: {
 		src: "./app/index.html"
+	},
+	vue: {
+		src: "./components/*.vue"
 	}
 }
 
@@ -102,7 +105,7 @@ function pageRefresh() {
 function devWatch() {
 	sync(syncOpts);
 	gulp.watch(config.style.srcDir, gulp.series('dev:style'));
-	gulp.watch(config.js.srcDir, gulp.series("dev:scripts", (done) => {
+	gulp.watch([config.js.srcDir, config.vue.src], gulp.series(jsDev, (done) => {
 		sync.reload();
 		done();
 		})

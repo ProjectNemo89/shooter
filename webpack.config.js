@@ -21,17 +21,26 @@ function config() {
 					loader: "babel-loader",
 					exclude: /node_modules/,
 					query: {
-						presets: ["es2015", "react"]
+						presets: ["es2015"]
 					}
+				},
+				{
+					test: /\.vue$/,
+					loader: "vue-loader"
 				}
 			]
 		},
 		plugins: [],
+		resolve: {
+ 			alias: {
+   				 'vue$': 'vue/dist/vue.common.js'
+  				   }
+		},
 
 		devServer: {
 			inline: true,
 			hot: true,
-			contentBase: "./app"
+			contentBase: "./app/"
 		}
 	};
 }

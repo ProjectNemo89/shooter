@@ -19,10 +19,13 @@
 			text-align: center;
 		}
 
+		@mixin atMedium {
+			/*top: 52%;*/
+		}
+
 		@mixin atLarge {		
 			text-align: right;
-			top: 45%;
-			
+			top: 48%;
 		}
 		
 		&__loader {

@@ -4,7 +4,7 @@
   "description": "Site for IPSC and IDPA promotion",
   "main": "index.html",
   "scripts": {
-    "start": "gulp default"
+    "dev": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +23,8 @@
     "precss": "^1.4.0",
     "react-router-transition": "0.0.6",
     "vue-loader": "^10.0.2",
+    "vue-template-compiler": "^2.1.3",
+    "vue-template-es2015-compiler": "^1.3.2",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2",
     "webpack-uglify-js-plugin": "^1.1.9"
