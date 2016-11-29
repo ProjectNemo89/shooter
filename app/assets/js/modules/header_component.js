@@ -11,7 +11,7 @@ export const Header = () => {
 				<ul className="main-header__nav-items">
 					<li><a href="">Obuka</a></li>
 					<li><Link to="/obuka">Oprema</Link></li>
-					<li><a href="">Kontakt</a></li>
+					<li><Link to="/contact">Kontakt</Link></li>
 				</ul>
 			</nav>
 		</header>

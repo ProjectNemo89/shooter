@@ -1,5 +1,18 @@
 .main-footer {
 	background: #1c1d25;
-	padding: 10rem 0;
+	padding: 5rem 0;
 	width: 100%;
+
+	&__social {
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	&__copyrights {
+		font-family: "Exo 2", sans-serif;
+		color: $fontWhite;
+		text-align: center;
+		font-size: .8rem;
+	}
 }
+

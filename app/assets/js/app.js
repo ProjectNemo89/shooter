@@ -3,7 +3,7 @@ import Overlay from "./modules/overlay";
 import React from "react";
 import { Router, Route, IndexRoute, browserHistory } from "react-router";
 import ReactDOM from "react-dom";
-
+import { Motion, spring } from "react-motion";
 import Main from "./modules/main_component";
 import { MainHero } from "./modules/mainhero_component";
 
@@ -11,9 +11,8 @@ import { MainHero } from "./modules/mainhero_component";
 const routes = (
 	<Router history={browserHistory}>
 		<Route path="/" component={Main}>
-			<Route path="obuka" component={MainHero}></Route>
 		</Route>
-
+		<Route path="/contact" component={MainHero}></Route>
 	</Router>
 );
 
