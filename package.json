@@ -4,7 +4,8 @@
   "description": "Site for IPSC and IDPA promotion",
   "main": "index.html",
   "scripts": {
-    "dev": "webpack-dev-server"
+    "dev": "gulp dev",
+    "build": "gulp prod"
   },
   "author": "",
   "license": "ISC",
