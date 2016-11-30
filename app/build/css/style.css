@@ -690,11 +690,18 @@
   content: "";
   display: table;
   clear: both;
+}.about__wrapper{
+  width: 100%;
+}@media screen and (min-width: 18.75rem){.about__wrapper{
+    padding: 5rem 7% 0;
+  }
+}@media screen and (min-width: 75rem){.about__wrapper{
+    padding: 5rem 20% 0;
+  }
 }.about > h1{
   font-family: "Exo 2", sans-serif;
   text-align: center;
   text-transform: uppercase;
-  padding-bottom: 5rem;
   margin: 0;
 }.about > h4{
   font-family: 'Kaushan Script', cursive;
@@ -719,7 +726,6 @@
     text-align: center;
   }
 }@media screen and (min-width: 75rem){.about__description{
-    padding-right: 13rem;
     float: left;
     width: 50%;
     text-align: left;
@@ -733,7 +739,6 @@
   }
 }@media screen and (min-width: 75rem){.about__image{
     padding-top: 4rem;
-    padding-left: 23%;
     float: left;
   }
 }.icons {

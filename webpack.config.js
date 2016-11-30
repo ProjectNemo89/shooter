@@ -32,8 +32,13 @@ function config() {
 		},
 		plugins: [],
 		resolve: {
+			root: path.resolve(__dirname),
+			extensions: ['', '.js'],
  			alias: {
-   				 'vue$': 'vue/dist/vue.common.js'
+   				 'vue$': 'vue/dist/vue.common.js',
+				  "TweenMax": "gsap/src/uncompressed/TweenMax",
+				  "TweenLite": "gsap/src/uncompressed/TweenMax",
+				  "ScrollToPlugin": "gsap/src/uncompressed/plugins/ScrollToPlugin"
   				   }
 		},
 
