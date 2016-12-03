@@ -1,6 +1,7 @@
 import gulp from 'gulp';
 import postcss from "gulp-postcss";
 import precss from 'precss';
+import autoprefixer from "gulp-autoprefixer";
 import cssmin from 'gulp-clean-css';
 import postcssImport from 'postcss-import';
 import webpack from 'webpack';
@@ -46,6 +47,7 @@ gulp.task("dev:refresh", pageRefresh);
 function styleDev() {
 	return gulp.src(config.style.src)
 			.pipe(postcss([postcssImport, precss]))
+			.pipe(autoprefixer())
 			.pipe(gulp.dest(config.style.dest))
 			.pipe(sync.stream());
 }
@@ -119,6 +121,7 @@ function devWatch() {
 function styleMin() {
 		return gulp.src(config.style.src)
 			.pipe(postcss([postcssImport, precss]))
+			.pipe(autoprefixer({browsers: ['last 2 versions']}))
 			.pipe(cssmin({compatibility: "ie8"}))
 			.pipe(gulp.dest(config.style.dest))
 }

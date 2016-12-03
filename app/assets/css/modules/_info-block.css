@@ -45,6 +45,7 @@
 
 		&--black {
 			background-color: $black;
+			border: 3px solid $black;
 			color: $fontWhite;
 		}
 		

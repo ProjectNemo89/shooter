@@ -16,3 +16,12 @@
 	}
 }
 
+.cls-1 {
+	fill:#c3c3c3;
+} 
+
+.cls-1:hover{
+	fill:#cd926d; 
+	transition: fill .2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+

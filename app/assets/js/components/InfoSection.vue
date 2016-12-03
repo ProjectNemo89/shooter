@@ -6,7 +6,8 @@
             Osnovna obuka rukovanja vatrenim oružjem podrazumeva da pojedinac ili grupa, upoznaju
             Zakon o oružju i municiji, izgrade bezbednosnu kulturu kao jedan od najbitnih segmenata...
             </p>
-            <button class="btn" type="button">pročitaj više</button>
+            <router-link to="/beginners" tag="button" class="btn">pročitaj više</router-link>
+            
         </div>
         <div class="info-section__info-block info-section__info-block--black">
             <h4 class="info-section__info-block__heading">napredna obuka</h4>

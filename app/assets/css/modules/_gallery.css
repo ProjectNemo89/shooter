@@ -1,46 +1,42 @@
 .gallery {
 	width: 100%;
 
+
+	&__heading {
+		font-family: "Exo 2", sans-serif;
+		text-transform: uppercase;
+		text-align: center;	
+	}
+
+	&__subheading {
+		font-family: "Kaushan Script", cursive;
+		color: $fontGold;
+		text-align: center;
+		margin: 0; 
+	}
+
 	&__wrapper {
-		width: 95%;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
 		margin: 0 auto;
+		padding: 2rem 0;
+		column-count: 3;
+		column-gap: 0;	
 	}
 
 	&__item {
-		position: relative;
 		margin: 10px;
+		position: relative;
+		perspective: 800px;
 
-		&__title {
-			position: absolute;
-			width: 100%;
-			left: 0;
-			top: 50%;
-			transform: translateY(-50%);
-			padding: 0 20px;
+		&__wrapper {
 
-			&__heading {
-				text-align: center;
-				margin-left: -50px;
-				font-family: "Exo 2", sans-serif;
-				opacity: 0;
-				text-transform: uppercase;
-				font-size: 2rem;
-				font-weight: 600;
-				color: $fontWhite;
-				transition: margin .6s ease, opacity .6s ease; 
-			}
-		}
-
-		&:before {
+			&::before {
 			content: "";
+			display: block;
 			position: absolute;
-			top: 0;
-			left: 0;
-			bottom: 0;
-			right: 0;
+			top: 10px;
+			left: 10px;
+			bottom: 10px;
+			right: 10px;
 			opacity: 0;
 			transition: left .3s ease, 
 				right .3s ease, 
@@ -49,10 +45,14 @@
 				visibility .3s ease,
 				opacity .3s ease;
 			visibility: hidden;
-			background: -webkit-linear-gradient(left, #554346,#45505b);
-		}
+			background: linear-gradient(to left, #554346,#45505b);
+			z-index: 1;
+
+			}
 	
-		&:hover.gallery__item:before {
+		}
+
+		&:hover .gallery__item__wrapper:before {
 			top: 10px;
 			bottom: 16px;
 			left: 10px;
@@ -65,14 +65,35 @@
 			bottom .3s ease, 
 			visibility .3s ease,
 			opacity .3s ease;
-		}
+			}
 
-		&:hover .gallery__item__title__heading {
-			opacity: 1;
-			margin-left: 0;
-			transition: margin .6s ease, opacity .6s ease; 
-		}
+			&__title {
+				position: absolute;
+				z-index: 2;
+				width: 100%;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				padding: 0 20px;
 
+				&__heading {
+					text-align: center;
+					margin-left: -50px;
+					font-family: "Exo 2", sans-serif;
+					opacity: 0;
+					text-transform: uppercase;
+					font-size: 2rem;
+					font-weight: 600;
+					color: $fontWhite;
+					transition: margin .6s ease, opacity .6s ease; 
+				}
+			}
+
+			&:hover .gallery__item__title__heading {
+				opacity: 1;
+				margin-left: 0;
+				transition: margin .6s ease, opacity .6s ease; 
+			}
 	}
 }
 
