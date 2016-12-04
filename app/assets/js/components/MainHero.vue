@@ -9,7 +9,12 @@
         <div class="main-hero__callout">
             <h1 class="main-hero__main-heading">instruktor praktičnog streljaštva</h1>
             <h2 class="main-hero__subheading">Naučite da bezbedno rukujete oružjem</h2> 
-            <button class="btn btn--hero" type="button">prijavi se za obuku</button> 
+            <div class="btn__wrap">
+                <a class="btn btn--primary" href="#" data-text="pročitaj više">
+                    <span class="btn__overlay"></span>
+                    <span class="btn__text">pročitaj više</span>
+                </a>
+            </div> 
         </div>
     </div>
 </template>

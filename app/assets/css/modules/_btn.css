@@ -1,21 +1,73 @@
+
 .btn {
-	background-color: $mainBtn;
-	border: none;
+	display: block;
+	border-radius: 3px;
+	border: 2px solid transparent;
 	font-family: "Exo 2", sans-serif;
 	font-weight: 400;
+	font-size: .81rem;
 	text-transform: uppercase;
 	color: $fontWhite;
-	cursor: pointer;
+	text-align: center;
+	font-weight: 600;
 
-	&--hero {
-		@mixin atSmall {
-			margin-top: 3.5rem;
-		}
+	&:before{
+		content: attr(data-text);
+		position: absolute;
+		opacity: 0;
+		transform: translate3d(50%,0 ,0);
+		transition: transform .25s ease, opacity .25s ease;
+		z-index: 1;
+	}
 
-		@mixin atMedium {
-			margin: 0;
-		}		
-		
+	&__overlay {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 100%;
+		width: 140%;
+		background-color: #111517;
+		opacity: 0;
+		transform: translate3d(100%, 0, 0) skew(0deg);
+		transition: transform .6s ease, opacity .6s ease;
+
+	}
+	&__text {
+		position: relative;
+		display: inline-block;
+		z-index: 1;
+		transform: translate3d(0%, 0, 0);
+		opacity: 1;
+		transition: transform .25s ease, opacity .25s ease;
+	}
+
+	&__wrap {
+		width: 240px;
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+	}
+
+	&--primary {
+		background-color: $mainBtn;
+	}
+
+	&:hover &__overlay {
+		transform: translate3d(20%, 0, 0) skew(-20deg);
+		opacity: 1;
+		transition: transform .5s ease, opacity .3s ease;
+	}
+
+	&:hover&:before {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+		transition: transform .25s ease, opacity .25s ease;
+	}
+	&:hover &__text {
+		transform: translate3d(-50%, 0, 0);
+		opacity: 0;
+		transition: transform .25s ease, opacity .25s ease;
+
 	}
 
 	@mixin atSmall {

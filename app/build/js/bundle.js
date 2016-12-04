@@ -117,6 +117,7 @@
 			this.layer1 = document.querySelector(".layer1");
 			this.layer2 = document.querySelector(".layer2");
 			this.headingMask = document.querySelector(".main-hero__callout");
+			this.header = document.querySelector(".main-header");
 			this.onLoad();
 		}
 	
@@ -129,6 +130,7 @@
 					TweenMax.to(_this.layer1, 1, { width: 0, ease: Power3.easeInOut });
 					TweenMax.to(_this.layer2, 1, { delay: 1, height: 0, ease: Power3.easeInOut });
 					TweenMax.fromTo(_this.headingMask, 2, { x: "100%", opacity: 0, ease: Power3.easeInOut }, { delay: 1, x: "-50%", opacity: 1, ease: Power3.easeInOut });
+					TweenMax.fromTo(_this.header, 2, { opacity: 0, ease: Power2.easeInOut }, { delay: 2, opacity: 1, ease: Power2.easeInOut });
 				};
 			}
 		}]);
@@ -21208,6 +21210,11 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
 
 /***/ },
 /* 23 */
@@ -21360,12 +21367,19 @@
 	    staticClass: "main-hero__main-heading"
 	  }, ["instruktor praktičnog streljaštva"]), " ", _h('h2', {
 	    staticClass: "main-hero__subheading"
-	  }, ["Naučite da bezbedno rukujete oružjem"]), " ", _h('button', {
-	    staticClass: "btn btn--hero",
+	  }, ["Naučite da bezbedno rukujete oružjem"]), " ", _h('div', {
+	    staticClass: "btn__wrap"
+	  }, [_h('a', {
+	    staticClass: "btn btn--primary",
 	    attrs: {
-	      "type": "button"
+	      "href": "#",
+	      "data-text": "pročitaj više"
 	    }
-	  }, ["prijavi se za obuku"])])
+	  }, [_h('span', {
+	    staticClass: "btn__overlay"
+	  }), " ", _h('span', {
+	    staticClass: "btn__text"
+	  }, ["pročitaj više"])])])])
 	}]}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -21459,6 +21473,20 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	
 	exports.default = {};
 
@@ -21473,35 +21501,55 @@
 	    staticClass: "info-section__info-block"
 	  }, [_h('h4', {
 	    staticClass: "info-section__info-block__heading"
-	  }, ["osnovna obuka"]), " ", _h('p', ["\n        Osnovna obuka rukovanja vatrenim oružjem podrazumeva da pojedinac ili grupa, upoznaju\n        Zakon o oružju i municiji, izgrade bezbednosnu kulturu kao jedan od najbitnih segmenata...\n        "]), " ", _h('router-link', {
-	    staticClass: "btn",
+	  }, ["osnovna obuka"]), " ", _h('p', ["\n        Osnovna obuka rukovanja vatrenim oružjem podrazumeva da pojedinac ili grupa, upoznaju\n        Zakon o oružju i municiji, izgrade bezbednosnu kulturu kao jedan od najbitnih segmenata...\n        "]), " ", _h('div', {
+	    staticClass: "btn__wrap"
+	  }, [_h('router-link', {
+	    staticClass: "btn btn--primary",
 	    attrs: {
+	      "tag": "a",
 	      "to": "/beginners",
-	      "tag": "button"
+	      "data-text": "pročitaj više"
 	    }
-	  }, ["pročitaj više"])]), " ", _vm._m(0), " ", _vm._m(1)])
-	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('div', {
+	  }, [_h('span', {
+	    staticClass: "btn__overlay"
+	  }), " ", _h('span', {
+	    staticClass: "btn__text"
+	  }, ["pročitaj više"])])])]), " ", _h('div', {
 	    staticClass: "info-section__info-block info-section__info-block--black"
 	  }, [_h('h4', {
 	    staticClass: "info-section__info-block__heading"
-	  }, ["napredna obuka"]), " ", _h('p', ["\n        Nakon uspešno savladane osnovne obuke, pojedinac ili grupa prelazi na progresivni\n        nivo obuke, koji podrazumeva složeniju dinamiku i povezivanje svih elemenata...\n        "]), " ", _h('button', {
-	    staticClass: "btn",
+	  }, ["napredna obuka"]), " ", _h('p', ["\n        Nakon uspešno savladane osnovne obuke, pojedinac ili grupa prelazi na progresivni\n        nivo obuke, koji podrazumeva složeniju dinamiku i povezivanje svih elemenata...\n        "]), " ", _h('div', {
+	    staticClass: "btn__wrap"
+	  }, [_h('router-link', {
+	    staticClass: "btn btn--primary",
 	    attrs: {
-	      "type": "button"
+	      "tag": "a",
+	      "to": "/beginners",
+	      "data-text": "pročitaj više"
 	    }
-	  }, ["pročitaj više"])])
-	},function (){var _vm=this;var _h=_vm.$createElement;
+	  }, [_h('span', {
+	    staticClass: "btn__overlay"
+	  }), " ", _h('span', {
+	    staticClass: "btn__text"
+	  }, ["pročitaj više"])])])]), " ", _vm._m(0)])
+	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('div', {
 	    staticClass: "info-section__info-block"
 	  }, [_h('h4', {
 	    staticClass: "info-section__info-block__heading"
-	  }, ["rekreativni program"]), " ", _h('p', ["\n            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n            quis nostrud exercitation ullamco laboris nisi ut.\n        "]), " ", _h('button', {
-	    staticClass: "btn",
+	  }, ["rekreativni program"]), " ", _h('p', ["\n            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n            quis nostrud exercitation ullamco laboris nisi ut.\n        "]), " ", _h('div', {
+	    staticClass: "btn__wrap"
+	  }, [_h('a', {
+	    staticClass: "btn btn--primary",
 	    attrs: {
-	      "type": "button"
+	      "href": "#",
+	      "data-text": "pročitaj više"
 	    }
-	  }, ["pročitaj više"])])
+	  }, [_h('span', {
+	    staticClass: "btn__overlay"
+	  }), " ", _h('span', {
+	    staticClass: "btn__text"
+	  }, ["pročitaj više"])])])])
 	}]}
 	module.exports.render._withStripped = true
 	if (false) {

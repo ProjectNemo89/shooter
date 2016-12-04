@@ -347,6 +347,7 @@
   }
 }.main-hero__main-heading{
   text-transform: uppercase;
+  font-smoothing: antialiased;
   color: #fff;
   margin-bottom: 0;
   font-family: "Exo 2", sans-serif;
@@ -507,21 +508,84 @@
   display: table;
   clear: both;
 }.btn {
-	background-color: #af3a30;
-	border: none;
+	display: block;
+	border-radius: 3px;
+	border: 2px solid transparent;
 	font-family: "Exo 2", sans-serif;
 	font-weight: 400;
+	font-size: .81rem;
 	text-transform: uppercase;
 	color: #fcfcfc;
-	cursor: pointer
+	text-align: center;
+	font-weight: 600
 
-}.btn--hero{
-}@media screen and (min-width: 18.75rem){.btn--hero{
-    margin-top: 3.5rem;
-  }
-}@media screen and (min-width: 40rem){.btn--hero{
-    margin: 0;
-  }
+}.btn:before{
+  content: attr(data-text);
+  position: absolute;
+  opacity: 0;
+  -webkit-transform: translate3d(50%,0 ,0);
+          transform: translate3d(50%,0 ,0);
+  -webkit-transition: opacity .25s ease, -webkit-transform .25s ease;
+  transition: opacity .25s ease, -webkit-transform .25s ease;
+  transition: transform .25s ease, opacity .25s ease;
+  transition: transform .25s ease, opacity .25s ease, -webkit-transform .25s ease;
+  z-index: 1;
+}.btn__overlay{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 140%;
+  background-color: #111517;
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0) skew(0deg);
+          transform: translate3d(100%, 0, 0) skew(0deg);
+  -webkit-transition: opacity .6s ease, -webkit-transform .6s ease;
+  transition: opacity .6s ease, -webkit-transform .6s ease;
+  transition: transform .6s ease, opacity .6s ease;
+  transition: transform .6s ease, opacity .6s ease, -webkit-transform .6s ease;
+}.btn__text{
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  -webkit-transform: translate3d(0%, 0, 0);
+          transform: translate3d(0%, 0, 0);
+  opacity: 1;
+  -webkit-transition: opacity .25s ease, -webkit-transform .25s ease;
+  transition: opacity .25s ease, -webkit-transform .25s ease;
+  transition: transform .25s ease, opacity .25s ease;
+  transition: transform .25s ease, opacity .25s ease, -webkit-transform .25s ease;
+}.btn__wrap{
+  width: 240px;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}.btn--primary{
+  background-color: #ef0d33;
+}.btn:hover .btn__overlay{
+  -webkit-transform: translate3d(20%, 0, 0) skew(-20deg);
+          transform: translate3d(20%, 0, 0) skew(-20deg);
+  opacity: 1;
+  -webkit-transition: opacity .3s ease, -webkit-transform .5s ease;
+  transition: opacity .3s ease, -webkit-transform .5s ease;
+  transition: transform .5s ease, opacity .3s ease;
+  transition: transform .5s ease, opacity .3s ease, -webkit-transform .5s ease;
+}.btn:hover.btn:before{
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  opacity: 1;
+  -webkit-transition: opacity .25s ease, -webkit-transform .25s ease;
+  transition: opacity .25s ease, -webkit-transform .25s ease;
+  transition: transform .25s ease, opacity .25s ease;
+  transition: transform .25s ease, opacity .25s ease, -webkit-transform .25s ease;
+}.btn:hover .btn__text{
+  -webkit-transform: translate3d(-50%, 0, 0);
+          transform: translate3d(-50%, 0, 0);
+  opacity: 0;
+  -webkit-transition: opacity .25s ease, -webkit-transform .25s ease;
+  transition: opacity .25s ease, -webkit-transform .25s ease;
+  transition: transform .25s ease, opacity .25s ease;
+  transition: transform .25s ease, opacity .25s ease, -webkit-transform .25s ease;
 }@media screen and (min-width: 18.75rem){.btn{
     font-size: .7rem;
     padding: 1rem 1.7rem;

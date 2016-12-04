@@ -47,6 +47,10 @@ gulp.task("dev:refresh", pageRefresh);
 function styleDev() {
 	return gulp.src(config.style.src)
 			.pipe(postcss([postcssImport, precss]))
+			.on('error', function(err) {
+				console.log(err.toString());
+				this.emit("end");
+			})
 			.pipe(autoprefixer())
 			.pipe(gulp.dest(config.style.dest))
 			.pipe(sync.stream());

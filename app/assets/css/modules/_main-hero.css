@@ -35,6 +35,7 @@
 
 	&__main-heading {
 		text-transform: uppercase;
+		font-smoothing: antialiased;
 		color: #fff;
 		margin-bottom: 0;
 		font-family: "Exo 2", sans-serif;
