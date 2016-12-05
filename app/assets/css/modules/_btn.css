@@ -2,7 +2,7 @@
 .btn {
 	display: block;
 	border-radius: 3px;
-	border: 2px solid transparent;
+	border-color: transparent;
 	font-family: "Exo 2", sans-serif;
 	font-weight: 400;
 	font-size: .81rem;
@@ -10,6 +10,9 @@
 	color: $fontWhite;
 	text-align: center;
 	font-weight: 600;
+	transform: perspective(1px) scale(1.01);
+	backface-visibility: hidden;
+
 
 	&:before{
 		content: attr(data-text);
@@ -39,6 +42,7 @@
 		transform: translate3d(0%, 0, 0);
 		opacity: 1;
 		transition: transform .25s ease, opacity .25s ease;
+
 	}
 
 	&__wrap {

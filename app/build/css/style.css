@@ -347,12 +347,15 @@
   }
 }.main-hero__main-heading{
   text-transform: uppercase;
-  font-smoothing: antialiased;
   color: #fff;
   margin-bottom: 0;
   font-family: "Exo 2", sans-serif;
   font-weight: 700;
   text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+  -webkit-transform: perspective(1px) scale(1.01);
+          transform: perspective(1px) scale(1.01);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }@media screen and (min-width: 18.75rem){.main-hero__main-heading{
     font-size: 1.5rem;
     text-align: center;
@@ -372,6 +375,10 @@
   text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
   margin-top: 0;
   padding: 1.5rem 0;
+  -webkit-transform: perspective(1px) scale(1.01);
+          transform: perspective(1px) scale(1.01);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }@media screen and (min-width: 18.75rem){.main-hero__subheading{
     font-size: 1.3rem;
     text-align: center;
@@ -510,14 +517,18 @@
 }.btn {
 	display: block;
 	border-radius: 3px;
-	border: 2px solid transparent;
+	border-color: transparent;
 	font-family: "Exo 2", sans-serif;
 	font-weight: 400;
 	font-size: .81rem;
 	text-transform: uppercase;
 	color: #fcfcfc;
 	text-align: center;
-	font-weight: 600
+	font-weight: 600;
+	-webkit-transform: perspective(1px) scale(1.01);
+	        transform: perspective(1px) scale(1.01);
+	-webkit-backface-visibility: hidden;
+	        backface-visibility: hidden
 
 }.btn:before{
   content: attr(data-text);
@@ -902,10 +913,10 @@
   position: relative;
   font-family: "Kaushan Script", cursive;
   margin-top: 0;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   color: #777;
-  font-size: 1.5rem;
-  padding-bottom: 1rem;
+  font-size: 1rem;
+  padding-bottom: 2rem;
 }.contact__data>h3:after{
   content: "";
   position: absolute;
