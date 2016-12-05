@@ -1,5 +1,14 @@
 <template>
     <footer class="main-footer">
+        <div class="main-footer__links">
+            <ul class="main-footer__links__list">
+                <li>IPSC Savez Srbije</li>
+                <li>IPSC International</li>
+                <li>Shooting club JEDINICA, Inđija</li>
+                <li>Klub strelaca Muš</li>
+                <li>Ministarstvo omladine i sporta</li>
+            </ul>
+        </div>
         <div class="main-footer__social">
             <a href="#">
                 <svg class="icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>face-icon</title><path class="cls-1" d="M256,0C114.84,0,0,114.84,0,256S114.84,512,256,512,512,397.15,512,256,397.17,0,256,0Zm63.66,265H278V413.46H216.3V265H187V212.55H216.3V178.61c0-24.3,11.55-62.28,62.28-62.28l45.73,0.18v50.93H291.12c-5.4,0-13.09,2.7-13.09,14.29v30.83h47Z"/></svg>
@@ -9,6 +18,14 @@
             </a>
         </div>
         <div class="main-footer__copyrights">&copy; 2016 Dejan Vukojević</div>
+        <div class="main-footer__contact">
+            <div class="main-footer__contact__tel">
+                <div class="main-footer__contact__tel__label">Adress:</div>
+                <div class="main-footer__contact__tel__number">00381 64 486 006</div>
+            </div>
+            <div class="main-footer__contact__adress"></div>
+            <div class=""main-footer__contact__email></div>
+        </div>
     </footer>
 </template>
 

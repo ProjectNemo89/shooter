@@ -21005,6 +21005,10 @@
 	
 	var _OsnovnaObuka2 = _interopRequireDefault(_OsnovnaObuka);
 	
+	var _NaprednaObuka = __webpack_require__(52);
+	
+	var _NaprednaObuka2 = _interopRequireDefault(_NaprednaObuka);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var routes = exports.routes = [{
@@ -21013,6 +21017,9 @@
 	}, {
 	    path: "/beginners",
 	    component: _OsnovnaObuka2.default
+	}, {
+	    path: "/progresive",
+	    component: _NaprednaObuka2.default
 	}];
 
 /***/ },
@@ -21524,7 +21531,7 @@
 	    staticClass: "btn btn--primary",
 	    attrs: {
 	      "tag": "a",
-	      "to": "/beginners",
+	      "to": "/progresive",
 	      "data-text": "pročitaj više"
 	    }
 	  }, [_h('span', {
@@ -21784,7 +21791,7 @@
 	    staticClass: "wrapper"
 	  }, [_h('section', {
 	    staticClass: "story row row--gutter-top wrapper--lines"
-	  }, [_h('h4', ["Brzina, snaga i moć"]), " ", _h('h1', ["Glavni moto obuke"]), " ", _h('div', {
+	  }, [_h('h4', ["Brzina, snaga i moć"]), " ", _h('h1', ["Moto obuke"]), " ", _h('div', {
 	    staticClass: "row__column story--left"
 	  }, [_h('div', {
 	    staticClass: "row row--centered"
@@ -22435,6 +22442,23 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	"use strict";
 
 /***/ },
@@ -22444,7 +22468,7 @@
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('footer', {
 	    staticClass: "main-footer"
-	  }, [_h('div', {
+	  }, [_vm._m(0), " ", _h('div', {
 	    staticClass: "main-footer__social"
 	  }, [_h('a', {
 	    attrs: {
@@ -22486,8 +22510,30 @@
 	    }
 	  })])])])]), " ", _h('div', {
 	    staticClass: "main-footer__copyrights"
-	  }, ["© 2016 Dejan Vukojević"])])
-	},staticRenderFns: []}
+	  }, ["© 2016 Dejan Vukojević"]), " ", _vm._m(1)])
+	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', {
+	    staticClass: "main-footer__links"
+	  }, [_h('ul', {
+	    staticClass: "main-footer__links__list"
+	  }, [_h('li', ["IPSC Savez Srbije"]), " ", _h('li', ["IPSC International"]), " ", _h('li', ["Shooting club JEDINICA, Inđija"]), " ", _h('li', ["Klub strelaca Muš"]), " ", _h('li', ["Ministarstvo omladine i sporta"])])])
+	},function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', {
+	    staticClass: "main-footer__contact"
+	  }, [_h('div', {
+	    staticClass: "main-footer__contact__tel"
+	  }, [_h('div', {
+	    staticClass: "main-footer__contact__tel__label"
+	  }, ["Adress:"]), " ", _h('div', {
+	    staticClass: "main-footer__contact__tel__number"
+	  }, ["00381 64 486 006"])]), " ", _h('div', {
+	    staticClass: "main-footer__contact__adress"
+	  }), " ", _h('div', {
+	    attrs: {
+	      "main-footer__contact__email": ""
+	    }
+	  })])
+	}]}
 	module.exports.render._withStripped = true
 	if (false) {
 	  module.hot.accept()
@@ -22626,6 +22672,125 @@
 	  module.hot.accept()
 	  if (module.hot.data) {
 	     require("vue-hot-reload-api").rerender("data-v-be750572", module.exports)
+	  }
+	}
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(53)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(54)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\Nemanja\\Desktop\\Dejan site\\app\\assets\\js\\NaprednaObuka.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-a9378fa4", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-a9378fa4", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] NaprednaObuka.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _Header = __webpack_require__(23);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	var _Footer = __webpack_require__(45);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	
+	exports.default = {
+	    components: {
+	        "app-header": _Header2.default,
+	        "app-footer": _Footer2.default
+	    }
+	
+	};
+
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('section', {
+	    staticClass: "training"
+	  }, [_h('app-header'), " ", _vm._m(0), " ", _vm._m(1), " ", _h('app-footer')])
+	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', {
+	    staticClass: "training__img"
+	  }, [_h('h3', {
+	    staticClass: "training__img__subheading"
+	  }, ["Napredne tehnike rukovanja oružjem"]), " ", _h('h2', {
+	    staticClass: "training__img__heading"
+	  }, ["Progresivna obuka"])])
+	},function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', {
+	    staticClass: "training__desc"
+	  }, [_h('p', ["Nakon uspešno savladane osnovne obuke, pojedinac ili grupa prelazi na progresivni nivo obuke, koji podrazumeva složeniju  dinamiku i povezivanje svih elemenata stečenih u programu osnovne obuke u jednu celinu. U programu progresivne obuke, pored elemenata definisanih programom osnovne obuke uključuje se taktika,  brzo reagovanja, razmišljanje, odlučivanje, pojačana psihička i fizička aktivnost, upotrena i manipulacija vatrenim oružjem i resavanje situacija u veoma kratkom vremenskom periodu. Dobra preporuka je da se pojedinac ili grupa u progresivnoj obuci, povežu sa drugim programima kao što su IPSC i IDPA programi, sa kojima mogu praktično da svoja stečena znanja provere  i u  takmičarskom smislu, koja su usko povezana sa temom progresivne obuke.\n        "])])
+	}]}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-a9378fa4", module.exports)
 	  }
 	}
 

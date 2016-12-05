@@ -20,7 +20,7 @@
             nivo obuke, koji podrazumeva složeniju dinamiku i povezivanje svih elemenata...
             </p>
             <div class="btn__wrap">
-                <router-link tag="a" to="/beginners" class="btn btn--primary" data-text="pročitaj više">
+                <router-link tag="a" to="/progresive" class="btn btn--primary" data-text="pročitaj više">
                     <span class="btn__overlay"></span>
                     <span class="btn__text">pročitaj više</span>
                 </router-link>

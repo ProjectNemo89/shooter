@@ -811,6 +811,21 @@
 	background: #1c1d25;
 	padding: 5rem 0;
 	width: 100%
+}.main-footer__links{
+  font-family: "Exo 2", sans-serif;
+  color: #fcfcfc;
+  padding: 0 2rem;
+}.main-footer__links__list{
+  width: 100%;
+  list-style: none;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding-bottom: 2rem;
+}.main-footer__links__list > li{
+  //: inline-block;
 }.main-footer__social{
   margin: 0 auto;
   text-align: center;

@@ -2,7 +2,7 @@
 		<div class="wrapper">
 			<section class="story row row--gutter-top wrapper--lines">
 				<h4>Brzina, snaga i moć</h4>
-				<h1>Glavni moto obuke</h1>
+				<h1>Moto obuke</h1>
 				<div class="row__column story--left">
 					<div class="row row--centered">
 						<div class="story__image row row--centered" data-overlay-1>
