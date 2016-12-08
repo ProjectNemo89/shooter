@@ -2,12 +2,52 @@
     <footer class="main-footer">
         <div class="main-footer__links">
             <ul class="main-footer__links__list">
-                <li>IPSC Savez Srbije</li>
-                <li>IPSC International</li>
-                <li>Shooting club JEDINICA, Inđija</li>
-                <li>Klub strelaca Muš</li>
-                <li>Ministarstvo omladine i sporta</li>
+                <li>
+                    <a href="http://www.ipsc.rs">
+                        <img src="assets/img/ipscsavez.png" alt="IPSC savez Srbije">
+                        <div>IPSC Savez Srbije</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.ipsc.org/">
+                        <img src="assets/img/ipsc.png" alt="IPSC international">
+                        <div>IPSC International</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.klubstrelacajedinica.org.rs">
+                        <img src="assets/img/jedinica.png" alt="Klub Jednica Inđija">
+                        <div>Shooting club JEDINICA, Inđija</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.mus.co.rs/">
+                        <img src="assets/img/mus.png" alt="Klub Muš">
+                        <div>Klub strelaca Muš</div>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="http://www.mos.gov.rs/">
+                        <img src="assets/img/ministarstvo.png" alt="Ministarstvo omladine i sporta">
+                        <div>Ministarstvo omladine i sporta</div>
+                    </a>
+                 </li>
             </ul>
+        </div>
+        <div class="main-footer__contact">
+            <div class="main-footer__contact__tel">
+                <div class="main-footer__contact__tel__label">Telefon:</div>
+                <div class="main-footer__contact__tel__number">00381 64 486 006</div>
+            </div>
+            <div class="main-footer__contact__adress">
+                <div class="main-footer__contact__adress__label">Adresa:</div>
+                <div class="main-footer__contact__adress__place">Hajduk Veljkova 51, Požarevac</div>
+            </div>
+            <div class="main-footer__contact__email">
+                <div class="main-footer__contact__email__label">Email:</div>
+                <div class="main-footer__contact__email__cmail">dejanvukojevicipsc@gmail.com</div>
+            </div>
         </div>
         <div class="main-footer__social">
             <a href="#">
@@ -18,14 +58,6 @@
             </a>
         </div>
         <div class="main-footer__copyrights">&copy; 2016 Dejan Vukojević</div>
-        <div class="main-footer__contact">
-            <div class="main-footer__contact__tel">
-                <div class="main-footer__contact__tel__label">Adress:</div>
-                <div class="main-footer__contact__tel__number">00381 64 486 006</div>
-            </div>
-            <div class="main-footer__contact__adress"></div>
-            <div class=""main-footer__contact__email></div>
-        </div>
     </footer>
 </template>
 

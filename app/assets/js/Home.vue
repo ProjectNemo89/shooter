@@ -4,8 +4,8 @@
         <app-infosection></app-infosection>
         <app-about></app-about>
         <app-story></app-story>
-        <app-equipment></app-equipment>
         <app-gallery></app-gallery>
+        <app-equipment></app-equipment>
         <app-contact></app-contact>
         <app-footer></app-footer>
     </div>

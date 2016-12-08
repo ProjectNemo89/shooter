@@ -9,7 +9,7 @@ class Scroll {
         this.win = window;
         this.scrollTime = 1.2;
         this.scrollDistance = 170;
-        this.scrollTop = window.document.documentElement.scrollTop;
+        this.scrollTop = document.body.scrollTop;
         this.handleWheel();
 
     }
@@ -38,7 +38,7 @@ class Scroll {
 
     handleDelta(delta) {
         let finalScroll = 0;
-        this.scrollTop += delta; 
+        // this.scrollTop += delta; 
         finalScroll = this.scrollTop - (delta * this.scrollDistance);
         TweenMax.to(this.win, this.scrollTime, {
             scrollTo : { y: finalScroll, autoKill:true },

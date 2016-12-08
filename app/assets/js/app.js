@@ -1,6 +1,7 @@
 import Intro from "./modules/intro";
 import Overlay from "./modules/overlay";
 import Scroll from './modules/scroll';
+import Map from "./modules/map";
 import Vue from "vue";
 import App from "./App.vue";
 import VueRouter from "vue-router";
@@ -27,3 +28,4 @@ new Vue({
 new Intro();
 new Overlay();
 new Scroll();
+new Map();

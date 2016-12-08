@@ -1,8 +1,8 @@
 <template>
     <div>
-        <transition name="page">
+        <transition name="page" mode="out-in">
             <keep-alive>
-                <router-view></router-view>
+                    <router-view></router-view>
             </keep-alive>
         </transition>
     </div>
@@ -13,17 +13,30 @@
 </script>
 
 <style scoped>
-.page-enter {
-   opacity: 0;
-}
+
 .page-enter-active {
-   opacity: 1;
-   transition: opacity .9s ease; 
+    transform: translate3d(0,0,0);
+    backface-visibility: hidden;
+    animation: slide-in 1s ease forwards;
+  
 }
 
 .page-leave-active {
-    opacity: 0;
-    transition: opacity .9s ease;
+    transform: translate3d(0,0,0);
+    backface-visibility: hidden;
+    animation: slide-in 1s ease reverse forwards;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+
 }
 
 </style>
