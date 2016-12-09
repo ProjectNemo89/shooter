@@ -1,0 +1,18 @@
+{
+    "env": {
+        "browser": 1
+    },
+    "globals": {
+        "vue": 1
+    },
+    "rules": {
+        "quotes": [1, "double"],
+        "eqeqeq": 1
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    }
+
+
+}

@@ -1,19 +1,20 @@
 .info-section {
 		width: 100%;
-		margin-top: -6px;
+		margin-top: -8px;
 		border-top: 5px solid $fontGold;
 		@mixin clearfix;	
 
 	&__info-block {
 		font-family: "Roboto", sans-serif;
 		font-weight: 400;
-		min-height: 21rem;
+		height: 21rem;
+
 
 		@mixin atSmall {
 			width: 100%;
 			margin: 0 auto;
 			text-align: center;
-			padding: 8% 4%;
+			padding: 15% 4% 8%;
 			float: none;
 		}
 
@@ -24,13 +25,14 @@
 		@mixin atLarge {
 			width: 33.3333%;
 			float: left;
-			padding: 2% 4%;
+			padding: 4% 4% 2%;
 			text-align: left;
 		}
 
 		&__heading {
 			font-family: "Exo 2", sans-serif;
 			text-transform: uppercase;
+			margin-top: 0;
 		}
 
 		&:first-child {

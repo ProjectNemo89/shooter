@@ -13,20 +13,32 @@
 		font-family: "Kaushan Script", cursive;
 		color: $fontGold;
 		text-align: center;
-		margin: 0; 
+		margin: 0;
+		
 	}
 
 	&__wrapper {
 		margin: 0 auto;
 		padding: 2rem 0;
-		column-count: 3;
+		column-count: 1;
 		column-gap: 0;	
+
+		@mixin atSmall {
+			column-count: 1;
+		}
+
+		@mixin atMedium {
+			column-count: 2;
+		}
+
+		@mixin atLarge {
+			column-count: 3;
+		}
 	}
 
 	&__item {
 		margin: 10px;
 		position: relative;
-		perspective: 800px;
 
 		&__wrapper {
 

@@ -1,8 +1,21 @@
 .equipment {
+	background-color: #111517;
 
 	&__items {
 		position: relative;
 		overflow: hidden;
+		display: block;
+
+		@mixin atSmall {
+			float: none;
+			width: 80%;
+			margin: 0 auto;
+		}
+
+		@mixin atLarge {
+			float: left;
+			width: 50%;
+		}
 		
 	}
 
@@ -21,6 +34,8 @@
 		text-align: center;
 		text-transform: uppercase;
 		padding-bottom: 2rem;
+		color: $fontWhite;
+
 	}
 
 	&__subheading {
@@ -37,8 +52,22 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
+		text-align: center;
 		text-transform: uppercase;
-		transform: translateX(-50%);
+		transform: translate(-50%, -50%);
+
+        @mixin atSmall {
+			font-size: 1.1rem;
+		}
+		@mixin atMedium {
+			font-size: 1.5rem;
+		}
+
+		@mixin atLarge {
+			font-size: 1.5rem;
+		}
+
+
 
 	}
 

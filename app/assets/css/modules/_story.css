@@ -1,16 +1,20 @@
 .story {
+	background-color: #111517;
 
 	& > h1 {
 		font-family: "Exo 2", sans-serif;
 		text-align: center;
 		text-transform: uppercase;
 		padding-bottom: 4rem;
+		color: $fontWhite;
 	}
 
 	& > h4 {
 		font-family: "Kaushan script", cursive;
 		text-align: center;
 		color: $fontGold;
+		padding-top: .9rem;
+		margin-bottom: 0;
 	}
 
 	&--left {

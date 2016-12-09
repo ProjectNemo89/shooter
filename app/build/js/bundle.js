@@ -89,7 +89,7 @@
 	});
 	
 	new _vue2.default({
-	  el: '.app',
+	  el: ".app",
 	  router: router,
 	  render: function render(h) {
 	    return h(_App2.default);
@@ -21559,7 +21559,7 @@
 	    staticClass: "info-section"
 	  }, [_h('div', {
 	    staticClass: "info-section__info-block"
-	  }, [_h('h4', {
+	  }, [_h('h3', {
 	    staticClass: "info-section__info-block__heading"
 	  }, ["osnovna obuka"]), " ", _h('p', ["\n        Osnovna obuka rukovanja vatrenim oružjem podrazumeva da pojedinac ili grupa, upoznaju\n        Zakon o oružju i municiji, izgrade bezbednosnu kulturu kao jedan od najbitnih segmenata...\n        "]), " ", _h('div', {
 	    staticClass: "btn__wrap"
@@ -21576,9 +21576,9 @@
 	    staticClass: "btn__text"
 	  }, ["pročitaj više"])])])]), " ", _h('div', {
 	    staticClass: "info-section__info-block info-section__info-block--black"
-	  }, [_h('h4', {
+	  }, [_h('h3', {
 	    staticClass: "info-section__info-block__heading"
-	  }, ["napredna obuka"]), " ", _h('p', ["\n        Nakon uspešno savladane osnovne obuke, pojedinac ili grupa prelazi na progresivni\n        nivo obuke, koji podrazumeva složeniju dinamiku i povezivanje svih elemenata...\n        "]), " ", _h('div', {
+	  }, ["progresivna obuka"]), " ", _h('p', ["\n        Nakon uspešno savladane osnovne obuke, pojedinac ili grupa prelazi na progresivni\n        nivo obuke, koji podrazumeva složeniju dinamiku i povezivanje svih elemenata...\n        "]), " ", _h('div', {
 	    staticClass: "btn__wrap"
 	  }, [_h('router-link', {
 	    staticClass: "btn btn--primary",
@@ -21595,7 +21595,7 @@
 	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('div', {
 	    staticClass: "info-section__info-block"
-	  }, [_h('h4', {
+	  }, [_h('h3', {
 	    staticClass: "info-section__info-block__heading"
 	  }, ["rekreativni program"]), " ", _h('p', ["\n            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n            quis nostrud exercitation ullamco laboris nisi ut.\n        "]), " ", _h('div', {
 	    staticClass: "btn__wrap"
@@ -22040,7 +22040,7 @@
 	  }, ["Sve što vam je neophodno"]), " ", _h('h1', {
 	    staticClass: "equipment__heading"
 	  }, ["GHOST™ Oprema"]), " ", _h('a', {
-	    staticClass: "equipment__items row__6 row--pull-left",
+	    staticClass: "equipment__items",
 	    attrs: {
 	      "href": "#"
 	    }
@@ -22052,7 +22052,7 @@
 	  }), " ", _h('span', {
 	    staticClass: "equipment__link"
 	  }, ["holsteri"])]), " ", _h('a', {
-	    staticClass: "equipment__items row__6 row--pull-left",
+	    staticClass: "equipment__items",
 	    attrs: {
 	      "href": "#"
 	    }
@@ -22064,7 +22064,7 @@
 	  }), " ", _h('span', {
 	    staticClass: "equipment__link"
 	  }, ["nosači okvira"])]), " ", _h('a', {
-	    staticClass: "equipment__items row__6 row--pull-left",
+	    staticClass: "equipment__items",
 	    attrs: {
 	      "href": "#"
 	    }
@@ -22076,7 +22076,7 @@
 	  }), " ", _h('span', {
 	    staticClass: "equipment__link"
 	  }, ["majce i ostala odeća"])]), " ", _h('a', {
-	    staticClass: "equipment__items row__6 row--pull-left",
+	    staticClass: "equipment__items",
 	    attrs: {
 	      "href": "#"
 	    }
@@ -22422,7 +22422,7 @@
 	    staticClass: "contact__map"
 	  }), " ", _h('div', {
 	    staticClass: "contact__data"
-	  }, [_h('h2', ["Kontakt"]), " ", _h('h3', ["Možete nas uvek naći ovde"]), " ", _h('p', [_h('strong', ["Adresa:"]), " Ulica bb, Požarevac"]), " ", _h('p', [_h('strong', ["Telefon:"]), " 00381 64 00 39 28"]), " ", _h('p', [_h('strong', ["Email:"]), " ", _h('em', ["dejanvukojevicipsc@gmail.com"])])])])
+	  }, [_h('h1', ["Kontakt"]), " ", _h('h3', ["Možete nas uvek naći ovde"]), " ", _h('p', [_h('strong', ["Adresa:"]), " Ulica bb, Požarevac"]), " ", _h('p', [_h('strong', ["Telefon:"]), " 00381 64 00 39 28"]), " ", _h('p', [_h('strong', ["Email:"]), " ", _h('em', ["dejanvukojevicipsc@gmail.com"])])])])
 	}]}
 	module.exports.render._withStripped = true
 	if (false) {

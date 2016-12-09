@@ -20,6 +20,20 @@
 			text-align: center;
 			border-bottom: 1px solid #e0e0e0;
 
+			@mixin atSmall {
+				justify-content: center;
+			}
+
+			& > li {
+				@mixin atSmall {
+					padding: .8rem .5rem;
+				}
+
+				/*@mixin atLarge {
+					padding: 0 0 2rem 0;
+				}*/
+			}
+
 			& a {
 				text-decoration: none;
 				color: $fontWhite;
@@ -66,10 +80,8 @@
 			font-family: "Exo 2", sans-serif;
 			color: $fontWhite;
 			text-align: center;
+			padding: 1rem 1rem;
 			
-		}
-		&__adress, &__email {
-			padding-left: 2rem;
 		}
 	}
 }
