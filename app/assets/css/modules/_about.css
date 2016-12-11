@@ -1,14 +1,14 @@
 .about {
     @mixin clearfix;
     font-family: "Roboto", sans-serif;
-    padding-top: 6rem;
+    padding: 6rem;
     width: 100%;
     
     &__wrapper {
         width: 85%;
         margin: 0 auto;
         @mixin clearfix;
-        padding-top: 4rem;
+        padding-top: 6rem;
 
     }
 
@@ -27,7 +27,6 @@
 
 
     &__description {
-        font-family: "Roboto", sans-serif;
         width: 50%;
         max-width: 770px;
 

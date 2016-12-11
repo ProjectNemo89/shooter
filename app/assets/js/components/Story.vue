@@ -1,61 +1,43 @@
 <template>
-		<div class="wrapper">
-			<section class="story row row--gutter-top wrapper--lines">
-				<h4>Teorijski i praktični deo</h4>
-				<h1>Praktično streljaštvo</h1>
-				<div class="row__column story--left">
-					<div class="row row--centered">
-						<div class="story__image row row--centered" data-overlay-1>
-							<div class="story__desc story__desc--left" data-text-1>
-								<h1>Teorijski deo</h1>
-								<p>Teorijski deo obuke ima značajnu ulogu u definisanju kandidata ili grupe u početnoj fazi obuke. Pod ovim delom se podrazumeva upoznavanje kandidata ili grupe sa istorijatom Praktičnog  streljaštva, bezbednosnom kulturom, zakonima i propisima, mentalno i psihičkom pripremom,  balistikom, familiarizacijom sa oružjem i  opremom za manipulaciju, strelištem, oružjem i svim drugim  parametrima koji su potrebni za adekvatan početak obuke.
-								</p>
-							</div>					
-							<div class="story__text" data-letter-d>
-								<span>T</span>
-							</div>
-							<div class="image--overlay"></div>
-							<div class="story__mask" data-mask-1></div>
-							<img class="row--centered image--shadow" src="assets/img/philosophy-950.jpg" alt="Filozofija obuke i treninga" />
-						</div>
-					</div>				
+		<section class="story">
+			<h3 class="story__subheading">Tri stuba obuke</h3>
+			<h1 class="story__heading">program obuke u praktičnom streljaštvu</h1>
+				<div class="story__wrapper">
+				<div class="story__desc">
+					<h2 class="story__desc__heading">Teorijski deo</h2>
+					<div class="story__desc__text">
+						<p>
+							Teorijski deo obuke ima značajnu ulogu u definisanju kandidata ili grupe u početnoj fazi obuke. Pod ovim delom se podrazumeva upoznavanje kandidata ili grupe sa istorijatom Praktičnog  streljaštva, bezbednosnom kulturom, zakonima i propisima, mentalno i psihičkom pripremom,  balistikom, familiarizacijom sa oružjem i  opremom za manipulaciju, strelištem, oružjem i svim drugim  parametrima koji su potrebni za adekvatan početak obuke.
+						</p>
+					</div>
+					<blockquote class="story__emp">
+						<p>Teorijski deo obuke ima značajnu ulogu u definisanju kandidata ili grupe u početnoj fazi obuke</p>
+					</blockquote>
 				</div>
-				<div class="row__column row--gutter-top story--right">
-					<div class="row row--centered">
-						<div class="story__image row row--centered" data-overlay-2>
-							<div class="story__desc story__desc--right" data-text-2>
-								<h1>Praktični deo - &ldquor;rad na suvo&rdquor;</h1>
-								<p>Pod &ldquor;radom na suvo&rdquor; podrazumeva se rad na početnim tehnikama kao što su: stav, hvat, nišanjenje, disanje, kretanje i dr., bez upotrebe oružja, kako bi kandidat mogao da prihvati i uvežba sve prethodno definisane radnje. &ldquor;Rad na suvo&rdquor; je veoma značajan deo obuke jer u ovom delu nemamo momenat pucnja, koji u ovoj fazi u značajnoj meri ometa definisanje pokreta.
-								</p>
-							</div>
-							<div class="story__text story__text--left" data-letter-v>
-								<span>P</span>
-							</div>
-							<div class="image--overlay"></div>
-							<div class="story__mask" data-mask-2></div>
-							<img class="row--centered image--shadow" src="assets/img/philosophy-950.jpg" alt="Filozofija obuke i treninga" />
-						</div>
-					</div>				
+				<div class="story__desc">
+					<h2 class="story__desc__heading">Praktični deo (rad na suvo)</h2>
+					<div class="story__desc__text">
+						<p>
+							Pod praktičnim delom(rad na suvo) podrazumeva se rad na početnim tehnikama kao što su: stav, hvat, nišanjenje, disanje, kretanje, itd… Veoma je bitno da se ove radnje rade bez upotrebe oružja, da bi kandidat mogao da prihvati i uvežba sve gore definisane radnje. Praktični deo(rad na suvo), je najznačajniji deo jer u ovom delu nemamo momenat pucnja,  koji nam u ovoj fazi u značajnoj meri ometa definisanje pokreta. U radu sa ljudima zaključio sam da psihička priprema, mentalna stabilnost i u dobroj meri koncentracija imaju presudnu ulogu u shvatanju i prihvatanju manipulativnih radnji, koje se kasnije adekvatnim treningom i ponavljanjem dovode do  zahtevanog nivoa uvežbanosti. Takodje je veoma bitno da se u ovom delu obuke kandidatu dozvoli da u definisanim okvirima omogući autonomnost u stvaranju svog stila, koji je izvestan sobzirom na različitu konstituciju tela, leve ili desne ruke itd...
+						</p>
+					</div>
+					<blockquote class="story__emp">
+						<p>Veoma je bitno da se ove radnje rade bez upotrebe oružja, da bi kandidat mogao da prihvati i uvežba sve gore definisane radnje</p>
+					</blockquote>
 				</div>
-				<div class="row__column row--gutter-top story--left">
-					<div class="row row--centered">
-						<div class="story__image row row--centered" data-overlay-3>
-							<div class="story__desc story__desc--left" data-text-3>
-								<h1>Praktični deo - upotreba oružja</h1>
-								<p>Praktični deo sa upotrebom oružja je završni deo i verifikacija predhodnih perioda obuke. Poznavajuči oružje, bezbednosnu kulturu i sve druge elemente iz teorijskog dela, koji su nakon toga uvežbani i definisani sopstvenim stilom, možemo preći na dinamičan i kombinovan koncept Praktičnog streljaštva sa upotrebom oružja. Ovaj deo obuke je psiho-fizički zahtevan i kompleksan.
-								</p>
-							</div>
-							<div class="story__text" data-letter-c>
-								<span>P</span>
-							</div>
-							<div class="image--overlay"></div>
-							<div class="story__mask" data-mask-3></div>
-							<img class="row--centered image--shadow" src="assets/img/philosophy-950.jpg" alt="Filozofija obuke i treninga" />
-						</div>
-					</div>				
+				<div class="story__desc">
+					<h2 class="story__desc__heading">Praktični deo(upotreba oružja)</h2>
+					<div class="story__desc__text">
+						<p>
+							Praktični deo sa upotrebom oružja je završni deo i verifikacija predhodnih perioda obuke. Poznavajuči oružje, bezbednosnu kulturu i sve druge elemente iz teorijskog dela, nakon toga uvežbani i svojim stilom definisani, spremni smo da peđemo na dinamičan i kombinovan koncept Praktičnog streljastva sa upotrebom oružja. Koncept je regulisan tako da na jedan logičan i organizovan način u jedinici vremena, pod elementom stresa koji je realan, dovedem kandidata da reaguje u određenom trenutku na adekvatan nacin. Trening je psiho-fizički zahtevan i kompleksan,  ali garantuje kontinuiranim radom,  dovođenje stanja tela do automatizma sa elementom podsvesnog reagovanja, gde u suštini dobijamo dijapazon za veči  nivo razmišljanja i manipulaciju u određenom trenutku. Ovakav koncept obuke je pored takmičarskog dela IPSC i IDPA, adekvatan i za strukture, Vojsku, Policiju, službe obezbeđenja i sve druge strukture koje su u aktivnom kontaktu sa oružjem.
+						</p>
+					</div>
+					<blockquote class="story__emp">
+						<p>Ovakav koncept obuke je pored takmičarskog dela IPSC i IDPA, adekvatan i za strukture, Vojsku, Policiju, službe obezbeđenja i sve druge strukture koje su u aktivnom kontaktu sa oružjem</p>
+					</blockquote>
 				</div>
-			</section>
-		</div>
+			</div>
+		</section>
 </template>
 
 <script>

@@ -1,11 +1,13 @@
 import Intro from "./modules/intro";
-import Overlay from "./modules/overlay";
-import Scroll from './modules/scroll';
+import Scroll from "./modules/scroll";
+import Parallax from "./modules/parallax";
+import Reveal from "./modules/reveal";
 import Map from "./modules/map";
 import Vue from "vue";
 import App from "./App.vue";
 import VueRouter from "vue-router";
 import { routes } from "./routes";
+import $ from "jquery";
 
 Vue.use(VueRouter);
 
@@ -26,6 +28,7 @@ new Vue({
 
 
 new Intro();
-new Overlay();
 new Scroll();
+new Parallax();
 new Map();
+new Reveal($(".about, .story__wrapper"), "-45%");

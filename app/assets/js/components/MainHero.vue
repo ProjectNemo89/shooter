@@ -7,9 +7,9 @@
             <img srcset="assets/img/hero_background.jpg 640w, assets/img/deki.jpg 250w" alt="Dejan Vukojević | Instruktor praktičnog streljaštva" /> 
         </picture>
         <div class="main-hero__callout">
-            <h1 class="main-hero__main-heading">instruktor praktičnog streljaštva</h1>
-            <h2 class="main-hero__subheading">Naučite da bezbedno rukujete oružjem</h2> 
-            <div class="btn__wrap">
+            <h1 class="main-hero__main-heading parallax">instruktor praktičnog streljaštva</h1>
+            <h2 class="main-hero__subheading parallax">Naučite da bezbedno rukujete oružjem</h2> 
+            <div class="btn__wrap parallax">
                 <a class="btn btn--primary" href="#" data-text="pročitaj više">
                     <span class="btn__overlay"></span>
                     <span class="btn__text">pročitaj više</span>

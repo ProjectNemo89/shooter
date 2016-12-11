@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "dev": "gulp dev",
-    "build": "gulp prod"
+    "build": "gulp prod",
+    "clean": "gulp clean"
   },
   "author": "",
   "license": "ISC",
@@ -34,7 +35,9 @@
   "dependencies": {
     "gsap": "^1.19.0",
     "normalize.css": "^5.0.0",
+    "rellax": "^0.1.0",
     "vue": "^2.1.3",
-    "vue-router": "^2.1.1"
+    "vue-router": "^2.1.1",
+    "waypoints": "^4.0.1"
   }
 }
