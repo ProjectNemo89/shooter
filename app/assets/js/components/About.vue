@@ -4,7 +4,7 @@
         <h1>Biografija</h1>
         <div class="about__wrapper">
             <div class="about__image">
-                <img src="assets/img/dejan_vertical2.jpg" alt="Dejan Vukojević | Instruktor" />
+                <img class="lazyload" data-src="assets/img/dejan_vertical2.jpg" alt="Dejan Vukojević | Instruktor" />
             </div>
             <div class="about__description">
                 <div class="about__description__wrapper">

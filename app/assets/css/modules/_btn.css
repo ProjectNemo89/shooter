@@ -56,6 +56,10 @@
 		background-color: $mainBtn;
 	}
 
+	&--blue {
+		background-color: #2196f3; 
+	}
+
 	&:hover &__overlay {
 		transform: translate3d(20%, 0, 0) skew(-20deg);
 		opacity: 1;

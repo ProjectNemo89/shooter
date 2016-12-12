@@ -6,7 +6,7 @@
 				<div class="gallery__wrapper">
 					<div class="gallery__item">
 						<div class="gallery__item__wrapper">	
-							<img class="gallery__item__img" src="assets/img/gallery_item1.jpg" alt="" />
+							<img class="gallery__item__img lazyload" data-src="assets/img/gallery_item1.jpg" alt="" />
 							<div class="gallery__item__title">
 								<h4 class="gallery__item__title__heading">Naslov slike</h4>
 								<h4>Opisss</h4>	
@@ -15,7 +15,7 @@
 					</div>
 					<div class="gallery__item">
 						<div class="gallery__item__wrapper">
-							<img class="gallery__item__img" src="assets/img/gallery_item2.jpg" alt="" />
+							<img class="gallery__item__img lazyload" data-src="assets/img/gallery_item2.jpg" alt="" />
 							<div class="gallery__item__title">
 								<h4 class="gallery__item__title__heading">Naslov slike</h4>
 								<h4>Opisss</h4>	
@@ -28,12 +28,12 @@
 								<h4 class="gallery__item__title__heading">Naslov slike</h4>
 								<h4>Opisss</h4>	
 							</div>
-							<img class="gallery__item__img" src="assets/img/gallery_item3.jpg" alt="" />
+							<img class="gallery__item__img lazyload" data-src="assets/img/gallery_item3.jpg" alt="" />
 						</div>	
 					</div>
 					<div class="gallery__item">
 						<div class="gallery__item__wrapper">
-							<img class="gallery__item__img" src="assets/img/gallery_item4.jpg" alt="" />
+							<img class="gallery__item__img lazyload" data-src="assets/img/gallery_item4.jpg" alt="" />
 							<div class="gallery__item__title">
 								<h4 class="gallery__item__title__heading">Naslov slike</h4>
 								<h4>Opisss</h4>		
@@ -42,7 +42,7 @@
 					</div>
 					<div class="gallery__item">
 						<div class="gallery__item__wrapper">
-							<img class="gallery__item__img" src="assets/img/gallery_item5.jpg" alt="" />
+							<img class="gallery__item__img lazyload" data-src="assets/img/gallery_item5.jpg" alt="" />
 							<div class="gallery__item__title">
 								<h4 class="gallery__item__title__heading">Naslov slike</h4>
 								<h4>Opisss</h4>		
@@ -51,7 +51,7 @@
 					</div>
 					<div class="gallery__item">
 						<div class="gallery__item__wrapper">
-							<img class="gallery__item__img" src="assets/img/gallery_item6.jpg" alt="" />
+							<img class="gallery__item__img lazyload" data-src="assets/img/gallery_item6.jpg" alt="" />
 							<div class="gallery__item__title">
 								<h4 class="gallery__item__title__heading">Naslov slike</h4>
 								<h4>Opisss</h4>		
@@ -60,7 +60,7 @@
 					</div>
 					<div class="gallery__item">
 						<div class="gallery__item__wrapper">
-							<img class="gallery__item__img" src="assets/img/news_left_811x540.jpg" alt="" />
+							<img class="gallery__item__img lazyload" data-src="assets/img/news_left_811x540.jpg" alt="" />
 							<div class="gallery__item__title">
 								<h4 class="gallery__item__title__heading">Naslov slike</h4>
 								<h4>Opisss</h4>		

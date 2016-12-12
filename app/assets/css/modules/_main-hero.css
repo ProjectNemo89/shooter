@@ -11,6 +11,23 @@
 		z-index: -1;
 	}
 
+	&__video {
+		position: absolute;
+		top: -.5%;
+		left: 0;
+
+		&--hidden {
+			visibility: hidden;
+			display: none;
+		}
+
+		&--visible {
+			visibility: visible;
+			display: block;
+		}
+
+	}
+
 	&__callout {
 		position: absolute;
 		top: 50%;

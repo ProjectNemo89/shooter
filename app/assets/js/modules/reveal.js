@@ -5,11 +5,15 @@ class Reveal {
     constructor(items, offset) {
         this.item = items;
         this.offsetPercent = offset;
+        this.borders = $(".story__emp");
         this.hideInitialy();
         this.creatWaypoints();
+        this.displayBorders();
     }
     hideInitialy() {
         this.item.addClass("reveal-item");
+        this.borders.addClass("story__emp__borders--hidden");
+   
     }
     creatWaypoints() {
         const that = this;
@@ -20,13 +24,24 @@ class Reveal {
                 offset: that.offsetPercent,
                 handler: () => {
                    $(itemRevealed).addClass("reveal-item--reveal");
-                   console.log("trigger");
                 }
                 
             });
 
         });
+    }
 
+    displayBorders() {
+        this.borders.each(function() {
+            const borderRevealed = this;
+            new Waypoint({
+                element: borderRevealed,
+                handler: () => {
+                    $(borderRevealed).addClass("story__emp__borders--visible");
+                }
+            });
+        });
+        this.borders.addClass()
     }
    
 

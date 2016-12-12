@@ -1,7 +1,10 @@
 .contact {
+    position: relative;
     width: 100%;
     padding: 6rem 2rem;
     @mixin clearfix;
+
+
     &__data {
         float: left;
         font-family: "Exo 2", sans-serif;
@@ -64,6 +67,7 @@
 
     }
     &__map {
+        
         border: 2px solid #e0e0e0;
         float: none;
         width: 100%;

@@ -1,6 +1,5 @@
 <template>
-    <div class="wrapper equipment">
-        <section class="equipment row--gutter-smaller-top-btm row">
+        <section class="equipment">
             <h4 class="equipment__subheading">Sve što vam je neophodno</h4>
             <h1 class="equipment__heading">GHOST&trade; Oprema</h1>
             <a class="equipment__items" href="#">
@@ -20,7 +19,6 @@
                 <span class="equipment__link">dodaci</span>
             </a>
         </section>
-    </div>
 </template>
 <script>
 

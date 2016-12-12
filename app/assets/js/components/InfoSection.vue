@@ -29,9 +29,7 @@
         <div class="info-section__info-block">
             <h3 class="info-section__info-block__heading">rekreativni program</h3>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut.
+                Znamo da rekreacija  po definiciji treba da nas ojača i izgradi, shodno tome treba da nas fizički, fiziološki ozivi od svakodnevnih briga i obaveza i psihološki  podstakne da stičemo samokontrolu i time omogući da se sa novom snagom vratimo redovnim obavezama.
             </p>
             <div class="btn__wrap">
                 <a class="btn btn--primary" href="#" data-text="pročitaj više">

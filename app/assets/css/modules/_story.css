@@ -3,6 +3,7 @@
 	padding: 6rem 1rem;
 	width: 100%;
 	position: relative;
+	transform: skew(0, 5deg);
 
 	@mixin atSmall {
 		padding: 6rem 1rem;
@@ -14,6 +15,7 @@
 
 	&__wrapper {
 		padding-top: 3rem;
+		
 	}
 
 	&__heading {
@@ -21,15 +23,19 @@
 	color: $fontWhite;
 	text-transform: uppercase;
 	text-align: center;
+	transform: perspective(1px) scale(1,1) skew(0, -5deg);
+
 	}
 
 	&__subheading {
 		font-family: "Kaushan Script", cursive;
 		color: $fontGold;
 		text-align: center;
+		transform: perspective(1px) scale(1,1) skew(0, -5deg);
 
 	}
 	&__desc {
+		transform: perspective(1px) scale(1,1) skew(0, -5deg);
 		color: $fontWhite;
 		padding-top: 3rem;
 
@@ -64,8 +70,29 @@
 		font-size: 141.4%;
 		position: relative;
 		padding-left: 2rem;
+		
+		&__borders--hidden {
+			
+			&::before {
+			content: "";
+			position: absolute;
+			height: 0%;
+			width: 2px;
+			background-color: $fontGold;
+			transform: translateX(-1rem); 
+			transition: height 1s ease-in;
+			@mixin atSmall {
+				transform: translateX(-1rem);
+				}
 
-		&::before {
+			@mixin atLarge {
+				transform: translateX(-3rem);
+				}
+			}
+		}
+		&__borders--visible {
+
+			&::before {
 			content: "";
 			position: absolute;
 			height: 100%;
@@ -75,12 +102,18 @@
 
 			@mixin atSmall {
 				transform: translateX(-1rem);
-			}
+				}
 
 			@mixin atLarge {
 				transform: translateX(-3rem);
+				}
 			}
+			
+
 		}
+	
+
+		
 	}
 
 

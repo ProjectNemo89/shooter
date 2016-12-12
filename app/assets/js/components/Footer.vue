@@ -38,7 +38,7 @@
         <div class="main-footer__contact">
             <div class="main-footer__contact__tel">
                 <div class="main-footer__contact__tel__label">Telefon:</div>
-                <div class="main-footer__contact__tel__number">00381 64 486 006</div>
+                <div class="main-footer__contact__tel__number">00381 63 481 886</div>
             </div>
             <div class="main-footer__contact__adress">
                 <div class="main-footer__contact__adress__label">Adresa:</div>
