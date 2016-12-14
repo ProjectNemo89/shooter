@@ -50,6 +50,11 @@
 		position: relative;
 		display: inline-block;
 		overflow: hidden;
+
+		&--center {
+			display: block;
+			margin: 0 auto;
+		}
 	}
 
 	&--primary {

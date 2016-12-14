@@ -36,6 +36,7 @@ class Reveal {
             const borderRevealed = this;
             new Waypoint({
                 element: borderRevealed,
+                offset: "100",
                 handler: () => {
                     $(borderRevealed).addClass("story__emp__borders--visible");
                 }

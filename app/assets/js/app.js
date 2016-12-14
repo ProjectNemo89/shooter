@@ -29,11 +29,10 @@ new Vue({
   render: h => h(App),
 })
 
-
 new Intro();
 new Scroll();
 new Parallax();
 new Map();
 new Video();
-new Reveal($(".about__description__wrapper, .story__wrapper"), "-20%");
+new Reveal($(".about__description__wrapper, .story__wrapper"), "-50%");
 new Map();

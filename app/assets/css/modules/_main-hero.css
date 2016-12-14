@@ -1,13 +1,12 @@
 .main-hero {
 	position: relative;
 	width: 100%;
-	height: 100%;
 	overflow: hidden;
 
 	&__background {
 		position: relative;
 		width: 100%;
-		height: 100vh;
+		height: auto;
 		z-index: -1;
 	}
 
@@ -30,25 +29,29 @@
 
 	&__callout {
 		position: absolute;
-		top: 50%;
+		top: 45%;
 		left: 50%;
-		width: 75%;
+		width: 80%;
 		transform: translate3d(0,0,0);
 		backface-visibility: hidden;
-		transform: translate(-50%, -50%);
 
 		@mixin atSmall {
 			text-align: center;
+			width: 90%;
+			top: 30%;
+			top: 40vw;
 		}
 
 		@mixin atMedium {
-			top: 55%;
+			top: 18vw;
+			width: 75%;
 		}
 
 
 		@mixin atLarge {		
 			text-align: right;
-			top: 48%;
+			top: 18vw;
+			width: 75%;
 		}
 
 	}
@@ -59,20 +62,25 @@
 		margin-bottom: 0;
 		font-family: "Exo 2", sans-serif;
 		font-weight: 700;
+		font-size: 4vw;
+		line-height: 1.1;
 		text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 		transform: perspective(1px) scale(1.01);
 		backface-visibility: hidden;
 
 		@mixin atSmall {
 			text-align: center;
+			font-size: 6vw;
 		}
 
 		@mixin atMedium {
 			text-align: center;
+			font-size: 4vw;
 		}
 
 		@mixin atLarge {
 			text-align: right;
+			font-size: 4vw;
 		}
 	}
 
@@ -87,13 +95,14 @@
 		backface-visibility: hidden;
 
 		@mixin atSmall {
-			font-size: 1.3rem;
+			font-size: 1.2rem;
 			text-align: center;
 		}
 
 		@mixin atMedium {
-			font-size: 1.3rem;
+			font-size: 1.4rem;
 			text-align: center;
+			padding: 1rem 0;
 		}
 
 		@mixin atLarge {

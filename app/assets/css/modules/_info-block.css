@@ -2,20 +2,19 @@
 		width: 100%;
 		margin-top: -8px;
 		border-top: 5px solid $fontGold;
-		@mixin clearfix;	
+
+		@mixin atLarge {
+			display: flex;
+		}
 
 	&__info-block {
 		font-family: "Roboto", sans-serif;
 		font-weight: 400;
-		height: 21rem;
-
+		text-align: center;
+		flex: 1;
 
 		@mixin atSmall {
-			width: 100%;
-			margin: 0 auto;
-			text-align: center;
 			padding: 15% 4% 8%;
-			float: none;
 		}
 
 		@mixin atMedium {
@@ -23,10 +22,7 @@
 		}
 
 		@mixin atLarge {
-			width: 33.3333%;
-			float: left;
 			padding: 4% 4% 2%;
-			text-align: left;
 		}
 
 		&__heading {

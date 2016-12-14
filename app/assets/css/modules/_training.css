@@ -2,9 +2,16 @@
     width: 100%;
     &__desc {
         font-family: "Roboto", sans-serif;
-        width: 60%;
+        max-width: 80%;
         margin: 0 auto;
         padding: 6rem 0;
+
+        @mixin atSmall {
+            max-width: 80%;
+        }
+        @mixin atLarge {
+            max-width: 40%;
+        }
     }
     &__img {
         position: relative;
@@ -13,27 +20,30 @@
         height: 60vh;
         background: url("../../assets/img/core_training.jpg") no-repeat center center;
         background-size: cover;
-        &__heading {
+
+        &__wrapper {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+
+        }
+
+        &__heading {
             text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
             margin: 0;
             text-transform: uppercase;
             font-family: "Exo 2", sans-serif;
             color: $fontWhite;
+            text-align: center;
         }
         &__subheading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
             margin-top: -3rem;
             text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
-            transform: translate(-50%, -50%);
             font-family: "Kaushan Script", cursive;
             font-size: 1.5rem;
-            color: $fontWhite;
+            color: $fontGold;
+            text-align: center;
         }
 
     }

@@ -62,7 +62,7 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _reveal = __webpack_require__(109);
+	var _reveal = __webpack_require__(110);
 	
 	var _reveal2 = _interopRequireDefault(_reveal);
 	
@@ -115,7 +115,7 @@
 	new _parallax2.default();
 	new _map2.default();
 	new _video2.default();
-	new _reveal2.default((0, _jquery2.default)(".about__description__wrapper, .story__wrapper"), "-20%");
+	new _reveal2.default((0, _jquery2.default)(".about__description__wrapper, .story__wrapper"), "-50%");
 	new _map2.default();
 
 /***/ },
@@ -21770,6 +21770,10 @@
 	
 	var _rellax2 = _interopRequireDefault(_rellax);
 	
+	var _noframework = __webpack_require__(109);
+	
+	var _noframework2 = _interopRequireDefault(_noframework);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21994,85 +21998,6 @@
 
 /***/ },
 /* 109 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _noframework = __webpack_require__(110);
-	
-	var _noframework2 = _interopRequireDefault(_noframework);
-	
-	var _jquery = __webpack_require__(5);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var Reveal = function () {
-	    function Reveal(items, offset) {
-	        _classCallCheck(this, Reveal);
-	
-	        this.item = items;
-	        this.offsetPercent = offset;
-	        this.borders = (0, _jquery2.default)(".story__emp");
-	        this.hideInitialy();
-	        this.creatWaypoints();
-	        this.displayBorders();
-	    }
-	
-	    _createClass(Reveal, [{
-	        key: "hideInitialy",
-	        value: function hideInitialy() {
-	            this.item.addClass("reveal-item");
-	            this.borders.addClass("story__emp__borders--hidden");
-	        }
-	    }, {
-	        key: "creatWaypoints",
-	        value: function creatWaypoints() {
-	            var that = this;
-	            this.item.each(function () {
-	                var itemRevealed = this;
-	                new Waypoint({
-	                    element: itemRevealed,
-	                    offset: that.offsetPercent,
-	                    handler: function handler() {
-	                        (0, _jquery2.default)(itemRevealed).addClass("reveal-item--reveal");
-	                    }
-	
-	                });
-	            });
-	        }
-	    }, {
-	        key: "displayBorders",
-	        value: function displayBorders() {
-	            this.borders.each(function () {
-	                var borderRevealed = this;
-	                new Waypoint({
-	                    element: borderRevealed,
-	                    handler: function handler() {
-	                        (0, _jquery2.default)(borderRevealed).addClass("story__emp__borders--visible");
-	                    }
-	                });
-	            });
-	            this.borders.addClass();
-	        }
-	    }]);
-	
-	    return Reveal;
-	}();
-	
-	exports.default = Reveal;
-
-/***/ },
-/* 110 */
 /***/ function(module, exports) {
 
 	/*!
@@ -22833,6 +22758,86 @@
 	  Waypoint.Adapter = NoFrameworkAdapter
 	}())
 	;
+
+/***/ },
+/* 110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _noframework = __webpack_require__(109);
+	
+	var _noframework2 = _interopRequireDefault(_noframework);
+	
+	var _jquery = __webpack_require__(5);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Reveal = function () {
+	    function Reveal(items, offset) {
+	        _classCallCheck(this, Reveal);
+	
+	        this.item = items;
+	        this.offsetPercent = offset;
+	        this.borders = (0, _jquery2.default)(".story__emp");
+	        this.hideInitialy();
+	        this.creatWaypoints();
+	        this.displayBorders();
+	    }
+	
+	    _createClass(Reveal, [{
+	        key: "hideInitialy",
+	        value: function hideInitialy() {
+	            this.item.addClass("reveal-item");
+	            this.borders.addClass("story__emp__borders--hidden");
+	        }
+	    }, {
+	        key: "creatWaypoints",
+	        value: function creatWaypoints() {
+	            var that = this;
+	            this.item.each(function () {
+	                var itemRevealed = this;
+	                new Waypoint({
+	                    element: itemRevealed,
+	                    offset: that.offsetPercent,
+	                    handler: function handler() {
+	                        (0, _jquery2.default)(itemRevealed).addClass("reveal-item--reveal");
+	                    }
+	
+	                });
+	            });
+	        }
+	    }, {
+	        key: "displayBorders",
+	        value: function displayBorders() {
+	            this.borders.each(function () {
+	                var borderRevealed = this;
+	                new Waypoint({
+	                    element: borderRevealed,
+	                    offset: "100",
+	                    handler: function handler() {
+	                        (0, _jquery2.default)(borderRevealed).addClass("story__emp__borders--visible");
+	                    }
+	                });
+	            });
+	            this.borders.addClass();
+	        }
+	    }]);
+	
+	    return Reveal;
+	}();
+	
+	exports.default = Reveal;
 
 /***/ },
 /* 111 */
@@ -34216,7 +34221,7 @@
 	  }, [_h('h3', {
 	    staticClass: "info-section__info-block__heading"
 	  }, ["osnovna obuka"]), " ", _h('p', ["\n        Osnovna obuka rukovanja vatrenim oružjem podrazumeva da pojedinac ili grupa, upoznaju\n        Zakon o oružju i municiji, izgrade bezbednosnu kulturu kao jedan od najbitnih segmenata...\n        "]), " ", _h('div', {
-	    staticClass: "btn__wrap"
+	    staticClass: "btn__wrap btn__wrap--center"
 	  }, [_h('router-link', {
 	    staticClass: "btn btn--primary",
 	    attrs: {
@@ -34251,7 +34256,7 @@
 	    staticClass: "info-section__info-block"
 	  }, [_h('h3', {
 	    staticClass: "info-section__info-block__heading"
-	  }, ["rekreativni program"]), " ", _h('p', ["\n            Znamo da rekreacija  po definiciji treba da nas ojača i izgradi, shodno tome treba da nas fizički, fiziološki ozivi od svakodnevnih briga i obaveza i psihološki  podstakne da stičemo samokontrolu i time omogući da se sa novom snagom vratimo redovnim obavezama.\n        "]), " ", _h('div', {
+	  }, ["rekreativni program"]), " ", _h('p', ["\n            Znamo da rekreacija po definiciji treba da nas ojača i izgradi, shodno tome treba da nas fizički, fiziološki ozivi od svakodnevnih briga i obaveza i psihološki  podstakne da stičemo samokontrolu i time omogući da se sa novom snagom vratimo redovnim obavezama.\n        "]), " ", _h('div', {
 	    staticClass: "btn__wrap"
 	  }, [_h('a', {
 	    staticClass: "btn btn--primary",
@@ -34611,7 +34616,7 @@
 	  }, ["GHOST™ Oprema"]), " ", _h('a', {
 	    staticClass: "equipment__items",
 	    attrs: {
-	      "href": "#"
+	      "href": "http://ghostinternational.com/en/holsters/"
 	    }
 	  }, [_h('img', {
 	    staticClass: "lazyload",
@@ -34624,7 +34629,7 @@
 	  }, ["holsteri"])]), " ", _h('a', {
 	    staticClass: "equipment__items",
 	    attrs: {
-	      "href": "#"
+	      "href": "http://ghostinternational.com/en/pouches/"
 	    }
 	  }, [_h('img', {
 	    staticClass: "lazyload",
@@ -34637,7 +34642,7 @@
 	  }, ["nosači okvira"])]), " ", _h('a', {
 	    staticClass: "equipment__items",
 	    attrs: {
-	      "href": "#"
+	      "href": "http://ghostinternational.com/en/ghost-wear/"
 	    }
 	  }, [_h('img', {
 	    staticClass: "lazyload",
@@ -34650,7 +34655,7 @@
 	  }, ["majce i ostala odeća"])]), " ", _h('a', {
 	    staticClass: "equipment__items",
 	    attrs: {
-	      "href": "#"
+	      "href": "http://ghostinternational.com/en/accessories/"
 	    }
 	  }, [_h('img', {
 	    staticClass: "lazyload",
@@ -35133,7 +35138,7 @@
 	    staticClass: "main-footer__social"
 	  }, [_h('a', {
 	    attrs: {
-	      "href": "#"
+	      "href": "https://www.facebook.com/dejan.vukojevic.3"
 	    }
 	  }, [_h('svg', {
 	    staticClass: "icons",
@@ -35148,7 +35153,7 @@
 	    }
 	  })])]), " ", _h('a', {
 	    attrs: {
-	      "href": "#"
+	      "href": "https://www.youtube.com/channel/UCeRVJL9sXY6WsSPDDF2fmJw"
 	    }
 	  }, [_h('svg', {
 	    staticClass: "icons",
@@ -35207,7 +35212,7 @@
 	      "data-src": "assets/img/jedinica.png",
 	      "alt": "Klub Jednica Inđija"
 	    }
-	  }), " ", _h('div', ["Shooting club JEDINICA, Inđija"])])]), " ", _h('li', [_h('a', {
+	  }), " ", _h('div', ["Shooting club JEDINICA"])])]), " ", _h('li', [_h('a', {
 	    attrs: {
 	      "href": "http://www.mus.co.rs/"
 	    }
@@ -35354,6 +35359,8 @@
 	//
 	//
 	//
+	//
+	//
 	
 	exports.default = {
 	    components: {
@@ -35374,11 +35381,13 @@
 	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('div', {
 	    staticClass: "training__img"
+	  }, [_h('div', {
+	    staticClass: "training__img__wrapper"
 	  }, [_h('h3', {
 	    staticClass: "training__img__subheading"
-	  }, ["Upoznavanje sa oružjem"]), " ", _h('h2', {
+	  }, ["Upoznavanje sa oružjem"]), " ", _h('h1', {
 	    staticClass: "training__img__heading"
-	  }, ["Osnovna obuka"])])
+	  }, ["Osnovna obuka"])])])
 	},function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('div', {
 	    staticClass: "training__desc"
@@ -35473,6 +35482,8 @@
 	//
 	//
 	//
+	//
+	//
 	
 	exports.default = {
 	    components: {
@@ -35493,11 +35504,13 @@
 	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('div', {
 	    staticClass: "training__img"
+	  }, [_h('div', {
+	    staticClass: "training__img__wrapper"
 	  }, [_h('h3', {
 	    staticClass: "training__img__subheading"
-	  }, ["Napredne tehnike rukovanja oružjem"]), " ", _h('h2', {
+	  }, ["Napredne tehnike rukovanja oružjem"]), " ", _h('h1', {
 	    staticClass: "training__img__heading"
-	  }, ["Progresivna obuka"])])
+	  }, ["Progresivna obuka"])])])
 	},function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('div', {
 	    staticClass: "training__desc"
@@ -36221,10 +36234,6 @@
 	var _jquery = __webpack_require__(5);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _noframework = __webpack_require__(110);
-	
-	var _noframework2 = _interopRequireDefault(_noframework);
 	
 	__webpack_require__(161);
 	

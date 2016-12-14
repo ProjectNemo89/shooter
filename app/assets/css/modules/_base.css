@@ -2,18 +2,8 @@
 	box-sizing: border-box;
 }
 
-html {
-	font-size: 100%;
-	@mixin atSmall {
-		font-size: 100%;
-	}
-
-	@mixin atLarge {
-		font-size: 112.5%;
-	}
-}
-
 body {
+	font-size: 112.50%;
 	font-family: "Roboto", sans-serif;
 	background-color: #f3f3f3;
 	line-height: 1.5;
@@ -35,23 +25,20 @@ h1 {
 	margin-top: 0;
 	
 	@mixin atSmall {
-		font-size: 199.9%;
+		font-size: 1.999rem;
 	}
 
 	@mixin atLarge {
-		font-size: 282.7%;
+		font-size: 2.827rem;
 	}
 }
 
 h2 {
 
 	@mixin atSmall {
-		font-size: 141.4%;
+		font-size: 1.414rem;
 	}
 
-	@mixin atLarge {
-		font-size: 141.4%;
-	}
 }
 
 h3 {
@@ -60,9 +47,6 @@ h3 {
 		font-size: 141.4%;
 	}
 
-	@mixin atLarge {
-		font-size: 144.1%;
-	}
 }
 
 h4 {
