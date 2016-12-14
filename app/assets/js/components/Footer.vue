@@ -4,32 +4,32 @@
             <ul class="main-footer__links__list">
                 <li>
                     <a href="http://www.ipsc.rs">
-                        <img src="assets/img/ipscsavez.png" alt="IPSC savez Srbije">
+                        <img class="lazyload" data-src="assets/img/ipscsavez.png" alt="IPSC savez Srbije">
                         <div>IPSC Savez Srbije</div>
                     </a>
                 </li>
                 <li>
                     <a href="https://www.ipsc.org/">
-                        <img src="assets/img/ipsc.png" alt="IPSC international">
+                        <img class="lazyload" data-src="assets/img/ipsc.png" alt="IPSC international">
                         <div>IPSC International</div>
                     </a>
                 </li>
                 <li>
                     <a href="http://www.klubstrelacajedinica.org.rs">
-                        <img src="assets/img/jedinica.png" alt="Klub Jednica Inđija">
+                        <img class="lazyload" data-src="assets/img/jedinica.png" alt="Klub Jednica Inđija">
                         <div>Shooting club JEDINICA, Inđija</div>
                     </a>
                 </li>
                 <li>
                     <a href="http://www.mus.co.rs/">
-                        <img src="assets/img/mus.png" alt="Klub Muš">
+                        <img class="lazyload" data-src="assets/img/mus.png" alt="Klub Muš">
                         <div>Klub strelaca Muš</div>
                     </a>
 
                 </li>
                 <li>
                     <a href="http://www.mos.gov.rs/">
-                        <img src="assets/img/ministarstvo.png" alt="Ministarstvo omladine i sporta">
+                        <img class="lazyload" data-src="assets/img/ministarstvo.png" alt="Ministarstvo omladine i sporta">
                         <div>Ministarstvo omladine i sporta</div>
                     </a>
                  </li>

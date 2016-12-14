@@ -1,33 +1,37 @@
+import $ from "jquery";
+import waypoints from "../../../../node_modules/waypoints/lib/noframework.waypoints";
+import "./lazymap";
+
 class Map {
-    constructor() {
-
-        this.mapOptions = {
-            center: new google.maps.LatLng(44.574823, 21.142077),
-            mapTypeId: google.maps.MapTypeId.HYBRID,
-            zoom: 13,
-            panControl: false,
-			zoomControl: false,
-			mapTypeControl: false,
-			streetViewControl: false
-        },
-        this.marker = new google.maps.Marker({
-    	 position: this.mapOptions.center,
-    	 map: this.map,
-         visible: true,
-    	 title: 'Dejan Vukojevic Academy'
-  		 });
-        this.map = new google.maps.Map(
-        document.querySelector('.contact__map'), 
-        this.mapOptions),
-
-        this.setMarker();
+    constructor() {       
+        this.mapInit();
     }
-
-    setMarker() {
-        this.marker.setMap(this.map);
+    mapInit() {
+        $(".contact__map").lazyLoadGoogleMaps({
+            key: "AIzaSyALMQTdfOBdjhJXatLsc4YPcaPXI4KzsFs",
+            callback: function(container, map) {
+                const $container = $(container),
+                center = new google.maps.LatLng(44.574823, 21.142077);
+                map.setOptions(
+                    {zoom: 13, 
+                     center,
+                     mapTypeId: google.maps.MapTypeId.HYBRID,
+                     panControl: false,
+                     zoomControl: false,
+                     mapTypeControl: false,
+                     streetViewControl: false
+                    });
+                new google.maps.Marker(
+                    {position: center, 
+                     map,
+                     visible: true,
+                     title: "Dejan Vukojevic Academy"
+                });
+            } 
+        });
     }
-
-
 }
+
+
 
 export default Map;

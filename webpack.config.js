@@ -6,7 +6,7 @@ function config() {
 	return {
 		devtool: "source-map",
 		entry: {
-			app: path.resolve("./app/assets/js/app.js")
+			app: __dirname + "/app/assets/js/app.js"
 		},
 		output: {
 			path: path.join(__dirname, "app/build", "js"),
@@ -36,16 +36,11 @@ function config() {
 			extensions: ['', '.js'],
  			alias: {
    				 'vue$': 'vue/dist/vue.common.js',
+					"jquery": "jquery/src/jquery", 
 				  "TweenMax": "gsap/src/uncompressed/TweenMax",
 				  "TweenLite": "gsap/src/uncompressed/TweenMax",
 				  "ScrollToPlugin": "gsap/src/uncompressed/plugins/ScrollToPlugin"
   				   }
-		},
-
-		devServer: {
-			inline: true,
-			hot: true,
-			contentBase: "./app/"
 		}
 	};
 }

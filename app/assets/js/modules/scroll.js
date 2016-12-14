@@ -1,6 +1,7 @@
 require('../../../../node_modules/gsap/src/uncompressed/TweenLite');
 require('../../../../node_modules/gsap/src/uncompressed/plugins/ScrollToPlugin');
 import TweenMax from 'gsap';
+import $ from "jquery";
 
 
 
@@ -9,7 +10,7 @@ class Scroll {
         this.win = window;
         this.scrollTime = 1.2;
         this.scrollDistance = 170;
-        this.scrollTop = document.body.scrollTop;
+        this.scrollTop = $(window).scrollTop();
         this.handleWheel();
 
     }
