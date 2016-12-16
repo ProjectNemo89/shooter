@@ -9,6 +9,18 @@
                     </a>
                 </li>
                 <li>
+                    <a href="http://www.idpa.com/">
+                        <img class="lazyload" data-src="assets/img/idpa.png" alt="IDPA international">
+                        <div>IDPA International</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/groups/334543826585221/">
+                        <img class="lazyload" data-src="assets/img/grom.png" alt="Grom Academy Požarevac">
+                        <div>GROM Academy</div>
+                    </a>
+                </li>
+                <li>
                     <a href="https://www.ipsc.org/">
                         <img class="lazyload" data-src="assets/img/ipsc.png" alt="IPSC international">
                         <div>IPSC International</div>

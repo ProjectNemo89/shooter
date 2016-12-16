@@ -62,33 +62,37 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
+	__webpack_require__(109);
+	
 	var _reveal = __webpack_require__(110);
 	
 	var _reveal2 = _interopRequireDefault(_reveal);
 	
-	var _video = __webpack_require__(111);
+	var _video = __webpack_require__(112);
 	
 	var _video2 = _interopRequireDefault(_video);
 	
-	var _vue = __webpack_require__(112);
+	var _vue = __webpack_require__(113);
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _App = __webpack_require__(114);
+	var _App = __webpack_require__(115);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _vueRouter = __webpack_require__(121);
+	var _vueRouter = __webpack_require__(122);
 	
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 	
-	var _routes = __webpack_require__(122);
+	var _routes = __webpack_require__(123);
 	
-	__webpack_require__(159);
-	
-	var _map = __webpack_require__(160);
+	var _map = __webpack_require__(162);
 	
 	var _map2 = _interopRequireDefault(_map);
+	
+	var _menu = __webpack_require__(164);
+	
+	var _menu2 = _interopRequireDefault(_menu);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -98,6 +102,18 @@
 	  routes: _routes.routes,
 	  mode: "history",
 	  scrollBehavior: function scrollBehavior(to, from, savedPosition) {
+	    if (to.hash) {
+	      return { selector: to.hash };
+	    } else if (savedPosition) {
+	      return savedPosition;
+	    }
+	
+	    if (from.hash) {
+	      return { selector: from.hash };
+	    } else if (savedPosition) {
+	      return savedPosition;
+	    }
+	
 	    return { x: 0, y: 0 };
 	  }
 	});
@@ -115,7 +131,8 @@
 	new _parallax2.default();
 	new _map2.default();
 	new _video2.default();
-	new _reveal2.default((0, _jquery2.default)(".about__description__wrapper, .story__wrapper"), "-50%");
+	new _reveal2.default((0, _jquery2.default)(".about__description__wrapper"), "80%");
+	new _reveal2.default((0, _jquery2.default)(".story__desc__text"), "85%");
 	new _map2.default();
 
 /***/ },
@@ -139,7 +156,8 @@
 			this.layer1 = document.querySelector(".layer1");
 			this.layer2 = document.querySelector(".layer2");
 			this.headingMask = document.querySelector(".main-hero__callout");
-			this.header = document.querySelector(".main-header");
+			this.logo = document.querySelector(".main-header__logo");
+			this.menu = document.querySelector(".main-header__nav__controls");
 			this.onLoad();
 		}
 	
@@ -152,7 +170,8 @@
 					TweenMax.to(_this.layer1, 1, { width: 0, ease: Power3.easeInOut });
 					TweenMax.to(_this.layer2, 1, { delay: 1, height: 0, ease: Power3.easeInOut });
 					TweenMax.fromTo(_this.headingMask, 2, { x: "100%", opacity: 0, ease: Power3.easeInOut }, { delay: 1, x: "-50%", opacity: 1, ease: Power3.easeInOut });
-					TweenMax.fromTo(_this.header, 2, { opacity: 0, ease: Power2.easeInOut }, { delay: 2, opacity: 1, ease: Power2.easeInOut });
+					TweenMax.fromTo(_this.logo, 2, { opacity: 0, ease: Power2.easeInOut }, { delay: 2, opacity: 1, ease: Power2.easeInOut });
+					TweenMax.fromTo(_this.menu, 2, { opacity: 0, ease: Power2.easeInOut }, { delay: 2, opacity: 1, ease: Power2.easeInOut });
 				};
 			}
 		}]);
@@ -193,10 +212,9 @@
 	    function Scroll() {
 	        _classCallCheck(this, Scroll);
 	
-	        this.win = window;
-	        this.scrollTime = 1.2;
-	        this.scrollDistance = 170;
-	        this.scrollTop = (0, _jquery2.default)(window).scrollTop();
+	        this.win = (0, _jquery2.default)(window);
+	        this.scrollTime = 1;
+	        this.scrollDistance = 250;
 	        this.handleWheel();
 	    }
 	
@@ -207,16 +225,16 @@
 	
 	            var delta = 0;
 	            var that = this;
-	            this.win.addEventListener("mousewheel", function (e) {
+	            this.win.on("mousewheel", function (e) {
 	                var event = that.getEvent(e);
-	                event.preventDefault();
-	                delta += event.wheelDelta / 120;
+	                e.preventDefault();
+	                delta = event.originalEvent.wheelDelta / 120;
 	                that.handleDelta(delta);
 	            });
-	            this.win.addEventListener("DOMMouseScroll", function (e) {
+	            this.win.on("DOMMouseScroll", function (e) {
 	                var event = _this.getEvent(e);
 	                event.preventDefault();
-	                delta -= event.detail / 3;
+	                delta = event.originalEvent.detail / 3;
 	                _this.handleDelta(delta);
 	            });
 	        }
@@ -228,9 +246,7 @@
 	    }, {
 	        key: 'handleDelta',
 	        value: function handleDelta(delta) {
-	            var finalScroll = 0;
-	            // this.scrollTop += delta; 
-	            finalScroll = this.scrollTop - delta * this.scrollDistance;
+	            var finalScroll = (0, _jquery2.default)(window).scrollTop() - parseInt(delta * this.scrollDistance);
 	            _gsap2.default.to(this.win, this.scrollTime, {
 	                scrollTo: { y: finalScroll, autoKill: true },
 	                ease: Power1.easeOut,
@@ -21770,10 +21786,6 @@
 	
 	var _rellax2 = _interopRequireDefault(_rellax);
 	
-	var _noframework = __webpack_require__(109);
-	
-	var _noframework2 = _interopRequireDefault(_noframework);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21998,6 +22010,789 @@
 
 /***/ },
 /* 109 */
+/***/ function(module, exports) {
+
+	(function(window, factory) {
+		var lazySizes = factory(window, window.document);
+		window.lazySizes = lazySizes;
+		if(typeof module == 'object' && module.exports){
+			module.exports = lazySizes;
+		}
+	}(window, function l(window, document) {
+		'use strict';
+		/*jshint eqnull:true */
+		if(!document.getElementsByClassName){return;}
+	
+		var lazySizesConfig;
+	
+		var docElem = document.documentElement;
+	
+		var Date = window.Date;
+	
+		var supportPicture = window.HTMLPictureElement;
+	
+		var _addEventListener = 'addEventListener';
+	
+		var _getAttribute = 'getAttribute';
+	
+		var addEventListener = window[_addEventListener];
+	
+		var setTimeout = window.setTimeout;
+	
+		var requestAnimationFrame = window.requestAnimationFrame || setTimeout;
+	
+		var requestIdleCallback = window.requestIdleCallback;
+	
+		var regPicture = /^picture$/i;
+	
+		var loadEvents = ['load', 'error', 'lazyincluded', '_lazyloaded'];
+	
+		var regClassCache = {};
+	
+		var forEach = Array.prototype.forEach;
+	
+		var hasClass = function(ele, cls) {
+			if(!regClassCache[cls]){
+				regClassCache[cls] = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+			}
+			return regClassCache[cls].test(ele[_getAttribute]('class') || '') && regClassCache[cls];
+		};
+	
+		var addClass = function(ele, cls) {
+			if (!hasClass(ele, cls)){
+				ele.setAttribute('class', (ele[_getAttribute]('class') || '').trim() + ' ' + cls);
+			}
+		};
+	
+		var removeClass = function(ele, cls) {
+			var reg;
+			if ((reg = hasClass(ele,cls))) {
+				ele.setAttribute('class', (ele[_getAttribute]('class') || '').replace(reg, ' '));
+			}
+		};
+	
+		var addRemoveLoadEvents = function(dom, fn, add){
+			var action = add ? _addEventListener : 'removeEventListener';
+			if(add){
+				addRemoveLoadEvents(dom, fn);
+			}
+			loadEvents.forEach(function(evt){
+				dom[action](evt, fn);
+			});
+		};
+	
+		var triggerEvent = function(elem, name, detail, noBubbles, noCancelable){
+			var event = document.createEvent('CustomEvent');
+	
+			event.initCustomEvent(name, !noBubbles, !noCancelable, detail || {});
+	
+			elem.dispatchEvent(event);
+			return event;
+		};
+	
+		var updatePolyfill = function (el, full){
+			var polyfill;
+			if( !supportPicture && ( polyfill = (window.picturefill || lazySizesConfig.pf) ) ){
+				polyfill({reevaluate: true, elements: [el]});
+			} else if(full && full.src){
+				el.src = full.src;
+			}
+		};
+	
+		var getCSS = function (elem, style){
+			return (getComputedStyle(elem, null) || {})[style];
+		};
+	
+		var getWidth = function(elem, parent, width){
+			width = width || elem.offsetWidth;
+	
+			while(width < lazySizesConfig.minSize && parent && !elem._lazysizesWidth){
+				width =  parent.offsetWidth;
+				parent = parent.parentNode;
+			}
+	
+			return width;
+		};
+	
+		var rAF = (function(){
+			var running, waiting;
+			var fns = [];
+			var secondFns = [];
+	
+			var run = function(){
+				var runFns = fns;
+	
+				fns = secondFns;
+	
+				running = true;
+				waiting = false;
+	
+				while(runFns.length){
+					runFns.shift()();
+				}
+	
+				running = false;
+			};
+	
+			var rafBatch = function(fn, queue){
+				if(running && !queue){
+					fn.apply(this, arguments);
+				} else {
+					fns.push(fn);
+	
+					if(!waiting){
+						waiting = true;
+						(document.hidden ? setTimeout : requestAnimationFrame)(run);
+					}
+				}
+			};
+	
+			rafBatch._lsFlush = run;
+	
+			return rafBatch;
+		})();
+	
+		var rAFIt = function(fn, simple){
+			return simple ?
+				function() {
+					rAF(fn);
+				} :
+				function(){
+					var that = this;
+					var args = arguments;
+					rAF(function(){
+						fn.apply(that, args);
+					});
+				}
+			;
+		};
+	
+		var throttle = function(fn){
+			var running;
+			var lastTime = 0;
+			var gDelay = 125;
+			var RIC_DEFAULT_TIMEOUT = 666;
+			var rICTimeout = RIC_DEFAULT_TIMEOUT;
+			var run = function(){
+				running = false;
+				lastTime = Date.now();
+				fn();
+			};
+			var idleCallback = requestIdleCallback ?
+				function(){
+					requestIdleCallback(run, {timeout: rICTimeout});
+					if(rICTimeout !== RIC_DEFAULT_TIMEOUT){
+						rICTimeout = RIC_DEFAULT_TIMEOUT;
+					}
+				}:
+				rAFIt(function(){
+					setTimeout(run);
+				}, true)
+			;
+	
+			return function(isPriority){
+				var delay;
+				if((isPriority = isPriority === true)){
+					rICTimeout = 44;
+				}
+	
+				if(running){
+					return;
+				}
+	
+				running =  true;
+	
+				delay = gDelay - (Date.now() - lastTime);
+	
+				if(delay < 0){
+					delay = 0;
+				}
+	
+				if(isPriority || (delay < 9 && requestIdleCallback)){
+					idleCallback();
+				} else {
+					setTimeout(idleCallback, delay);
+				}
+			};
+		};
+	
+		//based on http://modernjavascript.blogspot.de/2013/08/building-better-debounce.html
+		var debounce = function(func) {
+			var timeout, timestamp;
+			var wait = 99;
+			var run = function(){
+				timeout = null;
+				func();
+			};
+			var later = function() {
+				var last = Date.now() - timestamp;
+	
+				if (last < wait) {
+					setTimeout(later, wait - last);
+				} else {
+					(requestIdleCallback || run)(run);
+				}
+			};
+	
+			return function() {
+				timestamp = Date.now();
+	
+				if (!timeout) {
+					timeout = setTimeout(later, wait);
+				}
+			};
+		};
+	
+	
+		var loader = (function(){
+			var lazyloadElems, preloadElems, isCompleted, resetPreloadingTimer, loadMode, started;
+	
+			var eLvW, elvH, eLtop, eLleft, eLright, eLbottom;
+	
+			var defaultExpand, preloadExpand, hFac;
+	
+			var regImg = /^img$/i;
+			var regIframe = /^iframe$/i;
+	
+			var supportScroll = ('onscroll' in window) && !(/glebot/.test(navigator.userAgent));
+	
+			var shrinkExpand = 0;
+			var currentExpand = 0;
+	
+			var isLoading = 0;
+			var lowRuns = -1;
+	
+			var resetPreloading = function(e){
+				isLoading--;
+				if(e && e.target){
+					addRemoveLoadEvents(e.target, resetPreloading);
+				}
+	
+				if(!e || isLoading < 0 || !e.target){
+					isLoading = 0;
+				}
+			};
+	
+			var isNestedVisible = function(elem, elemExpand){
+				var outerRect;
+				var parent = elem;
+				var visible = getCSS(document.body, 'visibility') == 'hidden' || getCSS(elem, 'visibility') != 'hidden';
+	
+				eLtop -= elemExpand;
+				eLbottom += elemExpand;
+				eLleft -= elemExpand;
+				eLright += elemExpand;
+	
+				while(visible && (parent = parent.offsetParent) && parent != document.body && parent != docElem){
+					visible = ((getCSS(parent, 'opacity') || 1) > 0);
+	
+					if(visible && getCSS(parent, 'overflow') != 'visible'){
+						outerRect = parent.getBoundingClientRect();
+						visible = eLright > outerRect.left &&
+							eLleft < outerRect.right &&
+							eLbottom > outerRect.top - 1 &&
+							eLtop < outerRect.bottom + 1
+						;
+					}
+				}
+	
+				return visible;
+			};
+	
+			var checkElements = function() {
+				var eLlen, i, rect, autoLoadElem, loadedSomething, elemExpand, elemNegativeExpand, elemExpandVal, beforeExpandVal;
+	
+				if((loadMode = lazySizesConfig.loadMode) && isLoading < 8 && (eLlen = lazyloadElems.length)){
+	
+					i = 0;
+	
+					lowRuns++;
+	
+					if(preloadExpand == null){
+						if(!('expand' in lazySizesConfig)){
+							lazySizesConfig.expand = docElem.clientHeight > 500 && docElem.clientWidth > 500 ? 500 : 370;
+						}
+	
+						defaultExpand = lazySizesConfig.expand;
+						preloadExpand = defaultExpand * lazySizesConfig.expFactor;
+					}
+	
+					if(currentExpand < preloadExpand && isLoading < 1 && lowRuns > 2 && loadMode > 2 && !document.hidden){
+						currentExpand = preloadExpand;
+						lowRuns = 0;
+					} else if(loadMode > 1 && lowRuns > 1 && isLoading < 6){
+						currentExpand = defaultExpand;
+					} else {
+						currentExpand = shrinkExpand;
+					}
+	
+					for(; i < eLlen; i++){
+	
+						if(!lazyloadElems[i] || lazyloadElems[i]._lazyRace){continue;}
+	
+						if(!supportScroll){unveilElement(lazyloadElems[i]);continue;}
+	
+						if(!(elemExpandVal = lazyloadElems[i][_getAttribute]('data-expand')) || !(elemExpand = elemExpandVal * 1)){
+							elemExpand = currentExpand;
+						}
+	
+						if(beforeExpandVal !== elemExpand){
+							eLvW = innerWidth + (elemExpand * hFac);
+							elvH = innerHeight + elemExpand;
+							elemNegativeExpand = elemExpand * -1;
+							beforeExpandVal = elemExpand;
+						}
+	
+						rect = lazyloadElems[i].getBoundingClientRect();
+	
+						if ((eLbottom = rect.bottom) >= elemNegativeExpand &&
+							(eLtop = rect.top) <= elvH &&
+							(eLright = rect.right) >= elemNegativeExpand * hFac &&
+							(eLleft = rect.left) <= eLvW &&
+							(eLbottom || eLright || eLleft || eLtop) &&
+							((isCompleted && isLoading < 3 && !elemExpandVal && (loadMode < 3 || lowRuns < 4)) || isNestedVisible(lazyloadElems[i], elemExpand))){
+							unveilElement(lazyloadElems[i]);
+							loadedSomething = true;
+							if(isLoading > 9){break;}
+						} else if(!loadedSomething && isCompleted && !autoLoadElem &&
+							isLoading < 4 && lowRuns < 4 && loadMode > 2 &&
+							(preloadElems[0] || lazySizesConfig.preloadAfterLoad) &&
+							(preloadElems[0] || (!elemExpandVal && ((eLbottom || eLright || eLleft || eLtop) || lazyloadElems[i][_getAttribute](lazySizesConfig.sizesAttr) != 'auto')))){
+							autoLoadElem = preloadElems[0] || lazyloadElems[i];
+						}
+					}
+	
+					if(autoLoadElem && !loadedSomething){
+						unveilElement(autoLoadElem);
+					}
+				}
+			};
+	
+			var throttledCheckElements = throttle(checkElements);
+	
+			var switchLoadingClass = function(e){
+				addClass(e.target, lazySizesConfig.loadedClass);
+				removeClass(e.target, lazySizesConfig.loadingClass);
+				addRemoveLoadEvents(e.target, rafSwitchLoadingClass);
+			};
+			var rafedSwitchLoadingClass = rAFIt(switchLoadingClass);
+			var rafSwitchLoadingClass = function(e){
+				rafedSwitchLoadingClass({target: e.target});
+			};
+	
+			var changeIframeSrc = function(elem, src){
+				try {
+					elem.contentWindow.location.replace(src);
+				} catch(e){
+					elem.src = src;
+				}
+			};
+	
+			var handleSources = function(source){
+				var customMedia, parent;
+	
+				var sourceSrcset = source[_getAttribute](lazySizesConfig.srcsetAttr);
+	
+				if( (customMedia = lazySizesConfig.customMedia[source[_getAttribute]('data-media') || source[_getAttribute]('media')]) ){
+					source.setAttribute('media', customMedia);
+				}
+	
+				if(sourceSrcset){
+					source.setAttribute('srcset', sourceSrcset);
+				}
+	
+				//https://bugzilla.mozilla.org/show_bug.cgi?id=1170572
+				if(customMedia){
+					parent = source.parentNode;
+					parent.insertBefore(source.cloneNode(), source);
+					parent.removeChild(source);
+				}
+			};
+	
+			var lazyUnveil = rAFIt(function (elem, detail, isAuto, sizes, isImg){
+				var src, srcset, parent, isPicture, event, firesLoad;
+	
+				if(!(event = triggerEvent(elem, 'lazybeforeunveil', detail)).defaultPrevented){
+	
+					if(sizes){
+						if(isAuto){
+							addClass(elem, lazySizesConfig.autosizesClass);
+						} else {
+							elem.setAttribute('sizes', sizes);
+						}
+					}
+	
+					srcset = elem[_getAttribute](lazySizesConfig.srcsetAttr);
+					src = elem[_getAttribute](lazySizesConfig.srcAttr);
+	
+					if(isImg) {
+						parent = elem.parentNode;
+						isPicture = parent && regPicture.test(parent.nodeName || '');
+					}
+	
+					firesLoad = detail.firesLoad || (('src' in elem) && (srcset || src || isPicture));
+	
+					event = {target: elem};
+	
+					if(firesLoad){
+						addRemoveLoadEvents(elem, resetPreloading, true);
+						clearTimeout(resetPreloadingTimer);
+						resetPreloadingTimer = setTimeout(resetPreloading, 2500);
+	
+						addClass(elem, lazySizesConfig.loadingClass);
+						addRemoveLoadEvents(elem, rafSwitchLoadingClass, true);
+					}
+	
+					if(isPicture){
+						forEach.call(parent.getElementsByTagName('source'), handleSources);
+					}
+	
+					if(srcset){
+						elem.setAttribute('srcset', srcset);
+					} else if(src && !isPicture){
+						if(regIframe.test(elem.nodeName)){
+							changeIframeSrc(elem, src);
+						} else {
+							elem.src = src;
+						}
+					}
+	
+					if(srcset || isPicture){
+						updatePolyfill(elem, {src: src});
+					}
+				}
+	
+				if(elem._lazyRace){
+					delete elem._lazyRace;
+				}
+				removeClass(elem, lazySizesConfig.lazyClass);
+	
+				rAF(function(){
+					if( !firesLoad || elem.complete ){
+						if(firesLoad){
+							resetPreloading(event);
+						} else {
+							isLoading--;
+						}
+						switchLoadingClass(event);
+					}
+				}, true);
+			});
+	
+			var unveilElement = function (elem){
+				var detail;
+	
+				var isImg = regImg.test(elem.nodeName);
+	
+				//allow using sizes="auto", but don't use. it's invalid. Use data-sizes="auto" or a valid value for sizes instead (i.e.: sizes="80vw")
+				var sizes = isImg && (elem[_getAttribute](lazySizesConfig.sizesAttr) || elem[_getAttribute]('sizes'));
+				var isAuto = sizes == 'auto';
+	
+				if( (isAuto || !isCompleted) && isImg && (elem.src || elem.srcset) && !elem.complete && !hasClass(elem, lazySizesConfig.errorClass)){return;}
+	
+				detail = triggerEvent(elem, 'lazyunveilread').detail;
+	
+				if(isAuto){
+					 autoSizer.updateElem(elem, true, elem.offsetWidth);
+				}
+	
+				elem._lazyRace = true;
+				isLoading++;
+	
+				lazyUnveil(elem, detail, isAuto, sizes, isImg);
+			};
+	
+			var onload = function(){
+				if(isCompleted){return;}
+				if(Date.now() - started < 999){
+					setTimeout(onload, 999);
+					return;
+				}
+				var afterScroll = debounce(function(){
+					lazySizesConfig.loadMode = 3;
+					throttledCheckElements();
+				});
+	
+				isCompleted = true;
+	
+				lazySizesConfig.loadMode = 3;
+	
+				throttledCheckElements();
+	
+				addEventListener('scroll', function(){
+					if(lazySizesConfig.loadMode == 3){
+						lazySizesConfig.loadMode = 2;
+					}
+					afterScroll();
+				}, true);
+			};
+	
+			return {
+				_: function(){
+					started = Date.now();
+	
+					lazyloadElems = document.getElementsByClassName(lazySizesConfig.lazyClass);
+					preloadElems = document.getElementsByClassName(lazySizesConfig.lazyClass + ' ' + lazySizesConfig.preloadClass);
+					hFac = lazySizesConfig.hFac;
+	
+					addEventListener('scroll', throttledCheckElements, true);
+	
+					addEventListener('resize', throttledCheckElements, true);
+	
+					if(window.MutationObserver){
+						new MutationObserver( throttledCheckElements ).observe( docElem, {childList: true, subtree: true, attributes: true} );
+					} else {
+						docElem[_addEventListener]('DOMNodeInserted', throttledCheckElements, true);
+						docElem[_addEventListener]('DOMAttrModified', throttledCheckElements, true);
+						setInterval(throttledCheckElements, 999);
+					}
+	
+					addEventListener('hashchange', throttledCheckElements, true);
+	
+					//, 'fullscreenchange'
+					['focus', 'mouseover', 'click', 'load', 'transitionend', 'animationend', 'webkitAnimationEnd'].forEach(function(name){
+						document[_addEventListener](name, throttledCheckElements, true);
+					});
+	
+					if((/d$|^c/.test(document.readyState))){
+						onload();
+					} else {
+						addEventListener('load', onload);
+						document[_addEventListener]('DOMContentLoaded', throttledCheckElements);
+						setTimeout(onload, 20000);
+					}
+	
+					if(lazyloadElems.length){
+						checkElements();
+						rAF._lsFlush();
+					} else {
+						throttledCheckElements();
+					}
+				},
+				checkElems: throttledCheckElements,
+				unveil: unveilElement
+			};
+		})();
+	
+	
+		var autoSizer = (function(){
+			var autosizesElems;
+	
+			var sizeElement = rAFIt(function(elem, parent, event, width){
+				var sources, i, len;
+				elem._lazysizesWidth = width;
+				width += 'px';
+	
+				elem.setAttribute('sizes', width);
+	
+				if(regPicture.test(parent.nodeName || '')){
+					sources = parent.getElementsByTagName('source');
+					for(i = 0, len = sources.length; i < len; i++){
+						sources[i].setAttribute('sizes', width);
+					}
+				}
+	
+				if(!event.detail.dataAttr){
+					updatePolyfill(elem, event.detail);
+				}
+			});
+			var getSizeElement = function (elem, dataAttr, width){
+				var event;
+				var parent = elem.parentNode;
+	
+				if(parent){
+					width = getWidth(elem, parent, width);
+					event = triggerEvent(elem, 'lazybeforesizes', {width: width, dataAttr: !!dataAttr});
+	
+					if(!event.defaultPrevented){
+						width = event.detail.width;
+	
+						if(width && width !== elem._lazysizesWidth){
+							sizeElement(elem, parent, event, width);
+						}
+					}
+				}
+			};
+	
+			var updateElementsSizes = function(){
+				var i;
+				var len = autosizesElems.length;
+				if(len){
+					i = 0;
+	
+					for(; i < len; i++){
+						getSizeElement(autosizesElems[i]);
+					}
+				}
+			};
+	
+			var debouncedUpdateElementsSizes = debounce(updateElementsSizes);
+	
+			return {
+				_: function(){
+					autosizesElems = document.getElementsByClassName(lazySizesConfig.autosizesClass);
+					addEventListener('resize', debouncedUpdateElementsSizes);
+				},
+				checkElems: debouncedUpdateElementsSizes,
+				updateElem: getSizeElement
+			};
+		})();
+	
+		var init = function(){
+			if(!init.i){
+				init.i = true;
+				autoSizer._();
+				loader._();
+			}
+		};
+	
+		(function(){
+			var prop;
+	
+			var lazySizesDefaults = {
+				lazyClass: 'lazyload',
+				loadedClass: 'lazyloaded',
+				loadingClass: 'lazyloading',
+				preloadClass: 'lazypreload',
+				errorClass: 'lazyerror',
+				//strictClass: 'lazystrict',
+				autosizesClass: 'lazyautosizes',
+				srcAttr: 'data-src',
+				srcsetAttr: 'data-srcset',
+				sizesAttr: 'data-sizes',
+				//preloadAfterLoad: false,
+				minSize: 40,
+				customMedia: {},
+				init: true,
+				expFactor: 1.5,
+				hFac: 0.8,
+				loadMode: 2
+			};
+	
+			lazySizesConfig = window.lazySizesConfig || window.lazysizesConfig || {};
+	
+			for(prop in lazySizesDefaults){
+				if(!(prop in lazySizesConfig)){
+					lazySizesConfig[prop] = lazySizesDefaults[prop];
+				}
+			}
+	
+			window.lazySizesConfig = lazySizesConfig;
+	
+			setTimeout(function(){
+				if(lazySizesConfig.init){
+					init();
+				}
+			});
+		})();
+	
+		return {
+			cfg: lazySizesConfig,
+			autoSizer: autoSizer,
+			loader: loader,
+			init: init,
+			uP: updatePolyfill,
+			aC: addClass,
+			rC: removeClass,
+			hC: hasClass,
+			fire: triggerEvent,
+			gW: getWidth,
+			rAF: rAF,
+		};
+	}
+	));
+
+
+/***/ },
+/* 110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _noframework = __webpack_require__(111);
+	
+	var _noframework2 = _interopRequireDefault(_noframework);
+	
+	var _jquery = __webpack_require__(5);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Reveal = function () {
+	    function Reveal(items, offset) {
+	        _classCallCheck(this, Reveal);
+	
+	        this.lazyimg = (0, _jquery2.default)(".lazyload");
+	        this.item = items;
+	        this.offsetPercent = offset;
+	        this.borders = (0, _jquery2.default)(".story__emp");
+	        this.hideInitialy();
+	        this.creatWaypoints();
+	        this.displayBorders();
+	        this.refreshWaypoints();
+	    }
+	
+	    _createClass(Reveal, [{
+	        key: "hideInitialy",
+	        value: function hideInitialy() {
+	            this.item.addClass("reveal-item");
+	            this.borders.addClass("story__emp__borders--hidden");
+	        }
+	    }, {
+	        key: "creatWaypoints",
+	        value: function creatWaypoints() {
+	            var that = this;
+	            this.item.each(function () {
+	                var itemRevealed = this;
+	                new Waypoint({
+	                    element: itemRevealed,
+	                    offset: that.offsetPercent,
+	                    handler: function handler() {
+	                        (0, _jquery2.default)(itemRevealed).addClass("reveal-item--reveal");
+	                    }
+	                });
+	            });
+	        }
+	    }, {
+	        key: "displayBorders",
+	        value: function displayBorders() {
+	            this.borders.each(function () {
+	                var borderRevealed = this;
+	                new Waypoint({
+	                    element: borderRevealed,
+	                    offset: "100%",
+	                    handler: function handler() {
+	                        (0, _jquery2.default)(borderRevealed).addClass("story__emp__borders--visible");
+	                    }
+	                });
+	            });
+	            this.borders.addClass();
+	        }
+	    }, {
+	        key: "refreshWaypoints",
+	        value: function refreshWaypoints() {
+	            this.lazyimg.on("load", function () {
+	                Waypoint.refreshAll();
+	            });
+	        }
+	    }]);
+	
+	    return Reveal;
+	}();
+	
+	exports.default = Reveal;
+
+/***/ },
+/* 111 */
 /***/ function(module, exports) {
 
 	/*!
@@ -22760,87 +23555,7 @@
 	;
 
 /***/ },
-/* 110 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _noframework = __webpack_require__(109);
-	
-	var _noframework2 = _interopRequireDefault(_noframework);
-	
-	var _jquery = __webpack_require__(5);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var Reveal = function () {
-	    function Reveal(items, offset) {
-	        _classCallCheck(this, Reveal);
-	
-	        this.item = items;
-	        this.offsetPercent = offset;
-	        this.borders = (0, _jquery2.default)(".story__emp");
-	        this.hideInitialy();
-	        this.creatWaypoints();
-	        this.displayBorders();
-	    }
-	
-	    _createClass(Reveal, [{
-	        key: "hideInitialy",
-	        value: function hideInitialy() {
-	            this.item.addClass("reveal-item");
-	            this.borders.addClass("story__emp__borders--hidden");
-	        }
-	    }, {
-	        key: "creatWaypoints",
-	        value: function creatWaypoints() {
-	            var that = this;
-	            this.item.each(function () {
-	                var itemRevealed = this;
-	                new Waypoint({
-	                    element: itemRevealed,
-	                    offset: that.offsetPercent,
-	                    handler: function handler() {
-	                        (0, _jquery2.default)(itemRevealed).addClass("reveal-item--reveal");
-	                    }
-	
-	                });
-	            });
-	        }
-	    }, {
-	        key: "displayBorders",
-	        value: function displayBorders() {
-	            this.borders.each(function () {
-	                var borderRevealed = this;
-	                new Waypoint({
-	                    element: borderRevealed,
-	                    offset: "100",
-	                    handler: function handler() {
-	                        (0, _jquery2.default)(borderRevealed).addClass("story__emp__borders--visible");
-	                    }
-	                });
-	            });
-	            this.borders.addClass();
-	        }
-	    }]);
-	
-	    return Reveal;
-	}();
-	
-	exports.default = Reveal;
-
-/***/ },
-/* 111 */
+/* 112 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -22890,7 +23605,7 @@
 	exports.default = Video;
 
 /***/ },
-/* 112 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {/*!
@@ -31008,10 +31723,10 @@
 	
 	module.exports = Vue$3;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(113)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(114)))
 
 /***/ },
-/* 113 */
+/* 114 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -31197,20 +31912,20 @@
 
 
 /***/ },
-/* 114 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(115)
+	__webpack_require__(116)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(119)
+	__vue_exports__ = __webpack_require__(120)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(120)
+	var __vue_template__ = __webpack_require__(121)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -31245,16 +31960,16 @@
 
 
 /***/ },
-/* 115 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(116);
+	var content = __webpack_require__(117);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(118)(content, {});
+	var update = __webpack_require__(119)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31271,10 +31986,10 @@
 	}
 
 /***/ },
-/* 116 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(117)();
+	exports = module.exports = __webpack_require__(118)();
 	// imports
 	
 	
@@ -31285,7 +32000,7 @@
 
 
 /***/ },
-/* 117 */
+/* 118 */
 /***/ function(module, exports) {
 
 	/*
@@ -31341,7 +32056,7 @@
 
 
 /***/ },
-/* 118 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -31563,7 +32278,7 @@
 
 
 /***/ },
-/* 119 */
+/* 120 */
 /***/ function(module, exports) {
 
 	//
@@ -31579,7 +32294,7 @@
 	"use strict";
 
 /***/ },
-/* 120 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
@@ -31599,7 +32314,7 @@
 	}
 
 /***/ },
-/* 121 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -33663,10 +34378,10 @@
 	}
 	
 	module.exports = VueRouter;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(113)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(114)))
 
 /***/ },
-/* 122 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33676,15 +34391,15 @@
 	});
 	exports.routes = undefined;
 	
-	var _Home = __webpack_require__(123);
+	var _Home = __webpack_require__(124);
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _OsnovnaObuka = __webpack_require__(153);
+	var _OsnovnaObuka = __webpack_require__(156);
 	
 	var _OsnovnaObuka2 = _interopRequireDefault(_OsnovnaObuka);
 	
-	var _NaprednaObuka = __webpack_require__(156);
+	var _NaprednaObuka = __webpack_require__(159);
 	
 	var _NaprednaObuka2 = _interopRequireDefault(_NaprednaObuka);
 	
@@ -33692,7 +34407,9 @@
 	
 	var routes = exports.routes = [{
 	    path: "/",
-	    component: _Home2.default
+	    component: _Home2.default,
+	    name: "home",
+	    hash: "#bio"
 	}, {
 	    path: "/beginners",
 	    component: _OsnovnaObuka2.default
@@ -33702,17 +34419,17 @@
 	}];
 
 /***/ },
-/* 123 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(124)
+	__vue_exports__ = __webpack_require__(125)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(152)
+	var __vue_template__ = __webpack_require__(155)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -33746,7 +34463,7 @@
 
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33755,40 +34472,207 @@
 	    value: true
 	});
 	
-	var _MainHero = __webpack_require__(125);
+	var _Header = __webpack_require__(126);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	var _MainHero = __webpack_require__(131);
 	
 	var _MainHero2 = _interopRequireDefault(_MainHero);
 	
-	var _InfoSection = __webpack_require__(131);
+	var _InfoSection = __webpack_require__(134);
 	
 	var _InfoSection2 = _interopRequireDefault(_InfoSection);
 	
-	var _About = __webpack_require__(134);
+	var _About = __webpack_require__(137);
 	
 	var _About2 = _interopRequireDefault(_About);
 	
-	var _Story = __webpack_require__(137);
+	var _Story = __webpack_require__(140);
 	
 	var _Story2 = _interopRequireDefault(_Story);
 	
-	var _Equipment = __webpack_require__(140);
+	var _Equipment = __webpack_require__(143);
 	
 	var _Equipment2 = _interopRequireDefault(_Equipment);
 	
-	var _Gallery = __webpack_require__(143);
+	var _Gallery = __webpack_require__(146);
 	
 	var _Gallery2 = _interopRequireDefault(_Gallery);
 	
-	var _Contact = __webpack_require__(146);
+	var _Contact = __webpack_require__(149);
 	
 	var _Contact2 = _interopRequireDefault(_Contact);
 	
-	var _Footer = __webpack_require__(149);
+	var _Footer = __webpack_require__(152);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	exports.default = {
+	    components: {
+	        "app-header": _Header2.default,
+	        "app-mainhero": _MainHero2.default,
+	        "app-infosection": _InfoSection2.default,
+	        "app-about": _About2.default,
+	        "app-story": _Story2.default,
+	        "app-equipment": _Equipment2.default,
+	        "app-gallery": _Gallery2.default,
+	        "app-contact": _Contact2.default,
+	        "app-footer": _Footer2.default
+	    }
+	}; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* styles */
+	__webpack_require__(127)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(129)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(130)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\Nemanja\\Desktop\\Dejan site\\app\\assets\\js\\components\\Header.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-9861d020"
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-9861d020", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-9861d020", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] Header.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ },
+/* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(128);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(119)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-9861d020&scoped=true!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Header.vue", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-9861d020&scoped=true!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Header.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 128 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(118)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n.cls-1[data-v-9861d020]{fill:#fff;\n}\n.cls-2[data-v-9861d020],.cls-3[data-v-9861d020],.cls-4[data-v-9861d020]{fill:none;\n}\n.cls-2[data-v-9861d020]{stroke:#fff;stroke-width:6px;\n}\n.cls-2[data-v-9861d020],.cls-4[data-v-9861d020]{stroke-miterlimit:10;\n}\n.cls-4[data-v-9861d020]{stroke:red;stroke-width:2px;\n}\n", "", {"version":3,"sources":["/./app/assets/js/components/Header.vue?3791f60e"],"names":[],"mappings":";AA2EA,wBAAA,UAAA;CAAA;AAAA,wEAAA,UAAA;CAAA;AAAA,wBAAA,YAAA,iBAAA;CAAA;AAAA,gDAAA,qBAAA;CAAA;AAAA,wBAAA,WAAA,iBAAA;CAAA","file":"Header.vue","sourcesContent":["<template>\r\n    <div>  \r\n        <div class=\"main-header__logo\">\r\n            <svg id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 492.34 88.96\">\r\n            <title>\r\n                logo\r\n            </title>\r\n            <path class=\"cls-1\" d=\"M311.74 84.58c0 2.56-2.11 4.35-5.16 4.35a6 6 0 0 1-5.7-3.46l2.58-1.28a3.28 3.28 0 0 0 3.11 2c1.39 0 2.18-.62 2.18-1.64s-.73-1.49-2.52-1.73c-3.23-.33-5.23-2.06-5.23-4.55s2.24-4.39 5.14-4.39a6.15 6.15 0 0 1 5.67 3.35l-2.54 1.32a3.3 3.3 0 0 0-3.14-2c-1.34 0-2.18.64-2.18 1.68s.88 1.56 2.52 1.81c3.39.51 5.18 2.04 5.27 4.54zM316 74.15v6.12h5v-6.12h2.88v14.5H321v-5.63h-5v5.63h-2.88v-14.5H316zM331.53 73.87c3.37 0 5.76 2.07 5.76 5v5c0 2.92-2.41 5-5.76 5s-5.74-2.09-5.74-5v-5c0-2.95 2.37-5 5.74-5zm0 12.22c1.71 0 2.67-.81 2.67-2.18v-5c0-1.43-.9-2.15-2.67-2.15s-2.65.75-2.65 2.15v5c0 1.37.96 2.18 2.65 2.18zM344.73 73.87c3.37 0 5.76 2.07 5.76 5v5c0 2.92-2.41 5-5.76 5s-5.74-2.09-5.74-5v-5c.01-2.95 2.37-5 5.74-5zm0 12.22c1.71 0 2.67-.81 2.67-2.18v-5c0-1.43-.9-2.15-2.67-2.15s-2.65.75-2.65 2.15v5c.01 1.37.92 2.18 2.65 2.18zM351.34 74.15h11.28v2.79h-4.31v11.71h-2.88V76.94h-4.1v-2.79zM367.45 88.65h-2.9v-14.5h2.9v14.5zM377.83 83.51v-9.36h2.88v14.5h-3l-5.27-9.21v9.21h-2.88v-14.5h2.86zM382.63 83.3v-3.73c0-3.41 2.28-5.65 5.8-5.65a5.3 5.3 0 0 1 5.29 3.24l-2.77 1.2c-.45-1.17-1-1.56-2.52-1.56-2 0-2.82.81-2.82 2.77v3.69c0 1.94.83 2.75 2.88 2.75s2.67-.68 2.67-2.71v-.45h-3.65v-2.64h6.63v3.09c0 3.5-2.11 5.59-5.67 5.59s-5.84-2.18-5.84-5.59zM407.84 74.15l5.16 14.5h-3l-1.24-3.48h-4.22l-1.19 3.48h-3l5.14-14.51h2.37zm-1.17 4.56l-1.22 3.86h2.41zM422.47 84.03l2.92 1.17c-.87 2.41-2.92 3.73-5.78 3.73-3.67 0-5.76-2-5.76-5.46v-4.1c0-3.54 2.13-5.61 5.76-5.61 2.86 0 4.91 1.32 5.78 3.73l-2.92 1.22c-.32-1.43-1.07-2-2.82-2-2.18 0-2.77.58-2.77 2.69v4c0 2 .6 2.6 2.69 2.6 1.81.01 2.58-.54 2.9-1.97zM432.69 74.15l5.16 14.51h-3l-1.24-3.48h-4.22l-1.19 3.48h-3l5.14-14.51h2.37zm-1.18 4.56l-1.22 3.86h2.41zM444.67 74.15c3.39 0 5.42 1.92 5.42 5.12v4.8c0 2.79-2.13 4.59-5.46 4.59h-5.29V74.15h5.33zm2.54 9.92V79.2c0-1.66-.7-2.3-2.54-2.3h-2.45v9h2.41c1.75 0 2.58-.62 2.58-1.83zM462 74.15v2.75h-6.9v3.07h6.14v2.74h-6.14v3.2h6.9v2.75h-9.73V74.15H462zM467.2 74.15l3.65 7.7 3.63-7.7h3.14v14.5h-2.88v-8.94L472 86.07h-2.26L467 79.71v8.92h-2.88V74.12h3.14zM482 74.15l2.82 5.8 3-5.8H491l-4.63 8.62v5.89h-3v-5.89l-4.74-8.62H482z\"/>\r\n            <path class=\"cls-2\" d=\"M480.67 9.38L486 1.71\"/>\r\n            <path class=\"cls-3\" d=\"M147 43.69h1.74L147 40.66v3.03zM308 30.05V43.52c0 3.37 1.89 5.26 6.09 5.26H314c4-.1 7-2 7-5.24V30.05c0-3.48-2.56-5.34-7-5.34v.14c-4.42.06-6 1.78-6 5.2zM114.97 38.35l-1.7 5.41 3.35-.01-1.65-5.4zM117.39 46.71l-.77-2.74-3.35.12-.79 2.62h4.91zM160 43.67h-2.11l2.11 3.66v-3.66zM202.97 43.58l-4.6.01 2.31 6.93 2.29-6.94zM240.64 55.89c4.25 0 6.66-1.89 6.66-5.32l-.08-7.09-13.22.03v7.06c0 3.37 2.45 5.32 6.64 5.32zM14.79 55.71c4.37 0 6.21-1.77 6.21-4.72v-7.06H9v11.78h5.79zM420.78 43.71h-4.51l2.26 6.81 2.25-6.81zM21 30.88c0-4.17-1.48-5.17-6.09-5.17H9v11.25h12v-6.08z\"/>\r\n            <path class=\"cls-1\" d=\"M21 50.99c0 3-1.84 4.72-6.21 4.72H9V43.96H0v19.75h14.79c9.28 0 15.21-4.92 15.21-12.72v-7.07h-9v7.06zM14.91 16.71H0v20.26h9V25.71h5.91c4.61 0 6.09 1 6.09 5.17v6.06h9v-5.88c0-8.98-5.64-14.35-15.09-14.35zM85 50.52c0 3.48-1.38 4.78-5.28 4.78-3 0-4.44-1.18-5.74-4.49l-7.59 3.72c2.13 6.18 6.81 9.34 13.61 9.34 9 0 14-4.9 14-13.53v-6.55h-9v6.71zM85 16.71v20.1l9-.02V16.71h-9zM111.36 16.71l-7.14 20.07 9.05-.02 1.7-5.4 1.65 5.39 9.05-.01-7.16-20.03h-7.15zM117.39 46.71h-4.91l.79-2.73-9.05-.17-7.15 19.9h9.33l3.25-9h10.51l3.37 9h9.33l-7.19-20.06-9.05.28.77 2.78zM160 16.71v19.96l9-.02V16.71h-9zM138 63.71h9V43.69l-9 .02v20zM146.21 16.71H138v20l9-.02v-3.03l1.49 3.03 9.37-.02-11.65-19.96zM160 47.33l-2.19-3.66-9.53-.06 11.51 20.1H169V43.65l-9 .02v3.66zM190.76 16.71h-9.86l7.08 19.9 9.39-.02-6.61-19.88zM211.54 16.71l-6.57 19.87 9.37-.02 7.06-19.85h-9.86zM200.68 50.52l-2.31-6.93-9.39-.07 7.21 20.19h8.92l7.23-20.23-9.37.06-2.29 6.98zM247.28 16.71l.15 19.78 9.57-.02V16.71h-9.72zM234 16.71h-9v19.82l9-.01V16.71zM247.34 50.58c0 3.43-2.45 5.32-6.7 5.32S234 53.94 234 50.58v-7.07h-9v7c0 8.34 6.64 14.2 16 14.2s16-6 16-14.18v-7.06h-9.57zM263 63.71h9V50.76l1.52-1.97 11.97 14.92h11.4l-16.84-20.36-17.05.11v20.25zM295.83 16.71h-11.58L272 30.94V16.71h-9v19.75l17.05-.03-.86-.94 16.64-18.78zM354 16.71h9v20h-9zM354 50.52c0 3.48-1.31 4.78-5.21 4.78-3 0-4.41-1.18-5.71-4.49l-7.58 3.72c2.13 6.14 6.75 9.33 13.54 9.33 9 0 14-4.9 14-13.53v-6.62h-9v6.81zM369 63.71h27v-8h-18v-8h17v-4h-26v20zM378 32.71v-7h18v-9h-27v20h26v-4h-17zM420.53 50.52l-2.26-6.81h-9.4l7.18 20h8.91l7.18-20h-9.36l-2.25 6.81zM429.39 16.71l-6.61 20h9.36l7.12-20h-9.87zM411.62 16.71h-9.87l7.12 20h9.4l-6.65-20zM445 16.71h9v20h-9zM445 43.71h9v20h-9zM475.86 55.54c-5.26 0-6.86-1.3-6.86-6.38v-5.45h-9v5.63c0 9.63 5.92 15.12 16.08 15.12 8.09 0 13.95-3.84 16.25-10.87l-9.07-3.6c-.7 4.13-2.56 5.55-7.4 5.55zM469 31.35c0-5.32 1.6-6.62 7.1-6.62 4.61 0 6.5 1.42 7.21 5.55l9-3.6c-2.3-7-8.2-10.87-16.29-10.87C466 15.82 460 21.61 460 31.35v5.36h9v-5.36zM45 32.71v-7h18v-9H36v20.2l25-.05v-4.15H45zM36 63.71h27v-8H45v-8h16v-3.85l-25 .05v19.8zM319 15.71v9c4.43 0 7 1.86 7 5.34v6.66h9v-6.66c0-8.15-6.66-14.34-16-14.34zM306 30.05c0-3.42 1.58-5.14 6-5.2v-8.8c-9.33 0-16 5.79-16 14v6.35h10v-6.35zM312.09 55.78c-4.19 0-6.09-1.89-6.09-5.26v-7.14h-10v7.12c0 8.21 6.51 14.06 15.78 14.06h.22v-8.85s.2.07.09.07zM326 50.52c0 3.27-3 5.14-7 5.24v8.81c9-.14 16-6 16-14v-6.86h-9v6.81z\"/>\r\n            <circle class=\"cls-4\" cx=\"316\" cy=\"40.71\" r=\"5.33\"/>\r\n            </svg>\r\n        </div>\r\n        <nav class=\"main-header__nav\" :class=\"{'main-header__nav--active': nav}\">\r\n            <div class=\"main-header__nav__controls\" :class=\"{'main-header__nav__controls--active': controls}\">\r\n                <div class=\"main-header__nav__label\" :class=\"{'main-header__nav__label--active': label}\">\r\n                    <h4>Meni</h4>\r\n                </div>\r\n                <div class=\"main-header__nav__button\">\r\n                    <a class=\"main-header__nav__button__menubar\" href=\"#\" @click.prevent=\"menuToggling\">\r\n                        <div class=\"main-header__nav__button__line\" :class=\"{'main-header__nav__button__line--active': lines}\"></div>\r\n                    </a> \r\n                </div>\r\n            </div>\r\n            <div class=\"main-header__nav__container\">\r\n                <ul class=\"main-header__nav__container__nav-items\">\r\n                    <li>\r\n                        <router-link :to=\"{name: 'home'}\" tag=\"a\">Početna</router-link>\r\n                    </li>\r\n                    <li>\r\n                        <router-link :to=\"{name:'home', hash: '#bio'}\" tag=\"a\">Biografija</router-link>\r\n                        \r\n                    </li>\r\n                    <li>\r\n                        <router-link :to=\"{name:'home', hash: '#info'}\" tag=\"a\">Obuke</router-link>\r\n                    </li>\r\n                    <li>\r\n                        <router-link to=\"/\" tag=\"a\">Oprema</router-link>\r\n                    </li>\r\n                    <li>\r\n                        <router-link to=\"/\" tag=\"a\">Galerija</router-link>\r\n                    </li>\r\n                    <li>\r\n                        <router-link to=\"/\" tag=\"a\">Kontakt</router-link>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </nav>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    export default {\r\n        data() {\r\n            return {\r\n                nav: false,\r\n                controls: false,\r\n                label: false,\r\n                lines: false\r\n            };   \r\n        },\r\n        methods: {\r\n            menuToggling() {\r\n            this.nav = !this.nav;\r\n            this.controls = !this.controls;\r\n            this.label = !this.label;\r\n            this.lines = !this.lines;             \r\n            }\r\n        }\r\n        \r\n    }\r\n</script>\r\n\r\n<style scoped>\r\n    .cls-1{fill:#fff;}.cls-2,.cls-3,.cls-4{fill:none;}.cls-2{stroke:#fff;stroke-width:6px;}.cls-2,.cls-4{stroke-miterlimit:10;}.cls-4{stroke:red;stroke-width:2px;}\r\n</style>"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 129 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	//
 	//
 	//
@@ -33804,30 +34688,164 @@
 	//
 	
 	exports.default = {
-	    components: {
-	        "app-mainhero": _MainHero2.default,
-	        "app-infosection": _InfoSection2.default,
-	        "app-about": _About2.default,
-	        "app-story": _Story2.default,
-	        "app-equipment": _Equipment2.default,
-	        "app-gallery": _Gallery2.default,
-	        "app-contact": _Contact2.default,
-	        "app-footer": _Footer2.default
+	    data: function data() {
+	        return {
+	            nav: false,
+	            controls: false,
+	            label: false,
+	            lines: false
+	        };
+	    },
+	
+	    methods: {
+	        menuToggling: function menuToggling() {
+	            this.nav = !this.nav;
+	            this.controls = !this.controls;
+	            this.label = !this.label;
+	            this.lines = !this.lines;
+	        }
 	    }
+	
 	};
 
 /***/ },
-/* 125 */
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', [_h('div', {
+	    staticClass: "main-header__logo"
+	  }, [_h('svg', {
+	    attrs: {
+	      "id": "Layer_1",
+	      "data-name": "Layer 1",
+	      "xmlns": "http://www.w3.org/2000/svg",
+	      "viewBox": "0 0 492.34 88.96"
+	    }
+	  }, [_h('title', ["\n            logo\n        "]), " ", _h('path', {
+	    staticClass: "cls-1",
+	    attrs: {
+	      "d": "M311.74 84.58c0 2.56-2.11 4.35-5.16 4.35a6 6 0 0 1-5.7-3.46l2.58-1.28a3.28 3.28 0 0 0 3.11 2c1.39 0 2.18-.62 2.18-1.64s-.73-1.49-2.52-1.73c-3.23-.33-5.23-2.06-5.23-4.55s2.24-4.39 5.14-4.39a6.15 6.15 0 0 1 5.67 3.35l-2.54 1.32a3.3 3.3 0 0 0-3.14-2c-1.34 0-2.18.64-2.18 1.68s.88 1.56 2.52 1.81c3.39.51 5.18 2.04 5.27 4.54zM316 74.15v6.12h5v-6.12h2.88v14.5H321v-5.63h-5v5.63h-2.88v-14.5H316zM331.53 73.87c3.37 0 5.76 2.07 5.76 5v5c0 2.92-2.41 5-5.76 5s-5.74-2.09-5.74-5v-5c0-2.95 2.37-5 5.74-5zm0 12.22c1.71 0 2.67-.81 2.67-2.18v-5c0-1.43-.9-2.15-2.67-2.15s-2.65.75-2.65 2.15v5c0 1.37.96 2.18 2.65 2.18zM344.73 73.87c3.37 0 5.76 2.07 5.76 5v5c0 2.92-2.41 5-5.76 5s-5.74-2.09-5.74-5v-5c.01-2.95 2.37-5 5.74-5zm0 12.22c1.71 0 2.67-.81 2.67-2.18v-5c0-1.43-.9-2.15-2.67-2.15s-2.65.75-2.65 2.15v5c.01 1.37.92 2.18 2.65 2.18zM351.34 74.15h11.28v2.79h-4.31v11.71h-2.88V76.94h-4.1v-2.79zM367.45 88.65h-2.9v-14.5h2.9v14.5zM377.83 83.51v-9.36h2.88v14.5h-3l-5.27-9.21v9.21h-2.88v-14.5h2.86zM382.63 83.3v-3.73c0-3.41 2.28-5.65 5.8-5.65a5.3 5.3 0 0 1 5.29 3.24l-2.77 1.2c-.45-1.17-1-1.56-2.52-1.56-2 0-2.82.81-2.82 2.77v3.69c0 1.94.83 2.75 2.88 2.75s2.67-.68 2.67-2.71v-.45h-3.65v-2.64h6.63v3.09c0 3.5-2.11 5.59-5.67 5.59s-5.84-2.18-5.84-5.59zM407.84 74.15l5.16 14.5h-3l-1.24-3.48h-4.22l-1.19 3.48h-3l5.14-14.51h2.37zm-1.17 4.56l-1.22 3.86h2.41zM422.47 84.03l2.92 1.17c-.87 2.41-2.92 3.73-5.78 3.73-3.67 0-5.76-2-5.76-5.46v-4.1c0-3.54 2.13-5.61 5.76-5.61 2.86 0 4.91 1.32 5.78 3.73l-2.92 1.22c-.32-1.43-1.07-2-2.82-2-2.18 0-2.77.58-2.77 2.69v4c0 2 .6 2.6 2.69 2.6 1.81.01 2.58-.54 2.9-1.97zM432.69 74.15l5.16 14.51h-3l-1.24-3.48h-4.22l-1.19 3.48h-3l5.14-14.51h2.37zm-1.18 4.56l-1.22 3.86h2.41zM444.67 74.15c3.39 0 5.42 1.92 5.42 5.12v4.8c0 2.79-2.13 4.59-5.46 4.59h-5.29V74.15h5.33zm2.54 9.92V79.2c0-1.66-.7-2.3-2.54-2.3h-2.45v9h2.41c1.75 0 2.58-.62 2.58-1.83zM462 74.15v2.75h-6.9v3.07h6.14v2.74h-6.14v3.2h6.9v2.75h-9.73V74.15H462zM467.2 74.15l3.65 7.7 3.63-7.7h3.14v14.5h-2.88v-8.94L472 86.07h-2.26L467 79.71v8.92h-2.88V74.12h3.14zM482 74.15l2.82 5.8 3-5.8H491l-4.63 8.62v5.89h-3v-5.89l-4.74-8.62H482z"
+	    }
+	  }), " ", _h('path', {
+	    staticClass: "cls-2",
+	    attrs: {
+	      "d": "M480.67 9.38L486 1.71"
+	    }
+	  }), " ", _h('path', {
+	    staticClass: "cls-3",
+	    attrs: {
+	      "d": "M147 43.69h1.74L147 40.66v3.03zM308 30.05V43.52c0 3.37 1.89 5.26 6.09 5.26H314c4-.1 7-2 7-5.24V30.05c0-3.48-2.56-5.34-7-5.34v.14c-4.42.06-6 1.78-6 5.2zM114.97 38.35l-1.7 5.41 3.35-.01-1.65-5.4zM117.39 46.71l-.77-2.74-3.35.12-.79 2.62h4.91zM160 43.67h-2.11l2.11 3.66v-3.66zM202.97 43.58l-4.6.01 2.31 6.93 2.29-6.94zM240.64 55.89c4.25 0 6.66-1.89 6.66-5.32l-.08-7.09-13.22.03v7.06c0 3.37 2.45 5.32 6.64 5.32zM14.79 55.71c4.37 0 6.21-1.77 6.21-4.72v-7.06H9v11.78h5.79zM420.78 43.71h-4.51l2.26 6.81 2.25-6.81zM21 30.88c0-4.17-1.48-5.17-6.09-5.17H9v11.25h12v-6.08z"
+	    }
+	  }), " ", _h('path', {
+	    staticClass: "cls-1",
+	    attrs: {
+	      "d": "M21 50.99c0 3-1.84 4.72-6.21 4.72H9V43.96H0v19.75h14.79c9.28 0 15.21-4.92 15.21-12.72v-7.07h-9v7.06zM14.91 16.71H0v20.26h9V25.71h5.91c4.61 0 6.09 1 6.09 5.17v6.06h9v-5.88c0-8.98-5.64-14.35-15.09-14.35zM85 50.52c0 3.48-1.38 4.78-5.28 4.78-3 0-4.44-1.18-5.74-4.49l-7.59 3.72c2.13 6.18 6.81 9.34 13.61 9.34 9 0 14-4.9 14-13.53v-6.55h-9v6.71zM85 16.71v20.1l9-.02V16.71h-9zM111.36 16.71l-7.14 20.07 9.05-.02 1.7-5.4 1.65 5.39 9.05-.01-7.16-20.03h-7.15zM117.39 46.71h-4.91l.79-2.73-9.05-.17-7.15 19.9h9.33l3.25-9h10.51l3.37 9h9.33l-7.19-20.06-9.05.28.77 2.78zM160 16.71v19.96l9-.02V16.71h-9zM138 63.71h9V43.69l-9 .02v20zM146.21 16.71H138v20l9-.02v-3.03l1.49 3.03 9.37-.02-11.65-19.96zM160 47.33l-2.19-3.66-9.53-.06 11.51 20.1H169V43.65l-9 .02v3.66zM190.76 16.71h-9.86l7.08 19.9 9.39-.02-6.61-19.88zM211.54 16.71l-6.57 19.87 9.37-.02 7.06-19.85h-9.86zM200.68 50.52l-2.31-6.93-9.39-.07 7.21 20.19h8.92l7.23-20.23-9.37.06-2.29 6.98zM247.28 16.71l.15 19.78 9.57-.02V16.71h-9.72zM234 16.71h-9v19.82l9-.01V16.71zM247.34 50.58c0 3.43-2.45 5.32-6.7 5.32S234 53.94 234 50.58v-7.07h-9v7c0 8.34 6.64 14.2 16 14.2s16-6 16-14.18v-7.06h-9.57zM263 63.71h9V50.76l1.52-1.97 11.97 14.92h11.4l-16.84-20.36-17.05.11v20.25zM295.83 16.71h-11.58L272 30.94V16.71h-9v19.75l17.05-.03-.86-.94 16.64-18.78zM354 16.71h9v20h-9zM354 50.52c0 3.48-1.31 4.78-5.21 4.78-3 0-4.41-1.18-5.71-4.49l-7.58 3.72c2.13 6.14 6.75 9.33 13.54 9.33 9 0 14-4.9 14-13.53v-6.62h-9v6.81zM369 63.71h27v-8h-18v-8h17v-4h-26v20zM378 32.71v-7h18v-9h-27v20h26v-4h-17zM420.53 50.52l-2.26-6.81h-9.4l7.18 20h8.91l7.18-20h-9.36l-2.25 6.81zM429.39 16.71l-6.61 20h9.36l7.12-20h-9.87zM411.62 16.71h-9.87l7.12 20h9.4l-6.65-20zM445 16.71h9v20h-9zM445 43.71h9v20h-9zM475.86 55.54c-5.26 0-6.86-1.3-6.86-6.38v-5.45h-9v5.63c0 9.63 5.92 15.12 16.08 15.12 8.09 0 13.95-3.84 16.25-10.87l-9.07-3.6c-.7 4.13-2.56 5.55-7.4 5.55zM469 31.35c0-5.32 1.6-6.62 7.1-6.62 4.61 0 6.5 1.42 7.21 5.55l9-3.6c-2.3-7-8.2-10.87-16.29-10.87C466 15.82 460 21.61 460 31.35v5.36h9v-5.36zM45 32.71v-7h18v-9H36v20.2l25-.05v-4.15H45zM36 63.71h27v-8H45v-8h16v-3.85l-25 .05v19.8zM319 15.71v9c4.43 0 7 1.86 7 5.34v6.66h9v-6.66c0-8.15-6.66-14.34-16-14.34zM306 30.05c0-3.42 1.58-5.14 6-5.2v-8.8c-9.33 0-16 5.79-16 14v6.35h10v-6.35zM312.09 55.78c-4.19 0-6.09-1.89-6.09-5.26v-7.14h-10v7.12c0 8.21 6.51 14.06 15.78 14.06h.22v-8.85s.2.07.09.07zM326 50.52c0 3.27-3 5.14-7 5.24v8.81c9-.14 16-6 16-14v-6.86h-9v6.81z"
+	    }
+	  }), " ", _h('circle', {
+	    staticClass: "cls-4",
+	    attrs: {
+	      "cx": "316",
+	      "cy": "40.71",
+	      "r": "5.33"
+	    }
+	  })])]), " ", _h('nav', {
+	    staticClass: "main-header__nav",
+	    class: {
+	      'main-header__nav--active': _vm.nav
+	    }
+	  }, [_h('div', {
+	    staticClass: "main-header__nav__controls",
+	    class: {
+	      'main-header__nav__controls--active': _vm.controls
+	    }
+	  }, [_h('div', {
+	    staticClass: "main-header__nav__label",
+	    class: {
+	      'main-header__nav__label--active': _vm.label
+	    }
+	  }, [_h('h4', ["Meni"])]), " ", _h('div', {
+	    staticClass: "main-header__nav__button"
+	  }, [_h('a', {
+	    staticClass: "main-header__nav__button__menubar",
+	    attrs: {
+	      "href": "#"
+	    },
+	    on: {
+	      "click": function($event) {
+	        $event.preventDefault();
+	        _vm.menuToggling($event)
+	      }
+	    }
+	  }, [_h('div', {
+	    staticClass: "main-header__nav__button__line",
+	    class: {
+	      'main-header__nav__button__line--active': _vm.lines
+	    }
+	  })])])]), " ", _h('div', {
+	    staticClass: "main-header__nav__container"
+	  }, [_h('ul', {
+	    staticClass: "main-header__nav__container__nav-items"
+	  }, [_h('li', [_h('router-link', {
+	    attrs: {
+	      "to": {
+	        name: 'home'
+	      },
+	      "tag": "a"
+	    }
+	  }, ["Početna"])]), " ", _h('li', [_h('router-link', {
+	    attrs: {
+	      "to": {
+	        name: 'home',
+	        hash: '#bio'
+	      },
+	      "tag": "a"
+	    }
+	  }, ["Biografija"])]), " ", _h('li', [_h('router-link', {
+	    attrs: {
+	      "to": {
+	        name: 'home',
+	        hash: '#info'
+	      },
+	      "tag": "a"
+	    }
+	  }, ["Obuke"])]), " ", _h('li', [_h('router-link', {
+	    attrs: {
+	      "to": "/",
+	      "tag": "a"
+	    }
+	  }, ["Oprema"])]), " ", _h('li', [_h('router-link', {
+	    attrs: {
+	      "to": "/",
+	      "tag": "a"
+	    }
+	  }, ["Galerija"])]), " ", _h('li', [_h('router-link', {
+	    attrs: {
+	      "to": "/",
+	      "tag": "a"
+	    }
+	  }, ["Kontakt"])])])])])])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-9861d020", module.exports)
+	  }
+	}
+
+/***/ },
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(126)
+	__vue_exports__ = __webpack_require__(132)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(130)
+	var __vue_template__ = __webpack_require__(133)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -33861,110 +34879,29 @@
 
 
 /***/ },
-/* 126 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _Header = __webpack_require__(127);
-	
-	var _Header2 = _interopRequireDefault(_Header);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	    components: {
-	        "app-header": _Header2.default
-	    }
-	}; //
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-/***/ },
-/* 127 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-	
-	/* script */
-	__vue_exports__ = __webpack_require__(128)
-	
-	/* template */
-	var __vue_template__ = __webpack_require__(129)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "C:\\Users\\Nemanja\\Desktop\\Dejan site\\app\\assets\\js\\components\\Header.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-9861d020", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-9861d020", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] Header.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-	
-	module.exports = __vue_exports__
-
-
-/***/ },
-/* 128 */
+/* 132 */
 /***/ function(module, exports) {
 
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	//
 	//
 	//
@@ -33984,61 +34921,13 @@
 	exports.default = {};
 
 /***/ },
-/* 129 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('header', {
-	    staticClass: "main-header"
-	  }, [_vm._m(0), " ", _h('nav', {
-	    staticClass: "main-header__nav"
-	  }, [_h('ul', {
-	    staticClass: "main-header__nav-items"
-	  }, [_h('li', [_h('router-link', {
-	    attrs: {
-	      "to": "/",
-	      "tag": "a"
-	    }
-	  }, ["Početna"])]), " ", _vm._m(1), " ", _vm._m(2)])])])
-	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('div', {
-	    staticClass: "main-header__logo"
-	  }, [_h('img', {
-	    staticClass: "main-header__logo-img",
-	    attrs: {
-	      "src": "assets/img/logo.svg",
-	      "alt": "Logo"
-	    }
-	  })])
-	},function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('li', [_h('a', {
-	    attrs: {
-	      "href": "/obuka"
-	    }
-	  }, ["Oprema"])])
-	},function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('li', [_h('a', {
-	    attrs: {
-	      "href": "/contact"
-	    }
-	  }, ["Kontakt"])])
-	}]}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-9861d020", module.exports)
-	  }
-	}
-
-/***/ },
-/* 130 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('div', {
 	    staticClass: "main-hero"
-	  }, [_h('app-header'), " ", _h('picture', {
+	  }, [_h('picture', {
 	    staticClass: "main-hero__background"
 	  }, [_h('source', {
 	    attrs: {
@@ -34111,17 +35000,17 @@
 	}
 
 /***/ },
-/* 131 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(132)
+	__vue_exports__ = __webpack_require__(135)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(133)
+	var __vue_template__ = __webpack_require__(136)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -34155,7 +35044,7 @@
 
 
 /***/ },
-/* 132 */
+/* 135 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -34210,12 +35099,15 @@
 	exports.default = {};
 
 /***/ },
-/* 133 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('section', {
-	    staticClass: "info-section"
+	    staticClass: "info-section",
+	    attrs: {
+	      "id": "info"
+	    }
 	  }, [_h('div', {
 	    staticClass: "info-section__info-block"
 	  }, [_h('h3', {
@@ -34279,17 +35171,17 @@
 	}
 
 /***/ },
-/* 134 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(135)
+	__vue_exports__ = __webpack_require__(138)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(136)
+	var __vue_template__ = __webpack_require__(139)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -34323,7 +35215,7 @@
 
 
 /***/ },
-/* 135 */
+/* 138 */
 /***/ function(module, exports) {
 
 	//
@@ -34351,14 +35243,17 @@
 	"use strict";
 
 /***/ },
-/* 136 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
 	  return _vm._m(0)
 	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('section', {
-	    staticClass: "about row"
+	    staticClass: "about row",
+	    attrs: {
+	      "id": "bio"
+	    }
 	  }, [_h('h4', ["Iskustvo, uspesi i znanje"]), " ", _h('h1', ["Biografija"]), " ", _h('div', {
 	    staticClass: "about__wrapper"
 	  }, [_h('div', {
@@ -34384,17 +35279,17 @@
 	}
 
 /***/ },
-/* 137 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(138)
+	__vue_exports__ = __webpack_require__(141)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(139)
+	var __vue_template__ = __webpack_require__(142)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -34428,7 +35323,7 @@
 
 
 /***/ },
-/* 138 */
+/* 141 */
 /***/ function(module, exports) {
 
 	//
@@ -34476,7 +35371,7 @@
 	"use strict";
 
 /***/ },
-/* 139 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
@@ -34529,17 +35424,17 @@
 	}
 
 /***/ },
-/* 140 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(141)
+	__vue_exports__ = __webpack_require__(144)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(142)
+	var __vue_template__ = __webpack_require__(145)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -34573,7 +35468,7 @@
 
 
 /***/ },
-/* 141 */
+/* 144 */
 /***/ function(module, exports) {
 
 	//
@@ -34601,7 +35496,7 @@
 	"use strict";
 
 /***/ },
-/* 142 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
@@ -34676,17 +35571,17 @@
 	}
 
 /***/ },
-/* 143 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(144)
+	__vue_exports__ = __webpack_require__(147)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(145)
+	var __vue_template__ = __webpack_require__(148)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -34720,7 +35615,7 @@
 
 
 /***/ },
-/* 144 */
+/* 147 */
 /***/ function(module, exports) {
 
 	//
@@ -34800,7 +35695,7 @@
 	"use strict";
 
 /***/ },
-/* 145 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
@@ -34925,17 +35820,17 @@
 	}
 
 /***/ },
-/* 146 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(147)
+	__vue_exports__ = __webpack_require__(150)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(148)
+	var __vue_template__ = __webpack_require__(151)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -34969,7 +35864,7 @@
 
 
 /***/ },
-/* 147 */
+/* 150 */
 /***/ function(module, exports) {
 
 	//
@@ -34989,7 +35884,7 @@
 	"use strict";
 
 /***/ },
-/* 148 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
@@ -35014,17 +35909,17 @@
 	}
 
 /***/ },
-/* 149 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(150)
+	__vue_exports__ = __webpack_require__(153)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(151)
+	var __vue_template__ = __webpack_require__(154)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -35058,9 +35953,21 @@
 
 
 /***/ },
-/* 150 */
+/* 153 */
 /***/ function(module, exports) {
 
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	//
 	//
 	//
@@ -35128,7 +36035,7 @@
 	"use strict";
 
 /***/ },
-/* 151 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
@@ -35193,6 +36100,26 @@
 	      "alt": "IPSC savez Srbije"
 	    }
 	  }), " ", _h('div', ["IPSC Savez Srbije"])])]), " ", _h('li', [_h('a', {
+	    attrs: {
+	      "href": "http://www.idpa.com/"
+	    }
+	  }, [_h('img', {
+	    staticClass: "lazyload",
+	    attrs: {
+	      "data-src": "assets/img/idpa.png",
+	      "alt": "IDPA international"
+	    }
+	  }), " ", _h('div', ["IDPA International"])])]), " ", _h('li', [_h('a', {
+	    attrs: {
+	      "href": "https://www.facebook.com/groups/334543826585221/"
+	    }
+	  }, [_h('img', {
+	    staticClass: "lazyload",
+	    attrs: {
+	      "data-src": "assets/img/grom.png",
+	      "alt": "Grom Academy Požarevac"
+	    }
+	  }), " ", _h('div', ["GROM Academy"])])]), " ", _h('li', [_h('a', {
 	    attrs: {
 	      "href": "https://www.ipsc.org/"
 	    }
@@ -35265,11 +36192,11 @@
 	}
 
 /***/ },
-/* 152 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('div', [_h('app-mainhero'), " ", _h('app-infosection'), " ", _h('app-about'), " ", _h('app-story'), " ", _h('app-gallery'), " ", _h('app-equipment'), " ", _h('app-contact'), " ", _h('app-footer')])
+	  return _h('div', [_h('app-header'), " ", _h('app-mainhero'), " ", _h('app-infosection'), " ", _h('app-about'), " ", _h('app-story'), " ", _h('app-gallery'), " ", _h('app-equipment'), " ", _h('app-contact'), " ", _h('app-footer')])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -35280,17 +36207,17 @@
 	}
 
 /***/ },
-/* 153 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(154)
+	__vue_exports__ = __webpack_require__(157)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(155)
+	var __vue_template__ = __webpack_require__(158)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -35324,128 +36251,6 @@
 
 
 /***/ },
-/* 154 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _Header = __webpack_require__(127);
-	
-	var _Header2 = _interopRequireDefault(_Header);
-	
-	var _Footer = __webpack_require__(149);
-	
-	var _Footer2 = _interopRequireDefault(_Footer);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	
-	exports.default = {
-	    components: {
-	        "app-header": _Header2.default,
-	        "app-footer": _Footer2.default
-	    }
-	
-	};
-
-/***/ },
-/* 155 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('section', {
-	    staticClass: "training"
-	  }, [_h('app-header'), " ", _vm._m(0), " ", _vm._m(1), " ", _h('app-footer')])
-	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('div', {
-	    staticClass: "training__img"
-	  }, [_h('div', {
-	    staticClass: "training__img__wrapper"
-	  }, [_h('h3', {
-	    staticClass: "training__img__subheading"
-	  }, ["Upoznavanje sa oružjem"]), " ", _h('h1', {
-	    staticClass: "training__img__heading"
-	  }, ["Osnovna obuka"])])])
-	},function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('div', {
-	    staticClass: "training__desc"
-	  }, [_h('p', ["Osnovna  obuka rukovanja vatrenim oružjem podrazumeva da pojedinac ili grupa, upoznaju Zakon o oružju i municiji,  izgrade bezbednosnu kulturu kao jedan od najbitnih segmenata, ovladaju teorijskim odredbama, definisanim planom i programom po segmentima prodju osnovnu obuku u manipulativnim tehnikama, kao i upotrebe vatrenog oružja i upoznavanje sa njegovim karakteristikama i načinom rada. Nakon povezivanja svih ovih elemenata u jedinici vremena, napornim radom dolazimo do pojedinca ili grupe koji su potpuno obučeni za bezbedno rukovanje upotrebu  i manipulaciju vatrenim oružjem."])])
-	}]}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-be750572", module.exports)
-	  }
-	}
-
-/***/ },
-/* 156 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-	
-	/* script */
-	__vue_exports__ = __webpack_require__(157)
-	
-	/* template */
-	var __vue_template__ = __webpack_require__(158)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "C:\\Users\\Nemanja\\Desktop\\Dejan site\\app\\assets\\js\\NaprednaObuka.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-a9378fa4", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-a9378fa4", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] NaprednaObuka.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-	
-	module.exports = __vue_exports__
-
-
-/***/ },
 /* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -35455,17 +36260,16 @@
 	    value: true
 	});
 	
-	var _Header = __webpack_require__(127);
+	var _Header = __webpack_require__(126);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Footer = __webpack_require__(149);
+	var _Footer = __webpack_require__(152);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	//
 	//
 	//
 	//
@@ -35508,6 +36312,129 @@
 	    staticClass: "training__img__wrapper"
 	  }, [_h('h3', {
 	    staticClass: "training__img__subheading"
+	  }, ["Upoznavanje sa oružjem"]), " ", _h('h1', {
+	    staticClass: "training__img__heading"
+	  }, ["Osnovna obuka"])])])
+	},function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', {
+	    staticClass: "training__desc"
+	  }, [_h('p', ["Osnovna  obuka rukovanja vatrenim oružjem podrazumeva da pojedinac ili grupa, upoznaju Zakon o oružju i municiji,  izgrade bezbednosnu kulturu kao jedan od najbitnih segmenata, ovladaju teorijskim odredbama, definisanim planom i programom po segmentima prodju osnovnu obuku u manipulativnim tehnikama, kao i upotrebe vatrenog oružja i upoznavanje sa njegovim karakteristikama i načinom rada. Nakon povezivanja svih ovih elemenata u jedinici vremena, napornim radom dolazimo do pojedinca ili grupe koji su potpuno obučeni za bezbedno rukovanje upotrebu  i manipulaciju vatrenim oružjem."])])
+	}]}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-be750572", module.exports)
+	  }
+	}
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(160)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(161)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\Nemanja\\Desktop\\Dejan site\\app\\assets\\js\\NaprednaObuka.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-a9378fa4", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-a9378fa4", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] NaprednaObuka.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _Header = __webpack_require__(126);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	var _Footer = __webpack_require__(152);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	
+	exports.default = {
+	    components: {
+	        "app-header": _Header2.default,
+	        "app-footer": _Footer2.default
+	    }
+	
+	};
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('section', {
+	    staticClass: "training"
+	  }, [_h('app-header'), " ", _vm._m(0), " ", _vm._m(1), " ", _h('app-footer')])
+	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', {
+	    staticClass: "training__img"
+	  }, [_h('div', {
+	    staticClass: "training__img__wrapper"
+	  }, [_h('h3', {
+	    staticClass: "training__img__subheading"
 	  }, ["Napredne tehnike rukovanja oružjem"]), " ", _h('h1', {
 	    staticClass: "training__img__heading"
 	  }, ["Progresivna obuka"])])])
@@ -35525,702 +36452,7 @@
 	}
 
 /***/ },
-/* 159 */
-/***/ function(module, exports) {
-
-	(function(window, factory) {
-		var lazySizes = factory(window, window.document);
-		window.lazySizes = lazySizes;
-		if(typeof module == 'object' && module.exports){
-			module.exports = lazySizes;
-		}
-	}(window, function l(window, document) {
-		'use strict';
-		/*jshint eqnull:true */
-		if(!document.getElementsByClassName){return;}
-	
-		var lazySizesConfig;
-	
-		var docElem = document.documentElement;
-	
-		var Date = window.Date;
-	
-		var supportPicture = window.HTMLPictureElement;
-	
-		var _addEventListener = 'addEventListener';
-	
-		var _getAttribute = 'getAttribute';
-	
-		var addEventListener = window[_addEventListener];
-	
-		var setTimeout = window.setTimeout;
-	
-		var requestAnimationFrame = window.requestAnimationFrame || setTimeout;
-	
-		var requestIdleCallback = window.requestIdleCallback;
-	
-		var regPicture = /^picture$/i;
-	
-		var loadEvents = ['load', 'error', 'lazyincluded', '_lazyloaded'];
-	
-		var regClassCache = {};
-	
-		var forEach = Array.prototype.forEach;
-	
-		var hasClass = function(ele, cls) {
-			if(!regClassCache[cls]){
-				regClassCache[cls] = new RegExp('(\\s|^)'+cls+'(\\s|$)');
-			}
-			return regClassCache[cls].test(ele[_getAttribute]('class') || '') && regClassCache[cls];
-		};
-	
-		var addClass = function(ele, cls) {
-			if (!hasClass(ele, cls)){
-				ele.setAttribute('class', (ele[_getAttribute]('class') || '').trim() + ' ' + cls);
-			}
-		};
-	
-		var removeClass = function(ele, cls) {
-			var reg;
-			if ((reg = hasClass(ele,cls))) {
-				ele.setAttribute('class', (ele[_getAttribute]('class') || '').replace(reg, ' '));
-			}
-		};
-	
-		var addRemoveLoadEvents = function(dom, fn, add){
-			var action = add ? _addEventListener : 'removeEventListener';
-			if(add){
-				addRemoveLoadEvents(dom, fn);
-			}
-			loadEvents.forEach(function(evt){
-				dom[action](evt, fn);
-			});
-		};
-	
-		var triggerEvent = function(elem, name, detail, noBubbles, noCancelable){
-			var event = document.createEvent('CustomEvent');
-	
-			event.initCustomEvent(name, !noBubbles, !noCancelable, detail || {});
-	
-			elem.dispatchEvent(event);
-			return event;
-		};
-	
-		var updatePolyfill = function (el, full){
-			var polyfill;
-			if( !supportPicture && ( polyfill = (window.picturefill || lazySizesConfig.pf) ) ){
-				polyfill({reevaluate: true, elements: [el]});
-			} else if(full && full.src){
-				el.src = full.src;
-			}
-		};
-	
-		var getCSS = function (elem, style){
-			return (getComputedStyle(elem, null) || {})[style];
-		};
-	
-		var getWidth = function(elem, parent, width){
-			width = width || elem.offsetWidth;
-	
-			while(width < lazySizesConfig.minSize && parent && !elem._lazysizesWidth){
-				width =  parent.offsetWidth;
-				parent = parent.parentNode;
-			}
-	
-			return width;
-		};
-	
-		var rAF = (function(){
-			var running, waiting;
-			var fns = [];
-			var secondFns = [];
-	
-			var run = function(){
-				var runFns = fns;
-	
-				fns = secondFns;
-	
-				running = true;
-				waiting = false;
-	
-				while(runFns.length){
-					runFns.shift()();
-				}
-	
-				running = false;
-			};
-	
-			var rafBatch = function(fn, queue){
-				if(running && !queue){
-					fn.apply(this, arguments);
-				} else {
-					fns.push(fn);
-	
-					if(!waiting){
-						waiting = true;
-						(document.hidden ? setTimeout : requestAnimationFrame)(run);
-					}
-				}
-			};
-	
-			rafBatch._lsFlush = run;
-	
-			return rafBatch;
-		})();
-	
-		var rAFIt = function(fn, simple){
-			return simple ?
-				function() {
-					rAF(fn);
-				} :
-				function(){
-					var that = this;
-					var args = arguments;
-					rAF(function(){
-						fn.apply(that, args);
-					});
-				}
-			;
-		};
-	
-		var throttle = function(fn){
-			var running;
-			var lastTime = 0;
-			var gDelay = 125;
-			var RIC_DEFAULT_TIMEOUT = 666;
-			var rICTimeout = RIC_DEFAULT_TIMEOUT;
-			var run = function(){
-				running = false;
-				lastTime = Date.now();
-				fn();
-			};
-			var idleCallback = requestIdleCallback ?
-				function(){
-					requestIdleCallback(run, {timeout: rICTimeout});
-					if(rICTimeout !== RIC_DEFAULT_TIMEOUT){
-						rICTimeout = RIC_DEFAULT_TIMEOUT;
-					}
-				}:
-				rAFIt(function(){
-					setTimeout(run);
-				}, true)
-			;
-	
-			return function(isPriority){
-				var delay;
-				if((isPriority = isPriority === true)){
-					rICTimeout = 44;
-				}
-	
-				if(running){
-					return;
-				}
-	
-				running =  true;
-	
-				delay = gDelay - (Date.now() - lastTime);
-	
-				if(delay < 0){
-					delay = 0;
-				}
-	
-				if(isPriority || (delay < 9 && requestIdleCallback)){
-					idleCallback();
-				} else {
-					setTimeout(idleCallback, delay);
-				}
-			};
-		};
-	
-		//based on http://modernjavascript.blogspot.de/2013/08/building-better-debounce.html
-		var debounce = function(func) {
-			var timeout, timestamp;
-			var wait = 99;
-			var run = function(){
-				timeout = null;
-				func();
-			};
-			var later = function() {
-				var last = Date.now() - timestamp;
-	
-				if (last < wait) {
-					setTimeout(later, wait - last);
-				} else {
-					(requestIdleCallback || run)(run);
-				}
-			};
-	
-			return function() {
-				timestamp = Date.now();
-	
-				if (!timeout) {
-					timeout = setTimeout(later, wait);
-				}
-			};
-		};
-	
-	
-		var loader = (function(){
-			var lazyloadElems, preloadElems, isCompleted, resetPreloadingTimer, loadMode, started;
-	
-			var eLvW, elvH, eLtop, eLleft, eLright, eLbottom;
-	
-			var defaultExpand, preloadExpand, hFac;
-	
-			var regImg = /^img$/i;
-			var regIframe = /^iframe$/i;
-	
-			var supportScroll = ('onscroll' in window) && !(/glebot/.test(navigator.userAgent));
-	
-			var shrinkExpand = 0;
-			var currentExpand = 0;
-	
-			var isLoading = 0;
-			var lowRuns = -1;
-	
-			var resetPreloading = function(e){
-				isLoading--;
-				if(e && e.target){
-					addRemoveLoadEvents(e.target, resetPreloading);
-				}
-	
-				if(!e || isLoading < 0 || !e.target){
-					isLoading = 0;
-				}
-			};
-	
-			var isNestedVisible = function(elem, elemExpand){
-				var outerRect;
-				var parent = elem;
-				var visible = getCSS(document.body, 'visibility') == 'hidden' || getCSS(elem, 'visibility') != 'hidden';
-	
-				eLtop -= elemExpand;
-				eLbottom += elemExpand;
-				eLleft -= elemExpand;
-				eLright += elemExpand;
-	
-				while(visible && (parent = parent.offsetParent) && parent != document.body && parent != docElem){
-					visible = ((getCSS(parent, 'opacity') || 1) > 0);
-	
-					if(visible && getCSS(parent, 'overflow') != 'visible'){
-						outerRect = parent.getBoundingClientRect();
-						visible = eLright > outerRect.left &&
-							eLleft < outerRect.right &&
-							eLbottom > outerRect.top - 1 &&
-							eLtop < outerRect.bottom + 1
-						;
-					}
-				}
-	
-				return visible;
-			};
-	
-			var checkElements = function() {
-				var eLlen, i, rect, autoLoadElem, loadedSomething, elemExpand, elemNegativeExpand, elemExpandVal, beforeExpandVal;
-	
-				if((loadMode = lazySizesConfig.loadMode) && isLoading < 8 && (eLlen = lazyloadElems.length)){
-	
-					i = 0;
-	
-					lowRuns++;
-	
-					if(preloadExpand == null){
-						if(!('expand' in lazySizesConfig)){
-							lazySizesConfig.expand = docElem.clientHeight > 500 && docElem.clientWidth > 500 ? 500 : 370;
-						}
-	
-						defaultExpand = lazySizesConfig.expand;
-						preloadExpand = defaultExpand * lazySizesConfig.expFactor;
-					}
-	
-					if(currentExpand < preloadExpand && isLoading < 1 && lowRuns > 2 && loadMode > 2 && !document.hidden){
-						currentExpand = preloadExpand;
-						lowRuns = 0;
-					} else if(loadMode > 1 && lowRuns > 1 && isLoading < 6){
-						currentExpand = defaultExpand;
-					} else {
-						currentExpand = shrinkExpand;
-					}
-	
-					for(; i < eLlen; i++){
-	
-						if(!lazyloadElems[i] || lazyloadElems[i]._lazyRace){continue;}
-	
-						if(!supportScroll){unveilElement(lazyloadElems[i]);continue;}
-	
-						if(!(elemExpandVal = lazyloadElems[i][_getAttribute]('data-expand')) || !(elemExpand = elemExpandVal * 1)){
-							elemExpand = currentExpand;
-						}
-	
-						if(beforeExpandVal !== elemExpand){
-							eLvW = innerWidth + (elemExpand * hFac);
-							elvH = innerHeight + elemExpand;
-							elemNegativeExpand = elemExpand * -1;
-							beforeExpandVal = elemExpand;
-						}
-	
-						rect = lazyloadElems[i].getBoundingClientRect();
-	
-						if ((eLbottom = rect.bottom) >= elemNegativeExpand &&
-							(eLtop = rect.top) <= elvH &&
-							(eLright = rect.right) >= elemNegativeExpand * hFac &&
-							(eLleft = rect.left) <= eLvW &&
-							(eLbottom || eLright || eLleft || eLtop) &&
-							((isCompleted && isLoading < 3 && !elemExpandVal && (loadMode < 3 || lowRuns < 4)) || isNestedVisible(lazyloadElems[i], elemExpand))){
-							unveilElement(lazyloadElems[i]);
-							loadedSomething = true;
-							if(isLoading > 9){break;}
-						} else if(!loadedSomething && isCompleted && !autoLoadElem &&
-							isLoading < 4 && lowRuns < 4 && loadMode > 2 &&
-							(preloadElems[0] || lazySizesConfig.preloadAfterLoad) &&
-							(preloadElems[0] || (!elemExpandVal && ((eLbottom || eLright || eLleft || eLtop) || lazyloadElems[i][_getAttribute](lazySizesConfig.sizesAttr) != 'auto')))){
-							autoLoadElem = preloadElems[0] || lazyloadElems[i];
-						}
-					}
-	
-					if(autoLoadElem && !loadedSomething){
-						unveilElement(autoLoadElem);
-					}
-				}
-			};
-	
-			var throttledCheckElements = throttle(checkElements);
-	
-			var switchLoadingClass = function(e){
-				addClass(e.target, lazySizesConfig.loadedClass);
-				removeClass(e.target, lazySizesConfig.loadingClass);
-				addRemoveLoadEvents(e.target, rafSwitchLoadingClass);
-			};
-			var rafedSwitchLoadingClass = rAFIt(switchLoadingClass);
-			var rafSwitchLoadingClass = function(e){
-				rafedSwitchLoadingClass({target: e.target});
-			};
-	
-			var changeIframeSrc = function(elem, src){
-				try {
-					elem.contentWindow.location.replace(src);
-				} catch(e){
-					elem.src = src;
-				}
-			};
-	
-			var handleSources = function(source){
-				var customMedia, parent;
-	
-				var sourceSrcset = source[_getAttribute](lazySizesConfig.srcsetAttr);
-	
-				if( (customMedia = lazySizesConfig.customMedia[source[_getAttribute]('data-media') || source[_getAttribute]('media')]) ){
-					source.setAttribute('media', customMedia);
-				}
-	
-				if(sourceSrcset){
-					source.setAttribute('srcset', sourceSrcset);
-				}
-	
-				//https://bugzilla.mozilla.org/show_bug.cgi?id=1170572
-				if(customMedia){
-					parent = source.parentNode;
-					parent.insertBefore(source.cloneNode(), source);
-					parent.removeChild(source);
-				}
-			};
-	
-			var lazyUnveil = rAFIt(function (elem, detail, isAuto, sizes, isImg){
-				var src, srcset, parent, isPicture, event, firesLoad;
-	
-				if(!(event = triggerEvent(elem, 'lazybeforeunveil', detail)).defaultPrevented){
-	
-					if(sizes){
-						if(isAuto){
-							addClass(elem, lazySizesConfig.autosizesClass);
-						} else {
-							elem.setAttribute('sizes', sizes);
-						}
-					}
-	
-					srcset = elem[_getAttribute](lazySizesConfig.srcsetAttr);
-					src = elem[_getAttribute](lazySizesConfig.srcAttr);
-	
-					if(isImg) {
-						parent = elem.parentNode;
-						isPicture = parent && regPicture.test(parent.nodeName || '');
-					}
-	
-					firesLoad = detail.firesLoad || (('src' in elem) && (srcset || src || isPicture));
-	
-					event = {target: elem};
-	
-					if(firesLoad){
-						addRemoveLoadEvents(elem, resetPreloading, true);
-						clearTimeout(resetPreloadingTimer);
-						resetPreloadingTimer = setTimeout(resetPreloading, 2500);
-	
-						addClass(elem, lazySizesConfig.loadingClass);
-						addRemoveLoadEvents(elem, rafSwitchLoadingClass, true);
-					}
-	
-					if(isPicture){
-						forEach.call(parent.getElementsByTagName('source'), handleSources);
-					}
-	
-					if(srcset){
-						elem.setAttribute('srcset', srcset);
-					} else if(src && !isPicture){
-						if(regIframe.test(elem.nodeName)){
-							changeIframeSrc(elem, src);
-						} else {
-							elem.src = src;
-						}
-					}
-	
-					if(srcset || isPicture){
-						updatePolyfill(elem, {src: src});
-					}
-				}
-	
-				if(elem._lazyRace){
-					delete elem._lazyRace;
-				}
-				removeClass(elem, lazySizesConfig.lazyClass);
-	
-				rAF(function(){
-					if( !firesLoad || elem.complete ){
-						if(firesLoad){
-							resetPreloading(event);
-						} else {
-							isLoading--;
-						}
-						switchLoadingClass(event);
-					}
-				}, true);
-			});
-	
-			var unveilElement = function (elem){
-				var detail;
-	
-				var isImg = regImg.test(elem.nodeName);
-	
-				//allow using sizes="auto", but don't use. it's invalid. Use data-sizes="auto" or a valid value for sizes instead (i.e.: sizes="80vw")
-				var sizes = isImg && (elem[_getAttribute](lazySizesConfig.sizesAttr) || elem[_getAttribute]('sizes'));
-				var isAuto = sizes == 'auto';
-	
-				if( (isAuto || !isCompleted) && isImg && (elem.src || elem.srcset) && !elem.complete && !hasClass(elem, lazySizesConfig.errorClass)){return;}
-	
-				detail = triggerEvent(elem, 'lazyunveilread').detail;
-	
-				if(isAuto){
-					 autoSizer.updateElem(elem, true, elem.offsetWidth);
-				}
-	
-				elem._lazyRace = true;
-				isLoading++;
-	
-				lazyUnveil(elem, detail, isAuto, sizes, isImg);
-			};
-	
-			var onload = function(){
-				if(isCompleted){return;}
-				if(Date.now() - started < 999){
-					setTimeout(onload, 999);
-					return;
-				}
-				var afterScroll = debounce(function(){
-					lazySizesConfig.loadMode = 3;
-					throttledCheckElements();
-				});
-	
-				isCompleted = true;
-	
-				lazySizesConfig.loadMode = 3;
-	
-				throttledCheckElements();
-	
-				addEventListener('scroll', function(){
-					if(lazySizesConfig.loadMode == 3){
-						lazySizesConfig.loadMode = 2;
-					}
-					afterScroll();
-				}, true);
-			};
-	
-			return {
-				_: function(){
-					started = Date.now();
-	
-					lazyloadElems = document.getElementsByClassName(lazySizesConfig.lazyClass);
-					preloadElems = document.getElementsByClassName(lazySizesConfig.lazyClass + ' ' + lazySizesConfig.preloadClass);
-					hFac = lazySizesConfig.hFac;
-	
-					addEventListener('scroll', throttledCheckElements, true);
-	
-					addEventListener('resize', throttledCheckElements, true);
-	
-					if(window.MutationObserver){
-						new MutationObserver( throttledCheckElements ).observe( docElem, {childList: true, subtree: true, attributes: true} );
-					} else {
-						docElem[_addEventListener]('DOMNodeInserted', throttledCheckElements, true);
-						docElem[_addEventListener]('DOMAttrModified', throttledCheckElements, true);
-						setInterval(throttledCheckElements, 999);
-					}
-	
-					addEventListener('hashchange', throttledCheckElements, true);
-	
-					//, 'fullscreenchange'
-					['focus', 'mouseover', 'click', 'load', 'transitionend', 'animationend', 'webkitAnimationEnd'].forEach(function(name){
-						document[_addEventListener](name, throttledCheckElements, true);
-					});
-	
-					if((/d$|^c/.test(document.readyState))){
-						onload();
-					} else {
-						addEventListener('load', onload);
-						document[_addEventListener]('DOMContentLoaded', throttledCheckElements);
-						setTimeout(onload, 20000);
-					}
-	
-					if(lazyloadElems.length){
-						checkElements();
-						rAF._lsFlush();
-					} else {
-						throttledCheckElements();
-					}
-				},
-				checkElems: throttledCheckElements,
-				unveil: unveilElement
-			};
-		})();
-	
-	
-		var autoSizer = (function(){
-			var autosizesElems;
-	
-			var sizeElement = rAFIt(function(elem, parent, event, width){
-				var sources, i, len;
-				elem._lazysizesWidth = width;
-				width += 'px';
-	
-				elem.setAttribute('sizes', width);
-	
-				if(regPicture.test(parent.nodeName || '')){
-					sources = parent.getElementsByTagName('source');
-					for(i = 0, len = sources.length; i < len; i++){
-						sources[i].setAttribute('sizes', width);
-					}
-				}
-	
-				if(!event.detail.dataAttr){
-					updatePolyfill(elem, event.detail);
-				}
-			});
-			var getSizeElement = function (elem, dataAttr, width){
-				var event;
-				var parent = elem.parentNode;
-	
-				if(parent){
-					width = getWidth(elem, parent, width);
-					event = triggerEvent(elem, 'lazybeforesizes', {width: width, dataAttr: !!dataAttr});
-	
-					if(!event.defaultPrevented){
-						width = event.detail.width;
-	
-						if(width && width !== elem._lazysizesWidth){
-							sizeElement(elem, parent, event, width);
-						}
-					}
-				}
-			};
-	
-			var updateElementsSizes = function(){
-				var i;
-				var len = autosizesElems.length;
-				if(len){
-					i = 0;
-	
-					for(; i < len; i++){
-						getSizeElement(autosizesElems[i]);
-					}
-				}
-			};
-	
-			var debouncedUpdateElementsSizes = debounce(updateElementsSizes);
-	
-			return {
-				_: function(){
-					autosizesElems = document.getElementsByClassName(lazySizesConfig.autosizesClass);
-					addEventListener('resize', debouncedUpdateElementsSizes);
-				},
-				checkElems: debouncedUpdateElementsSizes,
-				updateElem: getSizeElement
-			};
-		})();
-	
-		var init = function(){
-			if(!init.i){
-				init.i = true;
-				autoSizer._();
-				loader._();
-			}
-		};
-	
-		(function(){
-			var prop;
-	
-			var lazySizesDefaults = {
-				lazyClass: 'lazyload',
-				loadedClass: 'lazyloaded',
-				loadingClass: 'lazyloading',
-				preloadClass: 'lazypreload',
-				errorClass: 'lazyerror',
-				//strictClass: 'lazystrict',
-				autosizesClass: 'lazyautosizes',
-				srcAttr: 'data-src',
-				srcsetAttr: 'data-srcset',
-				sizesAttr: 'data-sizes',
-				//preloadAfterLoad: false,
-				minSize: 40,
-				customMedia: {},
-				init: true,
-				expFactor: 1.5,
-				hFac: 0.8,
-				loadMode: 2
-			};
-	
-			lazySizesConfig = window.lazySizesConfig || window.lazysizesConfig || {};
-	
-			for(prop in lazySizesDefaults){
-				if(!(prop in lazySizesConfig)){
-					lazySizesConfig[prop] = lazySizesDefaults[prop];
-				}
-			}
-	
-			window.lazySizesConfig = lazySizesConfig;
-	
-			setTimeout(function(){
-				if(lazySizesConfig.init){
-					init();
-				}
-			});
-		})();
-	
-		return {
-			cfg: lazySizesConfig,
-			autoSizer: autoSizer,
-			loader: loader,
-			init: init,
-			uP: updatePolyfill,
-			aC: addClass,
-			rC: removeClass,
-			hC: hasClass,
-			fire: triggerEvent,
-			gW: getWidth,
-			rAF: rAF,
-		};
-	}
-	));
-
-
-/***/ },
-/* 160 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36235,7 +36467,7 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	__webpack_require__(161);
+	__webpack_require__(163);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -36280,7 +36512,7 @@
 	exports.default = Map;
 
 /***/ },
-/* 161 */
+/* 163 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -36396,6 +36628,58 @@
 			return this;
 		};
 	})(jQuery, window, document);
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _jquery = __webpack_require__(5);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Menu = function () {
+	    function Menu() {
+	        _classCallCheck(this, Menu);
+	
+	        this.button = (0, _jquery2.default)(".main-header__nav__button__menubar");
+	        this.nav = (0, _jquery2.default)(".main-header__nav");
+	        this.controls = (0, _jquery2.default)(".main-header__nav__controls");
+	        this.label = (0, _jquery2.default)(".main-header__nav__label");
+	        this.lines = (0, _jquery2.default)(".main-header__nav__button__line");
+	        this.menuToggle();
+	    }
+	
+	    _createClass(Menu, [{
+	        key: "menuToggle",
+	        value: function menuToggle() {
+	            var _this = this;
+	
+	            this.button.click(function (e) {
+	                e.preventDefault();
+	                _this.nav.toggleClass("main-header__nav--active");
+	                _this.controls.toggleClass("main-header__nav__controls--active");
+	                _this.label.toggleClass("main-header__nav__label--active");
+	                _this.lines.toggleClass("main-header__nav__button__line--active");
+	            });
+	        }
+	    }]);
+	
+	    return Menu;
+	}();
+	
+	exports.default = Menu;
 
 /***/ }
 /******/ ]);

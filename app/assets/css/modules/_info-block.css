@@ -11,7 +11,7 @@
 		font-family: "Roboto", sans-serif;
 		font-weight: 400;
 		text-align: center;
-		flex: 1;
+		flex: 1 1 33.333%;
 
 		@mixin atSmall {
 			padding: 15% 4% 8%;
@@ -22,7 +22,7 @@
 		}
 
 		@mixin atLarge {
-			padding: 4% 4% 2%;
+			padding: 4.147rem 4% 2.073rem;
 		}
 
 		&__heading {

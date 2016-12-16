@@ -4,6 +4,7 @@
 	width: 100%;
 	position: relative;
 	transform: skew(0, 5deg);
+	outline: 1px solid transparent;
 
 	@mixin atSmall {
 		padding: 6rem 1rem;

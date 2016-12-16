@@ -1,5 +1,5 @@
 <template>
-    <section class="about row">
+    <section id="bio" class="about row">
         <h4>Iskustvo, uspesi i znanje</h4>
         <h1>Biografija</h1>
         <div class="about__wrapper">

@@ -1,6 +1,5 @@
 <template>
     <div class="main-hero">
-        <app-header></app-header>
         <picture class="main-hero__background">
             <source srcset="assets/img/hero_background.jpg 640w" media="(min-width: 640px)"/>
             <source srcset="assets/img/deki.jpg 250w" media="(min-width: 250px)" />
@@ -30,11 +29,7 @@
 </template>
 
 <script>
-    import Header from "./Header.vue";
     export default {
-        components: {
-            "app-header": Header
-        }
     }
 
 </script>

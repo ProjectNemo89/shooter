@@ -1,5 +1,5 @@
 <template>
-    <section class="info-section">
+    <section id="info" class="info-section">
         <div class="info-section__info-block">
             <h3 class="info-section__info-block__heading">osnovna obuka</h3>
             <p>

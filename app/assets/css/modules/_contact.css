@@ -26,6 +26,10 @@
             text-align: left;
             padding-top: 5%;
         }
+
+        &>p {
+            font-size: 1.3rem;
+        }
         
         &>h1 {
            margin-bottom: .3rem;
@@ -40,8 +44,7 @@
             color: #777;
             font-size: 1rem;
             padding-bottom: 2rem;
-            
-            
+                         
             &:after {
                 content: "";
                 position: absolute;

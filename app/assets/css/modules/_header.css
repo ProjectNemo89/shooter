@@ -1,44 +1,222 @@
-.main-header {
-	padding-top: 1rem;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	z-index: 1;
+	
+	.main-header__nav {
+		height: 100%;
+		width: 100%;
+		position: fixed;
+		right: 0;
+		top: 0;
+		z-index: 10;
+		transition: transform 400ms cubic-bezier(0.86, 0, 0.07, 1);
+		transform: translateX(100%);
 
-	&__nav-items {
-		list-style: none;
-		display: none;
-
-		@mixin atLarge {
-			display: block;
+		@mixin atSmall {
+			width: 100%;
 		}
-	}
-	&__nav-items > li {
-		display: inline-block;
-		padding-right: 1rem;
-	}
-	&__nav-items li > a {
-		text-decoration: none;
-		color: $fontWhite;
-		font-family: "Exo 2", sans-serif;
-		text-transform: uppercase;
-		font-weight: 700;
-		font-size: 1.2rem;
-		text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+		@mixin atLarge {		
+			width: 50%;
+		}
+
+		&--active {
+			transform: translateX(0%);
+			transition: transform 400ms cubic-bezier(0.86, 0, 0.07, 1);	
+		}
+
+		&__container {
+			position: relative;
+			display: flex;
+			background-color: #fff;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+			top: 0;
+
+			@mixin atSmall {
+				top: 0;
+			}
+
+			@mixin atLarge {
+				top: 40px;
+			}
+
+			&__nav-items {
+				list-style: none;
+				margin: 15rem auto 0;
+				text-align: center;
+
+				& li > a {
+					font-family: "Exo 2", sans-serif;
+					font-size: 2rem;
+					text-decoration: none;
+					text-transform: uppercase;
+					color: #111517;
+					font-weight: 700;
+					text-align: center;
+					
+				}
+			}
+		}
+
+		&__controls {
+			position: absolute;
+			top: 0;
+			left: 0;
+			transform: translateX(-80px);
+			width: 80px;
+			height: 80px;
+			transition: all 0.25s linear;
+			z-index: 5;
+			background-color: rgba(45, 45, 48, .8);
+
+			&--active {
+				transition: all 0.25s linear;
+
+				@mixin atSmall {
+					transform: translateX(0px);
+					background-color: #fff;
+				}
+				@mixin atLarge {
+					transform: translateX(-40px);
+					background-color: rgba(45, 45, 48, .8);
+				}
+			}
+		}
+		&__label {
+			position: absolute;
+			background-color: rgba(45, 45, 48, .8);
+			top: 0;
+			right: 0;
+			transform: translateX(-80px);
+			width: 80px;
+			height: 80px;
+			text-transform: uppercase;
+			font-family: "Exo 2", sans-serif;
+			font-weight: 700;
+			color: #fff;
+			overflow: hidden;
+			transition: all 300ms ease 400ms;
+			
+			@mixin atSmall {
+				width: 0;
+				
+			}
+
+			@mixin atLarge {
+				width: 80px;
+			}
+
+			&--active {
+				transform: translateX(0px);
+				width: 0;
+				transition: all 300ms ease 400ms;
+			}
+
+			&>h4 {
+				text-align: center;
+				display: inline-block;
+				padding-left: 15px;
+				padding-top: 2px; 
+			}
+		}
+		&__button {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 80px;
+			height: 80px;
+			z-index: 100;
+			transition: all 0.25s linear;
+
+			&__menubar {
+				display: block;
+				width: 100%;
+				height: 100%;
+				color: #111517;
+			}
+
+			&__line {
+				position: absolute;
+				left: 20px;
+				top: 38px;
+				width: 40px;
+				height: 5px;
+				border-radius: 2px;
+				background-color: #fff;
+				transition: width 400ms ease;
+
+				&::before {
+					content: "";
+					display: block;
+					position: absolute;
+					top: -10px;
+					left: 0;
+					width: 40px;
+					height: 5px;
+					background-color: #fff;
+					border-radius: 2px;
+					transition: transform 400ms ease;
+				}
+
+				&::after {
+					content: "";
+					display: block;
+					position: absolute;
+					top: 10px;
+					width: 40px;
+					height: 5px;
+					background-color: #fff;
+					border-radius: 2px;
+					transition: transform 400ms ease;
+				}
+
+				&--active {
+					transition: width 400ms ease;
+					width: 0;
+					background-color: currentColor;
+					@mixin atSmall {
+						background-color: currentColor;	
+					}
+					@mixin atLarge {
+						background-color: #fff;
+					}
+
+					&::before {
+						transform-origin: 50% 50%;
+						transform: translate(0px, 10px) rotate(45deg);
+						transition: transform 400ms ease;
+						background-color: currentColor;	
+						@mixin atSmall {
+							background-color: currentColor;	
+						}
+						@mixin atLarge {
+						background-color: #fff;
+						}
+					}
+					&::after {
+						transform-origin: 50% 50%;
+						transform: translate(0px, -10px) rotate(-45deg);
+						transition: transform 400ms ease;
+						background-color: currentColor;	
+						@mixin atSmall {
+							background-color: currentColor;	
+						}
+						@mixin atLarge {
+						background-color: #fff;
+						}
+					}
+				}
+			
+			}
+		}
 		
-		&:hover {
-			color: $fontGold;
-			border-top: 3px solid $fontGold;
-		}
 	}
 
-	&__nav {
-		float: right;
-		padding-right: 2rem;
-	}
 
-	&__logo {
-		float: left;
+
+	.main-header__logo {
+		position: absolute;
+		top: 20px;
+		left: 20px;
+		
 
 		@mixin atSmall {
 			width: 200px;
@@ -46,15 +224,9 @@
 		}
 
 		@mixin atLarge {
-			width: auto;
+			width: 15%;
 			height: auto;
 		}
 	}
 
-	&__logo-img {
-		width: 300px;
-		height: auto;
-		padding-left: 1rem;
-	}
 
-}

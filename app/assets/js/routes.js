@@ -5,7 +5,9 @@ import NaprednaObuka from  "./NaprednaObuka.vue";
 export const routes = [
     {
       path: "/",
-      component: Home
+      component: Home,
+      name: "home",
+      hash: "#bio"
     },
     {
         path: "/beginners",

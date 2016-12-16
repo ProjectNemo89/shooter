@@ -7,10 +7,9 @@ import $ from "jquery";
 
 class Scroll {
     constructor() {
-        this.win = window;
-        this.scrollTime = 1.2;
-        this.scrollDistance = 170;
-        this.scrollTop = $(window).scrollTop();
+        this.win = $(window);
+        this.scrollTime = 1;
+        this.scrollDistance = 250;
         this.handleWheel();
 
     }
@@ -18,16 +17,17 @@ class Scroll {
     handleWheel() {
         let delta = 0;
         const that = this;
-        this.win.addEventListener("mousewheel", (e) => {
+        this.win.on("mousewheel", (e) => {
             const event = that.getEvent(e);
-            event.preventDefault();
-            delta += event.wheelDelta / 120;
-            that.handleDelta(delta);					 
+           e.preventDefault();
+            delta = event.originalEvent.wheelDelta / 120;
+            that.handleDelta(delta);
+            					 
         });
-        this.win.addEventListener("DOMMouseScroll", (e) => {
+        this.win.on("DOMMouseScroll", (e) => {
             const event = this.getEvent(e);
             event.preventDefault();
-            delta -= event.detail / 3;
+            delta = event.originalEvent.detail / 3;
             this.handleDelta(delta);
         });
                  
@@ -37,10 +37,8 @@ class Scroll {
         return event ? event : this.win.event;
     }
 
-    handleDelta(delta) {
-        let finalScroll = 0;
-        // this.scrollTop += delta; 
-        finalScroll = this.scrollTop - (delta * this.scrollDistance);
+    handleDelta(delta) {    
+        let finalScroll = $(window).scrollTop() - parseInt(delta * this.scrollDistance);    
         TweenMax.to(this.win, this.scrollTime, {
             scrollTo : { y: finalScroll, autoKill:true },
             ease: Power1.easeOut,
