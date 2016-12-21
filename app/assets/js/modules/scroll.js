@@ -27,7 +27,7 @@ class Scroll {
         this.win.on("DOMMouseScroll", (e) => {
             const event = this.getEvent(e);
             event.preventDefault();
-            delta = event.originalEvent.detail / 3;
+            delta = -event.originalEvent.detail / 3;
             this.handleDelta(delta);
         });
                  

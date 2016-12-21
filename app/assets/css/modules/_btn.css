@@ -62,7 +62,7 @@
 	}
 
 	&--blue {
-		background-color: #2196f3; 
+		background-color: #0176d3;
 	}
 
 	&:hover &__overlay {
@@ -84,7 +84,6 @@
 	}
 
 	@mixin atSmall {
-		font-size: .7rem;
 		padding: 1rem 1.7rem;
 	}
 

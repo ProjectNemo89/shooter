@@ -6,6 +6,17 @@
 	transform: skew(0, 5deg);
 	outline: 1px solid transparent;
 
+
+	&__background-animation {
+	 position: absolute;
+	 top: 12%;
+	 left: 0;
+	 width: 100%;
+     height: 75%;
+     z-index: 2;
+
+ 	}
+
 	@mixin atSmall {
 		padding: 6rem 1rem;
 	}

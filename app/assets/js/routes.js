@@ -1,13 +1,12 @@
 import Home from "./Home.vue";
 import OsnovnaObuka from "./OsnovnaObuka.vue";
 import NaprednaObuka from  "./NaprednaObuka.vue";
-
+import Biografija from "./Biografija.vue";
 export const routes = [
     {
       path: "/",
       component: Home,
-      name: "home",
-      hash: "#bio"
+      name: "home"
     },
     {
         path: "/beginners",
@@ -16,5 +15,9 @@ export const routes = [
     {
         path: "/progresive",
         component: NaprednaObuka
+    },
+    {
+        path: "/biography",
+        component: Biografija
     }
 ];

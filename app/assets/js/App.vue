@@ -15,25 +15,20 @@
 <style scoped>
 
 .page-enter-active {
-    transform: translate3d(0,0,0);
-    backface-visibility: hidden;
-    animation: slide-in 1s ease forwards;
+    animation: slide-in 1s easein forwards;
   
 }
 
-.page-leave-active {
-    transform: translate3d(0,0,0);
-    backface-visibility: hidden;
-    animation: slide-in 1s ease reverse forwards;
+.page-leave-active {  
+    animation: slide-in 1s ease-in reverse forwards;
 }
 
 @keyframes slide-in {
     from {
-        transform: translateY(-100%);
+
         opacity: 0;
     }
     to {
-        transform: translateY(0%);
         opacity: 1;
     }
 

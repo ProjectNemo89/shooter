@@ -26,14 +26,14 @@
             <div class="main-header__nav__container">
                 <ul class="main-header__nav__container__nav-items">
                     <li>
-                        <router-link :to="{name: 'home'}" tag="a">Početna</router-link>
+                        <router-link @click="menuToggling" :to="{name: 'home'}">Početna</router-link>
                     </li>
                     <li>
-                        <router-link :to="{name:'home', hash: '#bio'}" tag="a">Biografija</router-link>
+                        <a @click="menuToggling" href="/#bio">Biografija</a>
                         
                     </li>
                     <li>
-                        <router-link :to="{name:'home', hash: '#info'}" tag="a">Obuke</router-link>
+                        <a @click="menuToggling" href="/#info">Obuke</a>
                     </li>
                     <li>
                         <router-link to="/" tag="a">Oprema</router-link>

@@ -11,7 +11,7 @@
 
 	&__subheading {
 		font-family: "Kaushan Script", cursive;
-		color: $fontGold;
+		color: #9c613c;
 		text-align: center;
 		margin: 0;
 		
@@ -78,6 +78,7 @@
 			bottom .3s ease, 
 			visibility .3s ease,
 			opacity .3s ease;
+            cursor: crosshair;
 			}
 
 			&__title {
@@ -95,10 +96,14 @@
 					font-family: "Exo 2", sans-serif;
 					opacity: 0;
 					text-transform: uppercase;
-					font-size: 2rem;
+					font-size: 1.7rem;
 					font-weight: 600;
 					color: $fontWhite;
-					transition: margin .6s ease, opacity .6s ease; 
+					transition: margin .6s ease, opacity .6s ease;
+
+				    @mixin atSmall {
+                        font-size: 1.2rem;
+                    }
 				}
 			}
 

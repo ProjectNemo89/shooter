@@ -1,8 +1,16 @@
 .contact {
     position: relative;
     width: 100%;
-    padding: 6rem 2rem;
+    padding: 0;
     @mixin clearfix;
+
+    @mixin atSmall {
+        padding: 0;
+    }
+
+    @mixin atLarge {
+        padding: 6rem 2rem;
+    }
 
 
     &__data {
@@ -18,7 +26,7 @@
         @mixin atSmall {
             text-align: center;
             width: 100%;
-            padding-top: 15%;
+            padding-top: 10%;
         }
 
         @mixin atLarge {
@@ -41,7 +49,7 @@
             font-family: "Kaushan Script", cursive;
             margin-top: 0;
             margin-bottom: 2rem;
-            color: #777;
+            color: #6f6f6f;
             font-size: 1rem;
             padding-bottom: 2rem;
                          

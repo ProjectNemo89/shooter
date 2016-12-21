@@ -86,13 +86,13 @@
 	
 	var _routes = __webpack_require__(123);
 	
-	var _map = __webpack_require__(162);
+	var _map = __webpack_require__(165);
 	
 	var _map2 = _interopRequireDefault(_map);
 	
-	var _menu = __webpack_require__(164);
+	var _particles = __webpack_require__(167);
 	
-	var _menu2 = _interopRequireDefault(_menu);
+	var _particles2 = _interopRequireDefault(_particles);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -106,15 +106,10 @@
 	      return { selector: to.hash };
 	    } else if (savedPosition) {
 	      return savedPosition;
-	    }
+	    } else {
 	
-	    if (from.hash) {
-	      return { selector: from.hash };
-	    } else if (savedPosition) {
-	      return savedPosition;
+	      return { x: 0, y: 0 };
 	    }
-	
-	    return { x: 0, y: 0 };
 	  }
 	});
 	
@@ -128,12 +123,14 @@
 	
 	new _intro2.default();
 	new _scroll2.default();
-	new _parallax2.default();
+	new _parallax2.default(".parallax-up", 2);
+	new _parallax2.default(".parallax-down", -2);
 	new _map2.default();
 	new _video2.default();
-	new _reveal2.default((0, _jquery2.default)(".about__description__wrapper"), "80%");
+	new _reveal2.default((0, _jquery2.default)(".about__description__wrapper"), "60%");
 	new _reveal2.default((0, _jquery2.default)(".story__desc__text"), "85%");
 	new _map2.default();
+	new _particles2.default("animate");
 
 /***/ },
 /* 1 */
@@ -234,7 +231,7 @@
 	            this.win.on("DOMMouseScroll", function (e) {
 	                var event = _this.getEvent(e);
 	                event.preventDefault();
-	                delta = event.originalEvent.detail / 3;
+	                delta = -event.originalEvent.detail / 3;
 	                _this.handleDelta(delta);
 	            });
 	        }
@@ -21782,19 +21779,46 @@
 	    value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _rellax = __webpack_require__(108);
 	
 	var _rellax2 = _interopRequireDefault(_rellax);
+	
+	var _jquery = __webpack_require__(5);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var Parallax = function Parallax() {
-	    _classCallCheck(this, Parallax);
+	var Parallax = function () {
+	    function Parallax(selector, speed) {
+	        _classCallCheck(this, Parallax);
 	
-	    this.parallax = new _rellax2.default(".parallax", { speed: 2 });
-	};
+	        this.selector = selector;
+	        this.speed = speed;
+	        this.onSmallWindow();
+	    }
+	
+	    _createClass(Parallax, [{
+	        key: "onSmallWindow",
+	        value: function onSmallWindow() {
+	            var width = (0, _jquery2.default)(window).width();
+	            var targets = (0, _jquery2.default)(".parallax-up, .parallax-down");
+	
+	            if (width > 300 && width < 600 && (targets.hasClass("parallax-up") || targets.hasClass("parallax-down"))) {
+	                targets.removeClass("parallax-up").removeClass("parallax-down");
+	            }
+	            if (width > 600 && (!targets.hasClass("parallax-up") || !targets.hasClass("parallax-down"))) {
+	                this.parallax = new _rellax2.default(this.selector, { speed: this.speed });
+	            }
+	        }
+	    }]);
+	
+	    return Parallax;
+	}();
 	
 	exports.default = Parallax;
 
@@ -31994,7 +32018,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n.page-enter-active[data-v-49097504] {\r\n    transform: translate3d(0,0,0);\r\n    backface-visibility: hidden;\r\n    animation: slide-in 1s ease forwards;\n}\n.page-leave-active[data-v-49097504] {\r\n    transform: translate3d(0,0,0);\r\n    backface-visibility: hidden;\r\n    animation: slide-in 1s ease reverse forwards;\n}\n@keyframes slide-in {\nfrom {\r\n        transform: translateY(-100%);\r\n        opacity: 0;\n}\nto {\r\n        transform: translateY(0%);\r\n        opacity: 1;\n}\n}\r\n\r\n", "", {"version":3,"sources":["/./app/assets/js/App.vue?1545bd8b"],"names":[],"mappings":";AAgBA;IACA,8BAAA;IACA,4BAAA;IACA,qCAAA;CAEA;AAEA;IACA,8BAAA;IACA,4BAAA;IACA,6CAAA;CACA;AAEA;AACA;QACA,6BAAA;QACA,WAAA;CACA;AACA;QACA,0BAAA;QACA,WAAA;CACA;CAEA","file":"App.vue","sourcesContent":["<template>\r\n    <div>\r\n        <transition name=\"page\" mode=\"out-in\">\r\n            <keep-alive>\r\n                    <router-view></router-view>\r\n            </keep-alive>\r\n        </transition>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n\r\n</script>\r\n\r\n<style scoped>\r\n\r\n.page-enter-active {\r\n    transform: translate3d(0,0,0);\r\n    backface-visibility: hidden;\r\n    animation: slide-in 1s ease forwards;\r\n  \r\n}\r\n\r\n.page-leave-active {\r\n    transform: translate3d(0,0,0);\r\n    backface-visibility: hidden;\r\n    animation: slide-in 1s ease reverse forwards;\r\n}\r\n\r\n@keyframes slide-in {\r\n    from {\r\n        transform: translateY(-100%);\r\n        opacity: 0;\r\n    }\r\n    to {\r\n        transform: translateY(0%);\r\n        opacity: 1;\r\n    }\r\n\r\n}\r\n\r\n</style>"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.page-enter-active[data-v-49097504] {\r\n    animation: slide-in 1s easein forwards;\n}\n.page-leave-active[data-v-49097504] {  \r\n    animation: slide-in 1s ease-in reverse forwards;\n}\n@keyframes slide-in {\nfrom {\r\n\r\n        opacity: 0;\n}\nto {\r\n        opacity: 1;\n}\n}\r\n\r\n", "", {"version":3,"sources":["/./app/assets/js/App.vue?3209595e"],"names":[],"mappings":";AAgBA;IACA,uCAAA;CAEA;AAEA;IACA,gDAAA;CACA;AAEA;AACA;;QAEA,WAAA;CACA;AACA;QACA,WAAA;CACA;CAEA","file":"App.vue","sourcesContent":["<template>\r\n    <div>\r\n        <transition name=\"page\" mode=\"out-in\">\r\n            <keep-alive>\r\n                    <router-view></router-view>\r\n            </keep-alive>\r\n        </transition>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n\r\n</script>\r\n\r\n<style scoped>\r\n\r\n.page-enter-active {\r\n    animation: slide-in 1s easein forwards;\r\n  \r\n}\r\n\r\n.page-leave-active {  \r\n    animation: slide-in 1s ease-in reverse forwards;\r\n}\r\n\r\n@keyframes slide-in {\r\n    from {\r\n\r\n        opacity: 0;\r\n    }\r\n    to {\r\n        opacity: 1;\r\n    }\r\n\r\n}\r\n\r\n</style>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -34403,19 +34427,25 @@
 	
 	var _NaprednaObuka2 = _interopRequireDefault(_NaprednaObuka);
 	
+	var _Biografija = __webpack_require__(162);
+	
+	var _Biografija2 = _interopRequireDefault(_Biografija);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var routes = exports.routes = [{
 	    path: "/",
 	    component: _Home2.default,
-	    name: "home",
-	    hash: "#bio"
+	    name: "home"
 	}, {
 	    path: "/beginners",
 	    component: _OsnovnaObuka2.default
 	}, {
 	    path: "/progresive",
 	    component: _NaprednaObuka2.default
+	}, {
+	    path: "/biography",
+	    component: _Biografija2.default
 	}];
 
 /***/ },
@@ -34620,7 +34650,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n.cls-1[data-v-9861d020]{fill:#fff;\n}\n.cls-2[data-v-9861d020],.cls-3[data-v-9861d020],.cls-4[data-v-9861d020]{fill:none;\n}\n.cls-2[data-v-9861d020]{stroke:#fff;stroke-width:6px;\n}\n.cls-2[data-v-9861d020],.cls-4[data-v-9861d020]{stroke-miterlimit:10;\n}\n.cls-4[data-v-9861d020]{stroke:red;stroke-width:2px;\n}\n", "", {"version":3,"sources":["/./app/assets/js/components/Header.vue?3791f60e"],"names":[],"mappings":";AA2EA,wBAAA,UAAA;CAAA;AAAA,wEAAA,UAAA;CAAA;AAAA,wBAAA,YAAA,iBAAA;CAAA;AAAA,gDAAA,qBAAA;CAAA;AAAA,wBAAA,WAAA,iBAAA;CAAA","file":"Header.vue","sourcesContent":["<template>\r\n    <div>  \r\n        <div class=\"main-header__logo\">\r\n            <svg id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 492.34 88.96\">\r\n            <title>\r\n                logo\r\n            </title>\r\n            <path class=\"cls-1\" d=\"M311.74 84.58c0 2.56-2.11 4.35-5.16 4.35a6 6 0 0 1-5.7-3.46l2.58-1.28a3.28 3.28 0 0 0 3.11 2c1.39 0 2.18-.62 2.18-1.64s-.73-1.49-2.52-1.73c-3.23-.33-5.23-2.06-5.23-4.55s2.24-4.39 5.14-4.39a6.15 6.15 0 0 1 5.67 3.35l-2.54 1.32a3.3 3.3 0 0 0-3.14-2c-1.34 0-2.18.64-2.18 1.68s.88 1.56 2.52 1.81c3.39.51 5.18 2.04 5.27 4.54zM316 74.15v6.12h5v-6.12h2.88v14.5H321v-5.63h-5v5.63h-2.88v-14.5H316zM331.53 73.87c3.37 0 5.76 2.07 5.76 5v5c0 2.92-2.41 5-5.76 5s-5.74-2.09-5.74-5v-5c0-2.95 2.37-5 5.74-5zm0 12.22c1.71 0 2.67-.81 2.67-2.18v-5c0-1.43-.9-2.15-2.67-2.15s-2.65.75-2.65 2.15v5c0 1.37.96 2.18 2.65 2.18zM344.73 73.87c3.37 0 5.76 2.07 5.76 5v5c0 2.92-2.41 5-5.76 5s-5.74-2.09-5.74-5v-5c.01-2.95 2.37-5 5.74-5zm0 12.22c1.71 0 2.67-.81 2.67-2.18v-5c0-1.43-.9-2.15-2.67-2.15s-2.65.75-2.65 2.15v5c.01 1.37.92 2.18 2.65 2.18zM351.34 74.15h11.28v2.79h-4.31v11.71h-2.88V76.94h-4.1v-2.79zM367.45 88.65h-2.9v-14.5h2.9v14.5zM377.83 83.51v-9.36h2.88v14.5h-3l-5.27-9.21v9.21h-2.88v-14.5h2.86zM382.63 83.3v-3.73c0-3.41 2.28-5.65 5.8-5.65a5.3 5.3 0 0 1 5.29 3.24l-2.77 1.2c-.45-1.17-1-1.56-2.52-1.56-2 0-2.82.81-2.82 2.77v3.69c0 1.94.83 2.75 2.88 2.75s2.67-.68 2.67-2.71v-.45h-3.65v-2.64h6.63v3.09c0 3.5-2.11 5.59-5.67 5.59s-5.84-2.18-5.84-5.59zM407.84 74.15l5.16 14.5h-3l-1.24-3.48h-4.22l-1.19 3.48h-3l5.14-14.51h2.37zm-1.17 4.56l-1.22 3.86h2.41zM422.47 84.03l2.92 1.17c-.87 2.41-2.92 3.73-5.78 3.73-3.67 0-5.76-2-5.76-5.46v-4.1c0-3.54 2.13-5.61 5.76-5.61 2.86 0 4.91 1.32 5.78 3.73l-2.92 1.22c-.32-1.43-1.07-2-2.82-2-2.18 0-2.77.58-2.77 2.69v4c0 2 .6 2.6 2.69 2.6 1.81.01 2.58-.54 2.9-1.97zM432.69 74.15l5.16 14.51h-3l-1.24-3.48h-4.22l-1.19 3.48h-3l5.14-14.51h2.37zm-1.18 4.56l-1.22 3.86h2.41zM444.67 74.15c3.39 0 5.42 1.92 5.42 5.12v4.8c0 2.79-2.13 4.59-5.46 4.59h-5.29V74.15h5.33zm2.54 9.92V79.2c0-1.66-.7-2.3-2.54-2.3h-2.45v9h2.41c1.75 0 2.58-.62 2.58-1.83zM462 74.15v2.75h-6.9v3.07h6.14v2.74h-6.14v3.2h6.9v2.75h-9.73V74.15H462zM467.2 74.15l3.65 7.7 3.63-7.7h3.14v14.5h-2.88v-8.94L472 86.07h-2.26L467 79.71v8.92h-2.88V74.12h3.14zM482 74.15l2.82 5.8 3-5.8H491l-4.63 8.62v5.89h-3v-5.89l-4.74-8.62H482z\"/>\r\n            <path class=\"cls-2\" d=\"M480.67 9.38L486 1.71\"/>\r\n            <path class=\"cls-3\" d=\"M147 43.69h1.74L147 40.66v3.03zM308 30.05V43.52c0 3.37 1.89 5.26 6.09 5.26H314c4-.1 7-2 7-5.24V30.05c0-3.48-2.56-5.34-7-5.34v.14c-4.42.06-6 1.78-6 5.2zM114.97 38.35l-1.7 5.41 3.35-.01-1.65-5.4zM117.39 46.71l-.77-2.74-3.35.12-.79 2.62h4.91zM160 43.67h-2.11l2.11 3.66v-3.66zM202.97 43.58l-4.6.01 2.31 6.93 2.29-6.94zM240.64 55.89c4.25 0 6.66-1.89 6.66-5.32l-.08-7.09-13.22.03v7.06c0 3.37 2.45 5.32 6.64 5.32zM14.79 55.71c4.37 0 6.21-1.77 6.21-4.72v-7.06H9v11.78h5.79zM420.78 43.71h-4.51l2.26 6.81 2.25-6.81zM21 30.88c0-4.17-1.48-5.17-6.09-5.17H9v11.25h12v-6.08z\"/>\r\n            <path class=\"cls-1\" d=\"M21 50.99c0 3-1.84 4.72-6.21 4.72H9V43.96H0v19.75h14.79c9.28 0 15.21-4.92 15.21-12.72v-7.07h-9v7.06zM14.91 16.71H0v20.26h9V25.71h5.91c4.61 0 6.09 1 6.09 5.17v6.06h9v-5.88c0-8.98-5.64-14.35-15.09-14.35zM85 50.52c0 3.48-1.38 4.78-5.28 4.78-3 0-4.44-1.18-5.74-4.49l-7.59 3.72c2.13 6.18 6.81 9.34 13.61 9.34 9 0 14-4.9 14-13.53v-6.55h-9v6.71zM85 16.71v20.1l9-.02V16.71h-9zM111.36 16.71l-7.14 20.07 9.05-.02 1.7-5.4 1.65 5.39 9.05-.01-7.16-20.03h-7.15zM117.39 46.71h-4.91l.79-2.73-9.05-.17-7.15 19.9h9.33l3.25-9h10.51l3.37 9h9.33l-7.19-20.06-9.05.28.77 2.78zM160 16.71v19.96l9-.02V16.71h-9zM138 63.71h9V43.69l-9 .02v20zM146.21 16.71H138v20l9-.02v-3.03l1.49 3.03 9.37-.02-11.65-19.96zM160 47.33l-2.19-3.66-9.53-.06 11.51 20.1H169V43.65l-9 .02v3.66zM190.76 16.71h-9.86l7.08 19.9 9.39-.02-6.61-19.88zM211.54 16.71l-6.57 19.87 9.37-.02 7.06-19.85h-9.86zM200.68 50.52l-2.31-6.93-9.39-.07 7.21 20.19h8.92l7.23-20.23-9.37.06-2.29 6.98zM247.28 16.71l.15 19.78 9.57-.02V16.71h-9.72zM234 16.71h-9v19.82l9-.01V16.71zM247.34 50.58c0 3.43-2.45 5.32-6.7 5.32S234 53.94 234 50.58v-7.07h-9v7c0 8.34 6.64 14.2 16 14.2s16-6 16-14.18v-7.06h-9.57zM263 63.71h9V50.76l1.52-1.97 11.97 14.92h11.4l-16.84-20.36-17.05.11v20.25zM295.83 16.71h-11.58L272 30.94V16.71h-9v19.75l17.05-.03-.86-.94 16.64-18.78zM354 16.71h9v20h-9zM354 50.52c0 3.48-1.31 4.78-5.21 4.78-3 0-4.41-1.18-5.71-4.49l-7.58 3.72c2.13 6.14 6.75 9.33 13.54 9.33 9 0 14-4.9 14-13.53v-6.62h-9v6.81zM369 63.71h27v-8h-18v-8h17v-4h-26v20zM378 32.71v-7h18v-9h-27v20h26v-4h-17zM420.53 50.52l-2.26-6.81h-9.4l7.18 20h8.91l7.18-20h-9.36l-2.25 6.81zM429.39 16.71l-6.61 20h9.36l7.12-20h-9.87zM411.62 16.71h-9.87l7.12 20h9.4l-6.65-20zM445 16.71h9v20h-9zM445 43.71h9v20h-9zM475.86 55.54c-5.26 0-6.86-1.3-6.86-6.38v-5.45h-9v5.63c0 9.63 5.92 15.12 16.08 15.12 8.09 0 13.95-3.84 16.25-10.87l-9.07-3.6c-.7 4.13-2.56 5.55-7.4 5.55zM469 31.35c0-5.32 1.6-6.62 7.1-6.62 4.61 0 6.5 1.42 7.21 5.55l9-3.6c-2.3-7-8.2-10.87-16.29-10.87C466 15.82 460 21.61 460 31.35v5.36h9v-5.36zM45 32.71v-7h18v-9H36v20.2l25-.05v-4.15H45zM36 63.71h27v-8H45v-8h16v-3.85l-25 .05v19.8zM319 15.71v9c4.43 0 7 1.86 7 5.34v6.66h9v-6.66c0-8.15-6.66-14.34-16-14.34zM306 30.05c0-3.42 1.58-5.14 6-5.2v-8.8c-9.33 0-16 5.79-16 14v6.35h10v-6.35zM312.09 55.78c-4.19 0-6.09-1.89-6.09-5.26v-7.14h-10v7.12c0 8.21 6.51 14.06 15.78 14.06h.22v-8.85s.2.07.09.07zM326 50.52c0 3.27-3 5.14-7 5.24v8.81c9-.14 16-6 16-14v-6.86h-9v6.81z\"/>\r\n            <circle class=\"cls-4\" cx=\"316\" cy=\"40.71\" r=\"5.33\"/>\r\n            </svg>\r\n        </div>\r\n        <nav class=\"main-header__nav\" :class=\"{'main-header__nav--active': nav}\">\r\n            <div class=\"main-header__nav__controls\" :class=\"{'main-header__nav__controls--active': controls}\">\r\n                <div class=\"main-header__nav__label\" :class=\"{'main-header__nav__label--active': label}\">\r\n                    <h4>Meni</h4>\r\n                </div>\r\n                <div class=\"main-header__nav__button\">\r\n                    <a class=\"main-header__nav__button__menubar\" href=\"#\" @click.prevent=\"menuToggling\">\r\n                        <div class=\"main-header__nav__button__line\" :class=\"{'main-header__nav__button__line--active': lines}\"></div>\r\n                    </a> \r\n                </div>\r\n            </div>\r\n            <div class=\"main-header__nav__container\">\r\n                <ul class=\"main-header__nav__container__nav-items\">\r\n                    <li>\r\n                        <router-link :to=\"{name: 'home'}\" tag=\"a\">Početna</router-link>\r\n                    </li>\r\n                    <li>\r\n                        <router-link :to=\"{name:'home', hash: '#bio'}\" tag=\"a\">Biografija</router-link>\r\n                        \r\n                    </li>\r\n                    <li>\r\n                        <router-link :to=\"{name:'home', hash: '#info'}\" tag=\"a\">Obuke</router-link>\r\n                    </li>\r\n                    <li>\r\n                        <router-link to=\"/\" tag=\"a\">Oprema</router-link>\r\n                    </li>\r\n                    <li>\r\n                        <router-link to=\"/\" tag=\"a\">Galerija</router-link>\r\n                    </li>\r\n                    <li>\r\n                        <router-link to=\"/\" tag=\"a\">Kontakt</router-link>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </nav>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    export default {\r\n        data() {\r\n            return {\r\n                nav: false,\r\n                controls: false,\r\n                label: false,\r\n                lines: false\r\n            };   \r\n        },\r\n        methods: {\r\n            menuToggling() {\r\n            this.nav = !this.nav;\r\n            this.controls = !this.controls;\r\n            this.label = !this.label;\r\n            this.lines = !this.lines;             \r\n            }\r\n        }\r\n        \r\n    }\r\n</script>\r\n\r\n<style scoped>\r\n    .cls-1{fill:#fff;}.cls-2,.cls-3,.cls-4{fill:none;}.cls-2{stroke:#fff;stroke-width:6px;}.cls-2,.cls-4{stroke-miterlimit:10;}.cls-4{stroke:red;stroke-width:2px;}\r\n</style>"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.cls-1[data-v-9861d020]{fill:#fff;\n}\n.cls-2[data-v-9861d020],.cls-3[data-v-9861d020],.cls-4[data-v-9861d020]{fill:none;\n}\n.cls-2[data-v-9861d020]{stroke:#fff;stroke-width:6px;\n}\n.cls-2[data-v-9861d020],.cls-4[data-v-9861d020]{stroke-miterlimit:10;\n}\n.cls-4[data-v-9861d020]{stroke:red;stroke-width:2px;\n}\n", "", {"version":3,"sources":["/./app/assets/js/components/Header.vue?c10cc38a"],"names":[],"mappings":";AA2EA,wBAAA,UAAA;CAAA;AAAA,wEAAA,UAAA;CAAA;AAAA,wBAAA,YAAA,iBAAA;CAAA;AAAA,gDAAA,qBAAA;CAAA;AAAA,wBAAA,WAAA,iBAAA;CAAA","file":"Header.vue","sourcesContent":["<template>\r\n    <div>  \r\n        <div class=\"main-header__logo\">\r\n            <svg id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 492.34 88.96\">\r\n            <title>\r\n                logo\r\n            </title>\r\n            <path class=\"cls-1\" d=\"M311.74 84.58c0 2.56-2.11 4.35-5.16 4.35a6 6 0 0 1-5.7-3.46l2.58-1.28a3.28 3.28 0 0 0 3.11 2c1.39 0 2.18-.62 2.18-1.64s-.73-1.49-2.52-1.73c-3.23-.33-5.23-2.06-5.23-4.55s2.24-4.39 5.14-4.39a6.15 6.15 0 0 1 5.67 3.35l-2.54 1.32a3.3 3.3 0 0 0-3.14-2c-1.34 0-2.18.64-2.18 1.68s.88 1.56 2.52 1.81c3.39.51 5.18 2.04 5.27 4.54zM316 74.15v6.12h5v-6.12h2.88v14.5H321v-5.63h-5v5.63h-2.88v-14.5H316zM331.53 73.87c3.37 0 5.76 2.07 5.76 5v5c0 2.92-2.41 5-5.76 5s-5.74-2.09-5.74-5v-5c0-2.95 2.37-5 5.74-5zm0 12.22c1.71 0 2.67-.81 2.67-2.18v-5c0-1.43-.9-2.15-2.67-2.15s-2.65.75-2.65 2.15v5c0 1.37.96 2.18 2.65 2.18zM344.73 73.87c3.37 0 5.76 2.07 5.76 5v5c0 2.92-2.41 5-5.76 5s-5.74-2.09-5.74-5v-5c.01-2.95 2.37-5 5.74-5zm0 12.22c1.71 0 2.67-.81 2.67-2.18v-5c0-1.43-.9-2.15-2.67-2.15s-2.65.75-2.65 2.15v5c.01 1.37.92 2.18 2.65 2.18zM351.34 74.15h11.28v2.79h-4.31v11.71h-2.88V76.94h-4.1v-2.79zM367.45 88.65h-2.9v-14.5h2.9v14.5zM377.83 83.51v-9.36h2.88v14.5h-3l-5.27-9.21v9.21h-2.88v-14.5h2.86zM382.63 83.3v-3.73c0-3.41 2.28-5.65 5.8-5.65a5.3 5.3 0 0 1 5.29 3.24l-2.77 1.2c-.45-1.17-1-1.56-2.52-1.56-2 0-2.82.81-2.82 2.77v3.69c0 1.94.83 2.75 2.88 2.75s2.67-.68 2.67-2.71v-.45h-3.65v-2.64h6.63v3.09c0 3.5-2.11 5.59-5.67 5.59s-5.84-2.18-5.84-5.59zM407.84 74.15l5.16 14.5h-3l-1.24-3.48h-4.22l-1.19 3.48h-3l5.14-14.51h2.37zm-1.17 4.56l-1.22 3.86h2.41zM422.47 84.03l2.92 1.17c-.87 2.41-2.92 3.73-5.78 3.73-3.67 0-5.76-2-5.76-5.46v-4.1c0-3.54 2.13-5.61 5.76-5.61 2.86 0 4.91 1.32 5.78 3.73l-2.92 1.22c-.32-1.43-1.07-2-2.82-2-2.18 0-2.77.58-2.77 2.69v4c0 2 .6 2.6 2.69 2.6 1.81.01 2.58-.54 2.9-1.97zM432.69 74.15l5.16 14.51h-3l-1.24-3.48h-4.22l-1.19 3.48h-3l5.14-14.51h2.37zm-1.18 4.56l-1.22 3.86h2.41zM444.67 74.15c3.39 0 5.42 1.92 5.42 5.12v4.8c0 2.79-2.13 4.59-5.46 4.59h-5.29V74.15h5.33zm2.54 9.92V79.2c0-1.66-.7-2.3-2.54-2.3h-2.45v9h2.41c1.75 0 2.58-.62 2.58-1.83zM462 74.15v2.75h-6.9v3.07h6.14v2.74h-6.14v3.2h6.9v2.75h-9.73V74.15H462zM467.2 74.15l3.65 7.7 3.63-7.7h3.14v14.5h-2.88v-8.94L472 86.07h-2.26L467 79.71v8.92h-2.88V74.12h3.14zM482 74.15l2.82 5.8 3-5.8H491l-4.63 8.62v5.89h-3v-5.89l-4.74-8.62H482z\"/>\r\n            <path class=\"cls-2\" d=\"M480.67 9.38L486 1.71\"/>\r\n            <path class=\"cls-3\" d=\"M147 43.69h1.74L147 40.66v3.03zM308 30.05V43.52c0 3.37 1.89 5.26 6.09 5.26H314c4-.1 7-2 7-5.24V30.05c0-3.48-2.56-5.34-7-5.34v.14c-4.42.06-6 1.78-6 5.2zM114.97 38.35l-1.7 5.41 3.35-.01-1.65-5.4zM117.39 46.71l-.77-2.74-3.35.12-.79 2.62h4.91zM160 43.67h-2.11l2.11 3.66v-3.66zM202.97 43.58l-4.6.01 2.31 6.93 2.29-6.94zM240.64 55.89c4.25 0 6.66-1.89 6.66-5.32l-.08-7.09-13.22.03v7.06c0 3.37 2.45 5.32 6.64 5.32zM14.79 55.71c4.37 0 6.21-1.77 6.21-4.72v-7.06H9v11.78h5.79zM420.78 43.71h-4.51l2.26 6.81 2.25-6.81zM21 30.88c0-4.17-1.48-5.17-6.09-5.17H9v11.25h12v-6.08z\"/>\r\n            <path class=\"cls-1\" d=\"M21 50.99c0 3-1.84 4.72-6.21 4.72H9V43.96H0v19.75h14.79c9.28 0 15.21-4.92 15.21-12.72v-7.07h-9v7.06zM14.91 16.71H0v20.26h9V25.71h5.91c4.61 0 6.09 1 6.09 5.17v6.06h9v-5.88c0-8.98-5.64-14.35-15.09-14.35zM85 50.52c0 3.48-1.38 4.78-5.28 4.78-3 0-4.44-1.18-5.74-4.49l-7.59 3.72c2.13 6.18 6.81 9.34 13.61 9.34 9 0 14-4.9 14-13.53v-6.55h-9v6.71zM85 16.71v20.1l9-.02V16.71h-9zM111.36 16.71l-7.14 20.07 9.05-.02 1.7-5.4 1.65 5.39 9.05-.01-7.16-20.03h-7.15zM117.39 46.71h-4.91l.79-2.73-9.05-.17-7.15 19.9h9.33l3.25-9h10.51l3.37 9h9.33l-7.19-20.06-9.05.28.77 2.78zM160 16.71v19.96l9-.02V16.71h-9zM138 63.71h9V43.69l-9 .02v20zM146.21 16.71H138v20l9-.02v-3.03l1.49 3.03 9.37-.02-11.65-19.96zM160 47.33l-2.19-3.66-9.53-.06 11.51 20.1H169V43.65l-9 .02v3.66zM190.76 16.71h-9.86l7.08 19.9 9.39-.02-6.61-19.88zM211.54 16.71l-6.57 19.87 9.37-.02 7.06-19.85h-9.86zM200.68 50.52l-2.31-6.93-9.39-.07 7.21 20.19h8.92l7.23-20.23-9.37.06-2.29 6.98zM247.28 16.71l.15 19.78 9.57-.02V16.71h-9.72zM234 16.71h-9v19.82l9-.01V16.71zM247.34 50.58c0 3.43-2.45 5.32-6.7 5.32S234 53.94 234 50.58v-7.07h-9v7c0 8.34 6.64 14.2 16 14.2s16-6 16-14.18v-7.06h-9.57zM263 63.71h9V50.76l1.52-1.97 11.97 14.92h11.4l-16.84-20.36-17.05.11v20.25zM295.83 16.71h-11.58L272 30.94V16.71h-9v19.75l17.05-.03-.86-.94 16.64-18.78zM354 16.71h9v20h-9zM354 50.52c0 3.48-1.31 4.78-5.21 4.78-3 0-4.41-1.18-5.71-4.49l-7.58 3.72c2.13 6.14 6.75 9.33 13.54 9.33 9 0 14-4.9 14-13.53v-6.62h-9v6.81zM369 63.71h27v-8h-18v-8h17v-4h-26v20zM378 32.71v-7h18v-9h-27v20h26v-4h-17zM420.53 50.52l-2.26-6.81h-9.4l7.18 20h8.91l7.18-20h-9.36l-2.25 6.81zM429.39 16.71l-6.61 20h9.36l7.12-20h-9.87zM411.62 16.71h-9.87l7.12 20h9.4l-6.65-20zM445 16.71h9v20h-9zM445 43.71h9v20h-9zM475.86 55.54c-5.26 0-6.86-1.3-6.86-6.38v-5.45h-9v5.63c0 9.63 5.92 15.12 16.08 15.12 8.09 0 13.95-3.84 16.25-10.87l-9.07-3.6c-.7 4.13-2.56 5.55-7.4 5.55zM469 31.35c0-5.32 1.6-6.62 7.1-6.62 4.61 0 6.5 1.42 7.21 5.55l9-3.6c-2.3-7-8.2-10.87-16.29-10.87C466 15.82 460 21.61 460 31.35v5.36h9v-5.36zM45 32.71v-7h18v-9H36v20.2l25-.05v-4.15H45zM36 63.71h27v-8H45v-8h16v-3.85l-25 .05v19.8zM319 15.71v9c4.43 0 7 1.86 7 5.34v6.66h9v-6.66c0-8.15-6.66-14.34-16-14.34zM306 30.05c0-3.42 1.58-5.14 6-5.2v-8.8c-9.33 0-16 5.79-16 14v6.35h10v-6.35zM312.09 55.78c-4.19 0-6.09-1.89-6.09-5.26v-7.14h-10v7.12c0 8.21 6.51 14.06 15.78 14.06h.22v-8.85s.2.07.09.07zM326 50.52c0 3.27-3 5.14-7 5.24v8.81c9-.14 16-6 16-14v-6.86h-9v6.81z\"/>\r\n            <circle class=\"cls-4\" cx=\"316\" cy=\"40.71\" r=\"5.33\"/>\r\n            </svg>\r\n        </div>\r\n        <nav class=\"main-header__nav\" :class=\"{'main-header__nav--active': nav}\">\r\n            <div class=\"main-header__nav__controls\" :class=\"{'main-header__nav__controls--active': controls}\">\r\n                <div class=\"main-header__nav__label\" :class=\"{'main-header__nav__label--active': label}\">\r\n                    <h4>Meni</h4>\r\n                </div>\r\n                <div class=\"main-header__nav__button\">\r\n                    <a class=\"main-header__nav__button__menubar\" href=\"#\" @click.prevent=\"menuToggling\">\r\n                        <div class=\"main-header__nav__button__line\" :class=\"{'main-header__nav__button__line--active': lines}\"></div>\r\n                    </a> \r\n                </div>\r\n            </div>\r\n            <div class=\"main-header__nav__container\">\r\n                <ul class=\"main-header__nav__container__nav-items\">\r\n                    <li>\r\n                        <router-link @click=\"menuToggling\" :to=\"{name: 'home'}\">Početna</router-link>\r\n                    </li>\r\n                    <li>\r\n                        <a @click=\"menuToggling\" href=\"/#bio\">Biografija</a>\r\n                        \r\n                    </li>\r\n                    <li>\r\n                        <a @click=\"menuToggling\" href=\"/#info\">Obuke</a>\r\n                    </li>\r\n                    <li>\r\n                        <router-link to=\"/\" tag=\"a\">Oprema</router-link>\r\n                    </li>\r\n                    <li>\r\n                        <router-link to=\"/\" tag=\"a\">Galerija</router-link>\r\n                    </li>\r\n                    <li>\r\n                        <router-link to=\"/\" tag=\"a\">Kontakt</router-link>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </nav>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    export default {\r\n        data() {\r\n            return {\r\n                nav: false,\r\n                controls: false,\r\n                label: false,\r\n                lines: false\r\n            };   \r\n        },\r\n        methods: {\r\n            menuToggling() {\r\n            this.nav = !this.nav;\r\n            this.controls = !this.controls;\r\n            this.label = !this.label;\r\n            this.lines = !this.lines;             \r\n            }\r\n        }\r\n        \r\n    }\r\n</script>\r\n\r\n<style scoped>\r\n    .cls-1{fill:#fff;}.cls-2,.cls-3,.cls-4{fill:none;}.cls-2{stroke:#fff;stroke-width:6px;}.cls-2,.cls-4{stroke-miterlimit:10;}.cls-4{stroke:red;stroke-width:2px;}\r\n</style>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -34790,24 +34820,24 @@
 	    attrs: {
 	      "to": {
 	        name: 'home'
-	      },
-	      "tag": "a"
+	      }
+	    },
+	    on: {
+	      "click": _vm.menuToggling
 	    }
-	  }, ["Početna"])]), " ", _h('li', [_h('router-link', {
+	  }, ["Početna"])]), " ", _h('li', [_h('a', {
 	    attrs: {
-	      "to": {
-	        name: 'home',
-	        hash: '#bio'
-	      },
-	      "tag": "a"
+	      "href": "/#bio"
+	    },
+	    on: {
+	      "click": _vm.menuToggling
 	    }
-	  }, ["Biografija"])]), " ", _h('li', [_h('router-link', {
+	  }, ["Biografija"])]), " ", _h('li', [_h('a', {
 	    attrs: {
-	      "to": {
-	        name: 'home',
-	        hash: '#info'
-	      },
-	      "tag": "a"
+	      "href": "/#info"
+	    },
+	    on: {
+	      "click": _vm.menuToggling
 	    }
 	  }, ["Obuke"])]), " ", _h('li', [_h('router-link', {
 	    attrs: {
@@ -34961,11 +34991,11 @@
 	  return _h('div', {
 	    staticClass: "main-hero__callout"
 	  }, [_h('h1', {
-	    staticClass: "main-hero__main-heading parallax"
+	    staticClass: "main-hero__main-heading parallax-up"
 	  }, ["instruktor praktičnog streljaštva"]), " ", _h('h2', {
-	    staticClass: "main-hero__subheading parallax"
+	    staticClass: "main-hero__subheading parallax-up"
 	  }, ["Naučite da bezbedno rukujete oružjem"]), " ", _h('div', {
-	    staticClass: "btn__wrap parallax"
+	    staticClass: "btn__wrap parallax-up"
 	  }, [_h('a', {
 	    staticClass: "btn btn--blue",
 	    attrs: {
@@ -34978,7 +35008,7 @@
 	  }), " ", _h('span', {
 	    staticClass: "btn__text"
 	  }, ["pogledaj video"])])]), " ", _h('div', {
-	    staticClass: "btn__wrap parallax"
+	    staticClass: "btn__wrap parallax-up"
 	  }, [_h('a', {
 	    staticClass: "btn btn--primary",
 	    attrs: {
@@ -35240,6 +35270,8 @@
 	//
 	//
 	//
+	//
+	//
 	"use strict";
 
 /***/ },
@@ -35247,8 +35279,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
-	  return _vm._m(0)
-	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('section', {
 	    staticClass: "about row",
 	    attrs: {
@@ -35256,7 +35286,26 @@
 	    }
 	  }, [_h('h4', ["Iskustvo, uspesi i znanje"]), " ", _h('h1', ["Biografija"]), " ", _h('div', {
 	    staticClass: "about__wrapper"
+	  }, [_vm._m(0), " ", _h('div', {
+	    staticClass: "about__description"
 	  }, [_h('div', {
+	    staticClass: "about__description__wrapper"
+	  }, [_h('p', ["\n                    Prvo moje iskustvo u reprezentaciji Srbije bilo je Evropsko prvenstvo u bazi SAJ-a 2009. godine da bi bih 2011. godine učestvovao na Svetskom prvenstvu na ostrvu Rodos, gde je učesće uzelo 64 reprezentacije. Kasnije 2013. godine učestvovao sam na Evropskom prvenstvu u Portugalu. Neopisivo iskustvo, prilika da vidim i pucam u društvu sa svim svetskim i evropskim šampionima, kao sto su Ljubiša Momčilović, Adam Tik, Erik Graufel, Džeri Mikulek, Tod Džeret i drugih.\n                "]), " ", _h('div', {
+	    staticClass: "btn__wrap btn__wrap--center"
+	  }, [_h('router-link', {
+	    staticClass: "btn btn--primary",
+	    attrs: {
+	      "tag": "a",
+	      "to": "/biography",
+	      "data-text": "pročitaj više"
+	    }
+	  }, [_h('span', {
+	    staticClass: "btn__overlay"
+	  }), " ", _h('span', {
+	    staticClass: "btn__text"
+	  }, ["pročitaj više"])])])])])])])
+	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', {
 	    staticClass: "about__image"
 	  }, [_h('img', {
 	    staticClass: "lazyload",
@@ -35264,11 +35313,7 @@
 	      "data-src": "assets/img/dejan_vertical2.jpg",
 	      "alt": "Dejan Vukojević | Instruktor"
 	    }
-	  })]), " ", _h('div', {
-	    staticClass: "about__description"
-	  }, [_h('div', {
-	    staticClass: "about__description__wrapper"
-	  }, [_h('p', ["Moj kontakt sa oružjem u nekom profesionalnom obliku počinje kada sam 1999. godine otišao u Vojnu školu. Kasnije po završetku Vojne škole u profesionalnoj službi, koja uspešno traje već 16 godina, susretao sam se sa skoro svim vrstama oružja. Međutim, najveću pažnju mi je privukao pištolj. U prvom periodu u službi, bio sam u prilici da se godinama bavim streljaštvom, gde su rezultati koje sam postigao 2010. godine, treće mesto, 2011. prvo mesto na nivou Vojske Srbije. Takođe te 2011. godine proglašen sam za sportistu Vojske Srbije i sportistu grada Požarevca. Takođe od 2007. godine, aktivno se bavim instruktorskim radom i pripreme ekipa za razna streljačka takmičenja u Vojsci Srbije, koja su rezultirala prvim mestom ekipno na takmičenjima nivoa Vojske Srbije. Negde 2005. godine, na poziv predsednika i glavnog instruktora kluba za praktično streljaštvo „GROM“ iz Požarevaca, gospodina Željka Vujčića, počinjem da se aktivno bavim praktičnim streljaštvom, gde nalazim najbližu orijentaciju u svetu streljaštva. Najbolji rezultati koje sam postigao u IPSC takmičenjima su prvak države u disciplini „produkcija“, takođe iste godine postajemo i timski prvaci države u disciplini „produkcija“.\n                    "]), " ", _h('p', ["Paralelno sa individualnim uspehom svo vreme gradim i definišem i instruktorski rad, koji je u značajnoj meri pomogao timu da uspe u ostvarivanju ovih rezultata. 2010. godine, pozvan sam od strane gospodina Petra Pantića u nacionalni tim (reprezentaciju Srbije), gde i dan danas nastupam. Prvo moje iskustvo u reprezentaciji Srbije bilo je Evropsko prvenstvo u bazi SAJ-a 2009. godine da bi bih 2011. godine učestvovao na Svetskom prvenstvu na ostrvu Rodos, gde je učesće uzelo 64 reprezentacije. Kasnije 2013. godine učestvovao sam na Evropskom prvenstvu u Portugalu. Neopisivo iskustvo, prilika da vidim i pucam u društvu sa svim svetskim i evropskim šampionima, kao sto su Ljubiša Momčilović, Adam Tik, Erik Graufel, Džeri Mikulek, Tod Džeret i drugih.\n                    "]), " ", _h('p', ["\n                    Iskustva stečena na ovim takmičenjima, stalno prenosim na moje prijatelje i moj tim KPS GROM Požarevac. U svojoj pucačkoj karijeri učestvovao sam na raznim evropskim takmičenjima, GECO Open Mađarska, Extream Open u Češkoj republici, Duklej Crna Gora, Delta Open Srbija itd. Paralelno sa gore navedenim aktivnostima, uspešno vodim četvoročlanu ekipu, članova KPS Grom, koji posle temeljne i kompleksne obuke počinju da nastupaju u IPSC ligi Srbije.\n                "])])])])])
+	  })])
 	}]}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -35368,6 +35413,8 @@
 	//
 	//
 	//
+	//
+	//
 	"use strict";
 
 /***/ },
@@ -35377,7 +35424,12 @@
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('section', {
 	    staticClass: "story"
-	  }, [_h('h3', {
+	  }, [_h('div', {
+	    staticClass: "story__background-animation",
+	    attrs: {
+	      "id": "animate"
+	    }
+	  }), " ", _h('h3', {
 	    staticClass: "story__subheading"
 	  }, ["Tri stuba obuke"]), " ", _h('h1', {
 	    staticClass: "story__heading"
@@ -35517,7 +35569,7 @@
 	    staticClass: "lazyload",
 	    attrs: {
 	      "data-src": "assets/img/holsters.jpg",
-	      "alt": "Holsteri"
+	      "alt": "Ghost Holsters"
 	    }
 	  }), " ", _h('span', {
 	    staticClass: "equipment__link"
@@ -35530,7 +35582,7 @@
 	    staticClass: "lazyload",
 	    attrs: {
 	      "data-src": "assets/img/pouch.jpg",
-	      "alt": "Nosači okvira"
+	      "alt": "Ghost Pouch"
 	    }
 	  }), " ", _h('span', {
 	    staticClass: "equipment__link"
@@ -35543,7 +35595,7 @@
 	    staticClass: "lazyload",
 	    attrs: {
 	      "data-src": "assets/img/wear.jpg",
-	      "alt": "Odeća i ostala oprema"
+	      "alt": "Ghost Wear"
 	    }
 	  }), " ", _h('span', {
 	    staticClass: "equipment__link"
@@ -35556,7 +35608,7 @@
 	    staticClass: "lazyload",
 	    attrs: {
 	      "data-src": "assets/img/accesories.jpg",
-	      "alt": "Dodaci"
+	      "alt": "Ghost Accessories"
 	    }
 	  }), " ", _h('span', {
 	    staticClass: "equipment__link"
@@ -35692,6 +35744,31 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	"use strict";
 
 /***/ },
@@ -35707,7 +35784,7 @@
 	    staticClass: "gallery"
 	  }, [_h('h4', {
 	    staticClass: "gallery__subheading"
-	  }, ["Slike obuka i druženja"]), " ", _h('h1', {
+	  }, ["Slike sa obuka i druženja"]), " ", _h('h1', {
 	    staticClass: "gallery__heading"
 	  }, ["Galerija"]), " ", _h('div', {
 	    staticClass: "gallery__wrapper"
@@ -35718,28 +35795,28 @@
 	  }, [_h('img', {
 	    staticClass: "gallery__item__img lazyload",
 	    attrs: {
-	      "data-src": "assets/img/gallery_item1.jpg",
-	      "alt": ""
+	      "data-src": "assets/img/gallery/gallery_item1.jpg",
+	      "alt": "Demonstracija na obuci"
 	    }
 	  }), " ", _h('div', {
 	    staticClass: "gallery__item__title"
 	  }, [_h('h4', {
 	    staticClass: "gallery__item__title__heading"
-	  }, ["Naslov slike"]), " ", _h('h4', ["Opisss"])])])]), " ", _h('div', {
+	  }, ["Prezentacija praktičnog pucanja"])])])]), " ", _h('div', {
 	    staticClass: "gallery__item"
 	  }, [_h('div', {
 	    staticClass: "gallery__item__wrapper"
 	  }, [_h('img', {
 	    staticClass: "gallery__item__img lazyload",
 	    attrs: {
-	      "data-src": "assets/img/gallery_item2.jpg",
-	      "alt": ""
+	      "data-src": "assets/img/gallery/gallery_item2.jpg",
+	      "alt": "Kretanje"
 	    }
 	  }), " ", _h('div', {
 	    staticClass: "gallery__item__title"
 	  }, [_h('h4', {
 	    staticClass: "gallery__item__title__heading"
-	  }, ["Naslov slike"]), " ", _h('h4', ["Opisss"])])])]), " ", _h('div', {
+	  }, ["Demonstracija pucanja u kretanju"])])])]), " ", _h('div', {
 	    staticClass: "gallery__item"
 	  }, [_h('div', {
 	    staticClass: "gallery__item__wrapper"
@@ -35747,11 +35824,11 @@
 	    staticClass: "gallery__item__title"
 	  }, [_h('h4', {
 	    staticClass: "gallery__item__title__heading"
-	  }, ["Naslov slike"]), " ", _h('h4', ["Opisss"])]), " ", _h('img', {
+	  }, ["Međunarodni seminar - Crna Gora"])]), " ", _h('img', {
 	    staticClass: "gallery__item__img lazyload",
 	    attrs: {
-	      "data-src": "assets/img/gallery_item3.jpg",
-	      "alt": ""
+	      "data-src": "assets/img/gallery/gallery_item3.jpg",
+	      "alt": "Fotografija sa obuke u Crnoj Gori"
 	    }
 	  })])]), " ", _h('div', {
 	    staticClass: "gallery__item"
@@ -35760,56 +35837,112 @@
 	  }, [_h('img', {
 	    staticClass: "gallery__item__img lazyload",
 	    attrs: {
-	      "data-src": "assets/img/gallery_item4.jpg",
-	      "alt": ""
+	      "data-src": "assets/img/gallery/gallery_item4.jpg",
+	      "alt": "Jerry Miculek"
 	    }
 	  }), " ", _h('div', {
 	    staticClass: "gallery__item__title"
 	  }, [_h('h4', {
 	    staticClass: "gallery__item__title__heading"
-	  }, ["Naslov slike"]), " ", _h('h4', ["Opisss"])])])]), " ", _h('div', {
+	  }, ["Fotografija sa Jerry Miculek-om"])])])]), " ", _h('div', {
 	    staticClass: "gallery__item"
 	  }, [_h('div', {
 	    staticClass: "gallery__item__wrapper"
 	  }, [_h('img', {
 	    staticClass: "gallery__item__img lazyload",
 	    attrs: {
-	      "data-src": "assets/img/gallery_item5.jpg",
-	      "alt": ""
+	      "data-src": "assets/img/gallery/gallery_item5.jpg",
+	      "alt": "Brifing"
 	    }
 	  }), " ", _h('div', {
 	    staticClass: "gallery__item__title"
 	  }, [_h('h4', {
 	    staticClass: "gallery__item__title__heading"
-	  }, ["Naslov slike"]), " ", _h('h4', ["Opisss"])])])]), " ", _h('div', {
+	  }, ["Brifing pred početak obuke"])])])]), " ", _h('div', {
 	    staticClass: "gallery__item"
 	  }, [_h('div', {
 	    staticClass: "gallery__item__wrapper"
 	  }, [_h('img', {
 	    staticClass: "gallery__item__img lazyload",
 	    attrs: {
-	      "data-src": "assets/img/gallery_item6.jpg",
-	      "alt": ""
+	      "data-src": "assets/img/gallery/gallery_item6.jpg",
+	      "alt": "Rodos 2011"
 	    }
 	  }), " ", _h('div', {
 	    staticClass: "gallery__item__title"
 	  }, [_h('h4', {
 	    staticClass: "gallery__item__title__heading"
-	  }, ["Naslov slike"]), " ", _h('h4', ["Opisss"])])])]), " ", _h('div', {
+	  }, ["Svetsko prventstvo - Rodos"])])])]), " ", _h('div', {
 	    staticClass: "gallery__item"
 	  }, [_h('div', {
 	    staticClass: "gallery__item__wrapper"
 	  }, [_h('img', {
 	    staticClass: "gallery__item__img lazyload",
 	    attrs: {
-	      "data-src": "assets/img/news_left_811x540.jpg",
-	      "alt": ""
+	      "data-src": "assets/img/gallery/gallery_item7.jpg",
+	      "alt": "Reprezentacija u Mađarskoj"
 	    }
 	  }), " ", _h('div', {
 	    staticClass: "gallery__item__title"
 	  }, [_h('h4', {
 	    staticClass: "gallery__item__title__heading"
-	  }, ["Naslov slike"]), " ", _h('h4', ["Opisss"])])])])])])])
+	  }, ["Reprezenracija Srbije - Mađarska 2016"])])])]), " ", _h('div', {
+	    staticClass: "gallery__item"
+	  }, [_h('div', {
+	    staticClass: "gallery__item__wrapper"
+	  }, [_h('img', {
+	    staticClass: "gallery__item__img lazyload",
+	    attrs: {
+	      "data-src": "assets/img/gallery/gallery_item8.jpg",
+	      "alt": "Slika sa svetskog prventstva"
+	    }
+	  }), " ", _h('div', {
+	    staticClass: "gallery__item__title"
+	  }, [_h('h4', {
+	    staticClass: "gallery__item__title__heading"
+	  }, ["Slika sa Rodosa 2011"])])])]), " ", _h('div', {
+	    staticClass: "gallery__item"
+	  }, [_h('div', {
+	    staticClass: "gallery__item__wrapper"
+	  }, [_h('img', {
+	    staticClass: "gallery__item__img lazyload",
+	    attrs: {
+	      "data-src": "assets/img/gallery/gallery_item9.jpg",
+	      "alt": "Demonstracija na obuci"
+	    }
+	  }), " ", _h('div', {
+	    staticClass: "gallery__item__title"
+	  }, [_h('h4', {
+	    staticClass: "gallery__item__title__heading"
+	  }, ["Demonstracija potezanja i nišanjenja"])])])]), " ", _h('div', {
+	    staticClass: "gallery__item"
+	  }, [_h('div', {
+	    staticClass: "gallery__item__wrapper"
+	  }, [_h('img', {
+	    staticClass: "gallery__item__img lazyload",
+	    attrs: {
+	      "data-src": "assets/img/gallery/gallery_item10.jpg",
+	      "alt": "Rob Leatham Rodos 2011"
+	    }
+	  }), " ", _h('div', {
+	    staticClass: "gallery__item__title"
+	  }, [_h('h4', {
+	    staticClass: "gallery__item__title__heading"
+	  }, ["Slika sa Rob Leatham-om"])])])]), " ", _h('div', {
+	    staticClass: "gallery__item"
+	  }, [_h('div', {
+	    staticClass: "gallery__item__wrapper"
+	  }, [_h('img', {
+	    staticClass: "gallery__item__img lazyload",
+	    attrs: {
+	      "data-src": "assets/img/gallery/gallery_item11.jpg",
+	      "alt": "Demonstracija brzog potezanja"
+	    }
+	  }), " ", _h('div', {
+	    staticClass: "gallery__item__title"
+	  }, [_h('h4', {
+	    staticClass: "gallery__item__title__heading"
+	  }, ["Demonstracije brzog potezanja"])])])])])])])
 	}]}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -36288,6 +36421,7 @@
 	//
 	//
 	//
+	//
 	
 	exports.default = {
 	    components: {
@@ -36302,9 +36436,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('section', {
+	  return _h('div', [_h('app-header'), " ", _h('section', {
 	    staticClass: "training"
-	  }, [_h('app-header'), " ", _vm._m(0), " ", _vm._m(1), " ", _h('app-footer')])
+	  }, [_vm._m(0), " ", _vm._m(1), " ", _h('app-footer')])])
 	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('div', {
 	    staticClass: "training__img"
@@ -36455,6 +36589,149 @@
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(163)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(164)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\Nemanja\\Desktop\\Dejan site\\app\\assets\\js\\Biografija.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-0fb44abb", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-0fb44abb", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] Biografija.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _Header = __webpack_require__(126);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	var _Footer = __webpack_require__(152);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	
+	exports.default = {
+	    components: {
+	        "app-header": _Header2.default,
+	        "app-footer": _Footer2.default
+	    }
+	};
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', [_h('app-header'), " ", _vm._m(0), " ", _h('app-footer')])
+	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', {
+	    staticClass: "about-extended"
+	  }, [_h('div', {
+	    staticClass: "about-extended__img"
+	  }, [_h('img', {
+	    staticClass: "parallax",
+	    attrs: {
+	      "src": "assets/img/about_extended.jpg",
+	      "alt": "Dejan Vukojević - Rodos 2011"
+	    }
+	  })]), " ", _h('div', {
+	    staticClass: "about-extended__description"
+	  }, [_h('h2', {
+	    staticClass: "about-extended__description__subheading"
+	  }, ["Iskustvo i uspesi"]), " ", _h('h1', {
+	    staticClass: "about-extended__description__heading"
+	  }, ["Biografija"]), " ", _h('p', {
+	    staticClass: "about-extended__description__text"
+	  }, ["\n                Moja kontakt sa oružjem u nekom profesionalnom obliku počinje kada sam 1999. godine otisao u Vojnu Školu. Kasnije po završetku Vojne Škole u profesionalnoj službi,\n                koja uspešno traje već 16 godina, susretao sam se sa skoro svim vrstama oružja. Međutim, najveću pažnju mi je privukao pistolj. U prvom periodu u službi bio sam u prilici\n                da se godinama bavim streljaštvom, gde su rezultati koje sam postigao 2010, godine treće mesto, 2011. prvo mesto na nivou Vojske Srbije. Takođe te 2011. godine proglašen sam za sportistu Vojske Srbije\n                i sportistu Grada Pošarevca. Takođe od 2007. godine, aktivno se bavim instruktorskim radom i pripreme ekipa za razna streljačka takmičenja u Vojsci Srbije, koja su rezultirala prvim mestom ekipno na takmičenjima nivoa Vojske Srbije.\n            "])]), " ", _h('div', {
+	    staticClass: "about-extended__description about-extended__description--left"
+	  }, [_h('p', {
+	    staticClass: "about-extended__description__text"
+	  }, ["\n                Negde 2005. godine, na poziv  Predsednika i Glavnog instruktora Kluba za praktično streljastvo „GROM“ Požarevac, gospodina Željka Vujčića, počinjem da se aktivno bavim Praktičnim streljaštvom, gde nalazim najbližu orijentaciju u svetu streljaštva.\n                Početak obuke  baziran je na fundamentu novih koncepata koje je kreirao KPS GROM, kasnije  programu IDPA, IPSC i drugih oblika obuke. 2006. godine počinjem da se profesionalno bavim IPSC-om, gde egzistiram i dan danas. Najbolji rezultati koje sam\n                postigao u IPSC takmičenjima su Prvak države u Disciplini „Produkcija“, takodje iste godine postajemo i timski prvaci drzave u disciplini „Produkcija“. Paralelno sa idividualnim uspehom sve to vreme gradim i gefinišem i instruktorski rad, koji je u\n                značajnoj meri pomogao timu da uspe u ostvarivanju ovih rezultata. 2010. godine, pozvan sam od strane gospodina Petra Pantića u nacionalni tim (Reprezentaciju Srbije), gde i dan danas nastupam. Prvo moje iskustvo u Reprezentaciji Srbije\n                bilo je ( saj 2009. Evropsko prvenstvo ) 2011. godine, na Svetskom prvenstvu na ostrvu Rodos, gde je učesće uzelo 64 reprezentacije. Kasnije 2013. godine učestvovao sam na Evropskom prvenstvu u Portugalu. Neopisivo iskustvo, prilika da vidim i\n                pucam u društvu sa svim Svetskim i Evropskim šampionima, kao sto su Ljubiša Momčilović, Adam Tic, Erik Graufel, Dzeri Mikulek, Tod Dzeret i drugi.\n                Iskustva stečena na ovim takmičenjima,  stalno prenosim na moje prijatelje i moj tim KPS GROM Požarevac. U svojoj pucačkoj karijeri učestvovao sam na raznim evropskim takmičenjima, GECO open Mađarska, Extrem open, Češka Republika, Duklej Crna Gora, Dellta Open Srbija itd.....\n            "])])])
+	}]}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-0fb44abb", module.exports)
+	  }
+	}
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -36467,7 +36744,7 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	__webpack_require__(163);
+	__webpack_require__(166);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -36512,7 +36789,7 @@
 	exports.default = Map;
 
 /***/ },
-/* 163 */
+/* 166 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -36630,7 +36907,7 @@
 	})(jQuery, window, document);
 
 /***/ },
-/* 164 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36641,45 +36918,1578 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _jquery = __webpack_require__(5);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	__webpack_require__(168);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var Menu = function () {
-	    function Menu() {
-	        _classCallCheck(this, Menu);
+	var Particles = function () {
+	    function Particles(selector) {
+	        _classCallCheck(this, Particles);
 	
-	        this.button = (0, _jquery2.default)(".main-header__nav__button__menubar");
-	        this.nav = (0, _jquery2.default)(".main-header__nav");
-	        this.controls = (0, _jquery2.default)(".main-header__nav__controls");
-	        this.label = (0, _jquery2.default)(".main-header__nav__label");
-	        this.lines = (0, _jquery2.default)(".main-header__nav__button__line");
-	        this.menuToggle();
+	        this.selector = selector;
+	        this.config = "assets/js/vendors/config/particles_config.json";
+	        this.animate();
 	    }
 	
-	    _createClass(Menu, [{
-	        key: "menuToggle",
-	        value: function menuToggle() {
-	            var _this = this;
-	
-	            this.button.click(function (e) {
-	                e.preventDefault();
-	                _this.nav.toggleClass("main-header__nav--active");
-	                _this.controls.toggleClass("main-header__nav__controls--active");
-	                _this.label.toggleClass("main-header__nav__label--active");
-	                _this.lines.toggleClass("main-header__nav__button__line--active");
+	    _createClass(Particles, [{
+	        key: "animate",
+	        value: function animate() {
+	            particlesJS.load(this.selector, this.config, function () {
+	                console.log("Particles loaded");
 	            });
 	        }
 	    }]);
 	
-	    return Menu;
+	    return Particles;
 	}();
 	
-	exports.default = Menu;
+	exports.default = Particles;
+
+/***/ },
+/* 168 */
+/***/ function(module, exports) {
+
+	/* -----------------------------------------------
+	/* Author : Vincent Garreau  - vincentgarreau.com
+	/* MIT license: http://opensource.org/licenses/MIT
+	/* Demo / Generator : vincentgarreau.com/particles.js
+	/* GitHub : github.com/VincentGarreau/particles.js
+	/* How to use? : Check the GitHub README
+	/* v2.0.0
+	/* ----------------------------------------------- */
+	
+	var pJS = function(tag_id, params){
+	
+	  var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
+	
+	  /* particles.js variables with default values */
+	  this.pJS = {
+	    canvas: {
+	      el: canvas_el,
+	      w: canvas_el.offsetWidth,
+	      h: canvas_el.offsetHeight
+	    },
+	    particles: {
+	      number: {
+	        value: 400,
+	        density: {
+	          enable: true,
+	          value_area: 800
+	        }
+	      },
+	      color: {
+	        value: '#fff'
+	      },
+	      shape: {
+	        type: 'circle',
+	        stroke: {
+	          width: 0,
+	          color: '#ff0000'
+	        },
+	        polygon: {
+	          nb_sides: 5
+	        },
+	        image: {
+	          src: '',
+	          width: 100,
+	          height: 100
+	        }
+	      },
+	      opacity: {
+	        value: 1,
+	        random: false,
+	        anim: {
+	          enable: false,
+	          speed: 2,
+	          opacity_min: 0,
+	          sync: false
+	        }
+	      },
+	      size: {
+	        value: 20,
+	        random: false,
+	        anim: {
+	          enable: false,
+	          speed: 20,
+	          size_min: 0,
+	          sync: false
+	        }
+	      },
+	      line_linked: {
+	        enable: true,
+	        distance: 100,
+	        color: '#fff',
+	        opacity: 1,
+	        width: 1
+	      },
+	      move: {
+	        enable: true,
+	        speed: 2,
+	        direction: 'none',
+	        random: false,
+	        straight: false,
+	        out_mode: 'out',
+	        bounce: false,
+	        attract: {
+	          enable: false,
+	          rotateX: 3000,
+	          rotateY: 3000
+	        }
+	      },
+	      array: []
+	    },
+	    interactivity: {
+	      detect_on: 'canvas',
+	      events: {
+	        onhover: {
+	          enable: true,
+	          mode: 'grab'
+	        },
+	        onclick: {
+	          enable: true,
+	          mode: 'push'
+	        },
+	        resize: true
+	      },
+	      modes: {
+	        grab:{
+	          distance: 100,
+	          line_linked:{
+	            opacity: 1
+	          }
+	        },
+	        bubble:{
+	          distance: 200,
+	          size: 80,
+	          duration: 0.4
+	        },
+	        repulse:{
+	          distance: 200,
+	          duration: 0.4
+	        },
+	        push:{
+	          particles_nb: 4
+	        },
+	        remove:{
+	          particles_nb: 2
+	        }
+	      },
+	      mouse:{}
+	    },
+	    retina_detect: false,
+	    fn: {
+	      interact: {},
+	      modes: {},
+	      vendors:{}
+	    },
+	    tmp: {}
+	  };
+	
+	  var pJS = this.pJS;
+	
+	  /* params settings */
+	  if(params){
+	    Object.deepExtend(pJS, params);
+	  }
+	
+	  pJS.tmp.obj = {
+	    size_value: pJS.particles.size.value,
+	    size_anim_speed: pJS.particles.size.anim.speed,
+	    move_speed: pJS.particles.move.speed,
+	    line_linked_distance: pJS.particles.line_linked.distance,
+	    line_linked_width: pJS.particles.line_linked.width,
+	    mode_grab_distance: pJS.interactivity.modes.grab.distance,
+	    mode_bubble_distance: pJS.interactivity.modes.bubble.distance,
+	    mode_bubble_size: pJS.interactivity.modes.bubble.size,
+	    mode_repulse_distance: pJS.interactivity.modes.repulse.distance
+	  };
+	
+	
+	  pJS.fn.retinaInit = function(){
+	
+	    if(pJS.retina_detect && window.devicePixelRatio > 1){
+	      pJS.canvas.pxratio = window.devicePixelRatio; 
+	      pJS.tmp.retina = true;
+	    } 
+	    else{
+	      pJS.canvas.pxratio = 1;
+	      pJS.tmp.retina = false;
+	    }
+	
+	    pJS.canvas.w = pJS.canvas.el.offsetWidth * pJS.canvas.pxratio;
+	    pJS.canvas.h = pJS.canvas.el.offsetHeight * pJS.canvas.pxratio;
+	
+	    pJS.particles.size.value = pJS.tmp.obj.size_value * pJS.canvas.pxratio;
+	    pJS.particles.size.anim.speed = pJS.tmp.obj.size_anim_speed * pJS.canvas.pxratio;
+	    pJS.particles.move.speed = pJS.tmp.obj.move_speed * pJS.canvas.pxratio;
+	    pJS.particles.line_linked.distance = pJS.tmp.obj.line_linked_distance * pJS.canvas.pxratio;
+	    pJS.interactivity.modes.grab.distance = pJS.tmp.obj.mode_grab_distance * pJS.canvas.pxratio;
+	    pJS.interactivity.modes.bubble.distance = pJS.tmp.obj.mode_bubble_distance * pJS.canvas.pxratio;
+	    pJS.particles.line_linked.width = pJS.tmp.obj.line_linked_width * pJS.canvas.pxratio;
+	    pJS.interactivity.modes.bubble.size = pJS.tmp.obj.mode_bubble_size * pJS.canvas.pxratio;
+	    pJS.interactivity.modes.repulse.distance = pJS.tmp.obj.mode_repulse_distance * pJS.canvas.pxratio;
+	
+	  };
+	
+	
+	
+	  /* ---------- pJS functions - canvas ------------ */
+	
+	  pJS.fn.canvasInit = function(){
+	    pJS.canvas.ctx = pJS.canvas.el.getContext('2d');
+	  };
+	
+	  pJS.fn.canvasSize = function(){
+	
+	    pJS.canvas.el.width = pJS.canvas.w;
+	    pJS.canvas.el.height = pJS.canvas.h;
+	
+	    if(pJS && pJS.interactivity.events.resize){
+	
+	      window.addEventListener('resize', function(){
+	
+	          pJS.canvas.w = pJS.canvas.el.offsetWidth;
+	          pJS.canvas.h = pJS.canvas.el.offsetHeight;
+	
+	          /* resize canvas */
+	          if(pJS.tmp.retina){
+	            pJS.canvas.w *= pJS.canvas.pxratio;
+	            pJS.canvas.h *= pJS.canvas.pxratio;
+	          }
+	
+	          pJS.canvas.el.width = pJS.canvas.w;
+	          pJS.canvas.el.height = pJS.canvas.h;
+	
+	          /* repaint canvas on anim disabled */
+	          if(!pJS.particles.move.enable){
+	            pJS.fn.particlesEmpty();
+	            pJS.fn.particlesCreate();
+	            pJS.fn.particlesDraw();
+	            pJS.fn.vendors.densityAutoParticles();
+	          }
+	
+	        /* density particles enabled */
+	        pJS.fn.vendors.densityAutoParticles();
+	
+	      });
+	
+	    }
+	
+	  };
+	
+	
+	  pJS.fn.canvasPaint = function(){
+	    pJS.canvas.ctx.fillRect(0, 0, pJS.canvas.w, pJS.canvas.h);
+	  };
+	
+	  pJS.fn.canvasClear = function(){
+	    pJS.canvas.ctx.clearRect(0, 0, pJS.canvas.w, pJS.canvas.h);
+	  };
+	
+	
+	  /* --------- pJS functions - particles ----------- */
+	
+	  pJS.fn.particle = function(color, opacity, position){
+	
+	    /* size */
+	    this.radius = (pJS.particles.size.random ? Math.random() : 1) * pJS.particles.size.value;
+	    if(pJS.particles.size.anim.enable){
+	      this.size_status = false;
+	      this.vs = pJS.particles.size.anim.speed / 100;
+	      if(!pJS.particles.size.anim.sync){
+	        this.vs = this.vs * Math.random();
+	      }
+	    }
+	
+	    /* position */
+	    this.x = position ? position.x : Math.random() * pJS.canvas.w;
+	    this.y = position ? position.y : Math.random() * pJS.canvas.h;
+	
+	    /* check position  - into the canvas */
+	    if(this.x > pJS.canvas.w - this.radius*2) this.x = this.x - this.radius;
+	    else if(this.x < this.radius*2) this.x = this.x + this.radius;
+	    if(this.y > pJS.canvas.h - this.radius*2) this.y = this.y - this.radius;
+	    else if(this.y < this.radius*2) this.y = this.y + this.radius;
+	
+	    /* check position - avoid overlap */
+	    if(pJS.particles.move.bounce){
+	      pJS.fn.vendors.checkOverlap(this, position);
+	    }
+	
+	    /* color */
+	    this.color = {};
+	    if(typeof(color.value) == 'object'){
+	
+	      if(color.value instanceof Array){
+	        var color_selected = color.value[Math.floor(Math.random() * pJS.particles.color.value.length)];
+	        this.color.rgb = hexToRgb(color_selected);
+	      }else{
+	        if(color.value.r != undefined && color.value.g != undefined && color.value.b != undefined){
+	          this.color.rgb = {
+	            r: color.value.r,
+	            g: color.value.g,
+	            b: color.value.b
+	          }
+	        }
+	        if(color.value.h != undefined && color.value.s != undefined && color.value.l != undefined){
+	          this.color.hsl = {
+	            h: color.value.h,
+	            s: color.value.s,
+	            l: color.value.l
+	          }
+	        }
+	      }
+	
+	    }
+	    else if(color.value == 'random'){
+	      this.color.rgb = {
+	        r: (Math.floor(Math.random() * (255 - 0 + 1)) + 0),
+	        g: (Math.floor(Math.random() * (255 - 0 + 1)) + 0),
+	        b: (Math.floor(Math.random() * (255 - 0 + 1)) + 0)
+	      }
+	    }
+	    else if(typeof(color.value) == 'string'){
+	      this.color = color;
+	      this.color.rgb = hexToRgb(this.color.value);
+	    }
+	
+	    /* opacity */
+	    this.opacity = (pJS.particles.opacity.random ? Math.random() : 1) * pJS.particles.opacity.value;
+	    if(pJS.particles.opacity.anim.enable){
+	      this.opacity_status = false;
+	      this.vo = pJS.particles.opacity.anim.speed / 100;
+	      if(!pJS.particles.opacity.anim.sync){
+	        this.vo = this.vo * Math.random();
+	      }
+	    }
+	
+	    /* animation - velocity for speed */
+	    var velbase = {}
+	    switch(pJS.particles.move.direction){
+	      case 'top':
+	        velbase = { x:0, y:-1 };
+	      break;
+	      case 'top-right':
+	        velbase = { x:0.5, y:-0.5 };
+	      break;
+	      case 'right':
+	        velbase = { x:1, y:-0 };
+	      break;
+	      case 'bottom-right':
+	        velbase = { x:0.5, y:0.5 };
+	      break;
+	      case 'bottom':
+	        velbase = { x:0, y:1 };
+	      break;
+	      case 'bottom-left':
+	        velbase = { x:-0.5, y:1 };
+	      break;
+	      case 'left':
+	        velbase = { x:-1, y:0 };
+	      break;
+	      case 'top-left':
+	        velbase = { x:-0.5, y:-0.5 };
+	      break;
+	      default:
+	        velbase = { x:0, y:0 };
+	      break;
+	    }
+	
+	    if(pJS.particles.move.straight){
+	      this.vx = velbase.x;
+	      this.vy = velbase.y;
+	      if(pJS.particles.move.random){
+	        this.vx = this.vx * (Math.random());
+	        this.vy = this.vy * (Math.random());
+	      }
+	    }else{
+	      this.vx = velbase.x + Math.random()-0.5;
+	      this.vy = velbase.y + Math.random()-0.5;
+	    }
+	
+	    // var theta = 2.0 * Math.PI * Math.random();
+	    // this.vx = Math.cos(theta);
+	    // this.vy = Math.sin(theta);
+	
+	    this.vx_i = this.vx;
+	    this.vy_i = this.vy;
+	
+	    
+	
+	    /* if shape is image */
+	
+	    var shape_type = pJS.particles.shape.type;
+	    if(typeof(shape_type) == 'object'){
+	      if(shape_type instanceof Array){
+	        var shape_selected = shape_type[Math.floor(Math.random() * shape_type.length)];
+	        this.shape = shape_selected;
+	      }
+	    }else{
+	      this.shape = shape_type;
+	    }
+	
+	    if(this.shape == 'image'){
+	      var sh = pJS.particles.shape;
+	      this.img = {
+	        src: sh.image.src,
+	        ratio: sh.image.width / sh.image.height
+	      }
+	      if(!this.img.ratio) this.img.ratio = 1;
+	      if(pJS.tmp.img_type == 'svg' && pJS.tmp.source_svg != undefined){
+	        pJS.fn.vendors.createSvgImg(this);
+	        if(pJS.tmp.pushing){
+	          this.img.loaded = false;
+	        }
+	      }
+	    }
+	
+	    
+	
+	  };
+	
+	
+	  pJS.fn.particle.prototype.draw = function() {
+	
+	    var p = this;
+	
+	    if(p.radius_bubble != undefined){
+	      var radius = p.radius_bubble; 
+	    }else{
+	      var radius = p.radius;
+	    }
+	
+	    if(p.opacity_bubble != undefined){
+	      var opacity = p.opacity_bubble;
+	    }else{
+	      var opacity = p.opacity;
+	    }
+	
+	    if(p.color.rgb){
+	      var color_value = 'rgba('+p.color.rgb.r+','+p.color.rgb.g+','+p.color.rgb.b+','+opacity+')';
+	    }else{
+	      var color_value = 'hsla('+p.color.hsl.h+','+p.color.hsl.s+'%,'+p.color.hsl.l+'%,'+opacity+')';
+	    }
+	
+	    pJS.canvas.ctx.fillStyle = color_value;
+	    pJS.canvas.ctx.beginPath();
+	
+	    switch(p.shape){
+	
+	      case 'circle':
+	        pJS.canvas.ctx.arc(p.x, p.y, radius, 0, Math.PI * 2, false);
+	      break;
+	
+	      case 'edge':
+	        pJS.canvas.ctx.rect(p.x-radius, p.y-radius, radius*2, radius*2);
+	      break;
+	
+	      case 'triangle':
+	        pJS.fn.vendors.drawShape(pJS.canvas.ctx, p.x-radius, p.y+radius / 1.66, radius*2, 3, 2);
+	      break;
+	
+	      case 'polygon':
+	        pJS.fn.vendors.drawShape(
+	          pJS.canvas.ctx,
+	          p.x - radius / (pJS.particles.shape.polygon.nb_sides/3.5), // startX
+	          p.y - radius / (2.66/3.5), // startY
+	          radius*2.66 / (pJS.particles.shape.polygon.nb_sides/3), // sideLength
+	          pJS.particles.shape.polygon.nb_sides, // sideCountNumerator
+	          1 // sideCountDenominator
+	        );
+	      break;
+	
+	      case 'star':
+	        pJS.fn.vendors.drawShape(
+	          pJS.canvas.ctx,
+	          p.x - radius*2 / (pJS.particles.shape.polygon.nb_sides/4), // startX
+	          p.y - radius / (2*2.66/3.5), // startY
+	          radius*2*2.66 / (pJS.particles.shape.polygon.nb_sides/3), // sideLength
+	          pJS.particles.shape.polygon.nb_sides, // sideCountNumerator
+	          2 // sideCountDenominator
+	        );
+	      break;
+	
+	      case 'image':
+	
+	        function draw(){
+	          pJS.canvas.ctx.drawImage(
+	            img_obj,
+	            p.x-radius,
+	            p.y-radius,
+	            radius*2,
+	            radius*2 / p.img.ratio
+	          );
+	        }
+	
+	        if(pJS.tmp.img_type == 'svg'){
+	          var img_obj = p.img.obj;
+	        }else{
+	          var img_obj = pJS.tmp.img_obj;
+	        }
+	
+	        if(img_obj){
+	          draw();
+	        }
+	
+	      break;
+	
+	    }
+	
+	    pJS.canvas.ctx.closePath();
+	
+	    if(pJS.particles.shape.stroke.width > 0){
+	      pJS.canvas.ctx.strokeStyle = pJS.particles.shape.stroke.color;
+	      pJS.canvas.ctx.lineWidth = pJS.particles.shape.stroke.width;
+	      pJS.canvas.ctx.stroke();
+	    }
+	    
+	    pJS.canvas.ctx.fill();
+	    
+	  };
+	
+	
+	  pJS.fn.particlesCreate = function(){
+	    for(var i = 0; i < pJS.particles.number.value; i++) {
+	      pJS.particles.array.push(new pJS.fn.particle(pJS.particles.color, pJS.particles.opacity.value));
+	    }
+	  };
+	
+	  pJS.fn.particlesUpdate = function(){
+	
+	    for(var i = 0; i < pJS.particles.array.length; i++){
+	
+	      /* the particle */
+	      var p = pJS.particles.array[i];
+	
+	      // var d = ( dx = pJS.interactivity.mouse.click_pos_x - p.x ) * dx + ( dy = pJS.interactivity.mouse.click_pos_y - p.y ) * dy;
+	      // var f = -BANG_SIZE / d;
+	      // if ( d < BANG_SIZE ) {
+	      //     var t = Math.atan2( dy, dx );
+	      //     p.vx = f * Math.cos(t);
+	      //     p.vy = f * Math.sin(t);
+	      // }
+	
+	      /* move the particle */
+	      if(pJS.particles.move.enable){
+	        var ms = pJS.particles.move.speed/2;
+	        p.x += p.vx * ms;
+	        p.y += p.vy * ms;
+	      }
+	
+	      /* change opacity status */
+	      if(pJS.particles.opacity.anim.enable) {
+	        if(p.opacity_status == true) {
+	          if(p.opacity >= pJS.particles.opacity.value) p.opacity_status = false;
+	          p.opacity += p.vo;
+	        }else {
+	          if(p.opacity <= pJS.particles.opacity.anim.opacity_min) p.opacity_status = true;
+	          p.opacity -= p.vo;
+	        }
+	        if(p.opacity < 0) p.opacity = 0;
+	      }
+	
+	      /* change size */
+	      if(pJS.particles.size.anim.enable){
+	        if(p.size_status == true){
+	          if(p.radius >= pJS.particles.size.value) p.size_status = false;
+	          p.radius += p.vs;
+	        }else{
+	          if(p.radius <= pJS.particles.size.anim.size_min) p.size_status = true;
+	          p.radius -= p.vs;
+	        }
+	        if(p.radius < 0) p.radius = 0;
+	      }
+	
+	      /* change particle position if it is out of canvas */
+	      if(pJS.particles.move.out_mode == 'bounce'){
+	        var new_pos = {
+	          x_left: p.radius,
+	          x_right:  pJS.canvas.w,
+	          y_top: p.radius,
+	          y_bottom: pJS.canvas.h
+	        }
+	      }else{
+	        var new_pos = {
+	          x_left: -p.radius,
+	          x_right: pJS.canvas.w + p.radius,
+	          y_top: -p.radius,
+	          y_bottom: pJS.canvas.h + p.radius
+	        }
+	      }
+	
+	      if(p.x - p.radius > pJS.canvas.w){
+	        p.x = new_pos.x_left;
+	        p.y = Math.random() * pJS.canvas.h;
+	      }
+	      else if(p.x + p.radius < 0){
+	        p.x = new_pos.x_right;
+	        p.y = Math.random() * pJS.canvas.h;
+	      }
+	      if(p.y - p.radius > pJS.canvas.h){
+	        p.y = new_pos.y_top;
+	        p.x = Math.random() * pJS.canvas.w;
+	      }
+	      else if(p.y + p.radius < 0){
+	        p.y = new_pos.y_bottom;
+	        p.x = Math.random() * pJS.canvas.w;
+	      }
+	
+	      /* out of canvas modes */
+	      switch(pJS.particles.move.out_mode){
+	        case 'bounce':
+	          if (p.x + p.radius > pJS.canvas.w) p.vx = -p.vx;
+	          else if (p.x - p.radius < 0) p.vx = -p.vx;
+	          if (p.y + p.radius > pJS.canvas.h) p.vy = -p.vy;
+	          else if (p.y - p.radius < 0) p.vy = -p.vy;
+	        break;
+	      }
+	
+	      /* events */
+	      if(isInArray('grab', pJS.interactivity.events.onhover.mode)){
+	        pJS.fn.modes.grabParticle(p);
+	      }
+	
+	      if(isInArray('bubble', pJS.interactivity.events.onhover.mode) || isInArray('bubble', pJS.interactivity.events.onclick.mode)){
+	        pJS.fn.modes.bubbleParticle(p);
+	      }
+	
+	      if(isInArray('repulse', pJS.interactivity.events.onhover.mode) || isInArray('repulse', pJS.interactivity.events.onclick.mode)){
+	        pJS.fn.modes.repulseParticle(p);
+	      }
+	
+	      /* interaction auto between particles */
+	      if(pJS.particles.line_linked.enable || pJS.particles.move.attract.enable){
+	        for(var j = i + 1; j < pJS.particles.array.length; j++){
+	          var p2 = pJS.particles.array[j];
+	
+	          /* link particles */
+	          if(pJS.particles.line_linked.enable){
+	            pJS.fn.interact.linkParticles(p,p2);
+	          }
+	
+	          /* attract particles */
+	          if(pJS.particles.move.attract.enable){
+	            pJS.fn.interact.attractParticles(p,p2);
+	          }
+	
+	          /* bounce particles */
+	          if(pJS.particles.move.bounce){
+	            pJS.fn.interact.bounceParticles(p,p2);
+	          }
+	
+	        }
+	      }
+	
+	
+	    }
+	
+	  };
+	
+	  pJS.fn.particlesDraw = function(){
+	
+	    /* clear canvas */
+	    pJS.canvas.ctx.clearRect(0, 0, pJS.canvas.w, pJS.canvas.h);
+	
+	    /* update each particles param */
+	    pJS.fn.particlesUpdate();
+	
+	    /* draw each particle */
+	    for(var i = 0; i < pJS.particles.array.length; i++){
+	      var p = pJS.particles.array[i];
+	      p.draw();
+	    }
+	
+	  };
+	
+	  pJS.fn.particlesEmpty = function(){
+	    pJS.particles.array = [];
+	  };
+	
+	  pJS.fn.particlesRefresh = function(){
+	
+	    /* init all */
+	    cancelRequestAnimFrame(pJS.fn.checkAnimFrame);
+	    cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
+	    pJS.tmp.source_svg = undefined;
+	    pJS.tmp.img_obj = undefined;
+	    pJS.tmp.count_svg = 0;
+	    pJS.fn.particlesEmpty();
+	    pJS.fn.canvasClear();
+	    
+	    /* restart */
+	    pJS.fn.vendors.start();
+	
+	  };
+	
+	
+	  /* ---------- pJS functions - particles interaction ------------ */
+	
+	  pJS.fn.interact.linkParticles = function(p1, p2){
+	
+	    var dx = p1.x - p2.x,
+	        dy = p1.y - p2.y,
+	        dist = Math.sqrt(dx*dx + dy*dy);
+	
+	    /* draw a line between p1 and p2 if the distance between them is under the config distance */
+	    if(dist <= pJS.particles.line_linked.distance){
+	
+	      var opacity_line = pJS.particles.line_linked.opacity - (dist / (1/pJS.particles.line_linked.opacity)) / pJS.particles.line_linked.distance;
+	
+	      if(opacity_line > 0){        
+	        
+	        /* style */
+	        var color_line = pJS.particles.line_linked.color_rgb_line;
+	        pJS.canvas.ctx.strokeStyle = 'rgba('+color_line.r+','+color_line.g+','+color_line.b+','+opacity_line+')';
+	        pJS.canvas.ctx.lineWidth = pJS.particles.line_linked.width;
+	        //pJS.canvas.ctx.lineCap = 'round'; /* performance issue */
+	        
+	        /* path */
+	        pJS.canvas.ctx.beginPath();
+	        pJS.canvas.ctx.moveTo(p1.x, p1.y);
+	        pJS.canvas.ctx.lineTo(p2.x, p2.y);
+	        pJS.canvas.ctx.stroke();
+	        pJS.canvas.ctx.closePath();
+	
+	      }
+	
+	    }
+	
+	  };
+	
+	
+	  pJS.fn.interact.attractParticles  = function(p1, p2){
+	
+	    /* condensed particles */
+	    var dx = p1.x - p2.x,
+	        dy = p1.y - p2.y,
+	        dist = Math.sqrt(dx*dx + dy*dy);
+	
+	    if(dist <= pJS.particles.line_linked.distance){
+	
+	      var ax = dx/(pJS.particles.move.attract.rotateX*1000),
+	          ay = dy/(pJS.particles.move.attract.rotateY*1000);
+	
+	      p1.vx -= ax;
+	      p1.vy -= ay;
+	
+	      p2.vx += ax;
+	      p2.vy += ay;
+	
+	    }
+	    
+	
+	  }
+	
+	
+	  pJS.fn.interact.bounceParticles = function(p1, p2){
+	
+	    var dx = p1.x - p2.x,
+	        dy = p1.y - p2.y,
+	        dist = Math.sqrt(dx*dx + dy*dy),
+	        dist_p = p1.radius+p2.radius;
+	
+	    if(dist <= dist_p){
+	      p1.vx = -p1.vx;
+	      p1.vy = -p1.vy;
+	
+	      p2.vx = -p2.vx;
+	      p2.vy = -p2.vy;
+	    }
+	
+	  }
+	
+	
+	  /* ---------- pJS functions - modes events ------------ */
+	
+	  pJS.fn.modes.pushParticles = function(nb, pos){
+	
+	    pJS.tmp.pushing = true;
+	
+	    for(var i = 0; i < nb; i++){
+	      pJS.particles.array.push(
+	        new pJS.fn.particle(
+	          pJS.particles.color,
+	          pJS.particles.opacity.value,
+	          {
+	            'x': pos ? pos.pos_x : Math.random() * pJS.canvas.w,
+	            'y': pos ? pos.pos_y : Math.random() * pJS.canvas.h
+	          }
+	        )
+	      )
+	      if(i == nb-1){
+	        if(!pJS.particles.move.enable){
+	          pJS.fn.particlesDraw();
+	        }
+	        pJS.tmp.pushing = false;
+	      }
+	    }
+	
+	  };
+	
+	
+	  pJS.fn.modes.removeParticles = function(nb){
+	
+	    pJS.particles.array.splice(0, nb);
+	    if(!pJS.particles.move.enable){
+	      pJS.fn.particlesDraw();
+	    }
+	
+	  };
+	
+	
+	  pJS.fn.modes.bubbleParticle = function(p){
+	
+	    /* on hover event */
+	    if(pJS.interactivity.events.onhover.enable && isInArray('bubble', pJS.interactivity.events.onhover.mode)){
+	
+	      var dx_mouse = p.x - pJS.interactivity.mouse.pos_x,
+	          dy_mouse = p.y - pJS.interactivity.mouse.pos_y,
+	          dist_mouse = Math.sqrt(dx_mouse*dx_mouse + dy_mouse*dy_mouse),
+	          ratio = 1 - dist_mouse / pJS.interactivity.modes.bubble.distance;
+	
+	      function init(){
+	        p.opacity_bubble = p.opacity;
+	        p.radius_bubble = p.radius;
+	      }
+	
+	      /* mousemove - check ratio */
+	      if(dist_mouse <= pJS.interactivity.modes.bubble.distance){
+	
+	        if(ratio >= 0 && pJS.interactivity.status == 'mousemove'){
+	          
+	          /* size */
+	          if(pJS.interactivity.modes.bubble.size != pJS.particles.size.value){
+	
+	            if(pJS.interactivity.modes.bubble.size > pJS.particles.size.value){
+	              var size = p.radius + (pJS.interactivity.modes.bubble.size*ratio);
+	              if(size >= 0){
+	                p.radius_bubble = size;
+	              }
+	            }else{
+	              var dif = p.radius - pJS.interactivity.modes.bubble.size,
+	                  size = p.radius - (dif*ratio);
+	              if(size > 0){
+	                p.radius_bubble = size;
+	              }else{
+	                p.radius_bubble = 0;
+	              }
+	            }
+	
+	          }
+	
+	          /* opacity */
+	          if(pJS.interactivity.modes.bubble.opacity != pJS.particles.opacity.value){
+	
+	            if(pJS.interactivity.modes.bubble.opacity > pJS.particles.opacity.value){
+	              var opacity = pJS.interactivity.modes.bubble.opacity*ratio;
+	              if(opacity > p.opacity && opacity <= pJS.interactivity.modes.bubble.opacity){
+	                p.opacity_bubble = opacity;
+	              }
+	            }else{
+	              var opacity = p.opacity - (pJS.particles.opacity.value-pJS.interactivity.modes.bubble.opacity)*ratio;
+	              if(opacity < p.opacity && opacity >= pJS.interactivity.modes.bubble.opacity){
+	                p.opacity_bubble = opacity;
+	              }
+	            }
+	
+	          }
+	
+	        }
+	
+	      }else{
+	        init();
+	      }
+	
+	
+	      /* mouseleave */
+	      if(pJS.interactivity.status == 'mouseleave'){
+	        init();
+	      }
+	    
+	    }
+	
+	    /* on click event */
+	    else if(pJS.interactivity.events.onclick.enable && isInArray('bubble', pJS.interactivity.events.onclick.mode)){
+	
+	
+	      if(pJS.tmp.bubble_clicking){
+	        var dx_mouse = p.x - pJS.interactivity.mouse.click_pos_x,
+	            dy_mouse = p.y - pJS.interactivity.mouse.click_pos_y,
+	            dist_mouse = Math.sqrt(dx_mouse*dx_mouse + dy_mouse*dy_mouse),
+	            time_spent = (new Date().getTime() - pJS.interactivity.mouse.click_time)/1000;
+	
+	        if(time_spent > pJS.interactivity.modes.bubble.duration){
+	          pJS.tmp.bubble_duration_end = true;
+	        }
+	
+	        if(time_spent > pJS.interactivity.modes.bubble.duration*2){
+	          pJS.tmp.bubble_clicking = false;
+	          pJS.tmp.bubble_duration_end = false;
+	        }
+	      }
+	
+	
+	      function process(bubble_param, particles_param, p_obj_bubble, p_obj, id){
+	
+	        if(bubble_param != particles_param){
+	
+	          if(!pJS.tmp.bubble_duration_end){
+	            if(dist_mouse <= pJS.interactivity.modes.bubble.distance){
+	              if(p_obj_bubble != undefined) var obj = p_obj_bubble;
+	              else var obj = p_obj;
+	              if(obj != bubble_param){
+	                var value = p_obj - (time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration);
+	                if(id == 'size') p.radius_bubble = value;
+	                if(id == 'opacity') p.opacity_bubble = value;
+	              }
+	            }else{
+	              if(id == 'size') p.radius_bubble = undefined;
+	              if(id == 'opacity') p.opacity_bubble = undefined;
+	            }
+	          }else{
+	            if(p_obj_bubble != undefined){
+	              var value_tmp = p_obj - (time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration),
+	                  dif = bubble_param - value_tmp;
+	                  value = bubble_param + dif;
+	              if(id == 'size') p.radius_bubble = value;
+	              if(id == 'opacity') p.opacity_bubble = value;
+	            }
+	          }
+	
+	        }
+	
+	      }
+	
+	      if(pJS.tmp.bubble_clicking){
+	        /* size */
+	        process(pJS.interactivity.modes.bubble.size, pJS.particles.size.value, p.radius_bubble, p.radius, 'size');
+	        /* opacity */
+	        process(pJS.interactivity.modes.bubble.opacity, pJS.particles.opacity.value, p.opacity_bubble, p.opacity, 'opacity');
+	      }
+	
+	    }
+	
+	  };
+	
+	
+	  pJS.fn.modes.repulseParticle = function(p){
+	
+	    if(pJS.interactivity.events.onhover.enable && isInArray('repulse', pJS.interactivity.events.onhover.mode) && pJS.interactivity.status == 'mousemove') {
+	
+	      var dx_mouse = p.x - pJS.interactivity.mouse.pos_x,
+	          dy_mouse = p.y - pJS.interactivity.mouse.pos_y,
+	          dist_mouse = Math.sqrt(dx_mouse*dx_mouse + dy_mouse*dy_mouse);
+	
+	      var normVec = {x: dx_mouse/dist_mouse, y: dy_mouse/dist_mouse},
+	          repulseRadius = pJS.interactivity.modes.repulse.distance,
+	          velocity = 100,
+	          repulseFactor = clamp((1/repulseRadius)*(-1*Math.pow(dist_mouse/repulseRadius,2)+1)*repulseRadius*velocity, 0, 50);
+	      
+	      var pos = {
+	        x: p.x + normVec.x * repulseFactor,
+	        y: p.y + normVec.y * repulseFactor
+	      }
+	
+	      if(pJS.particles.move.out_mode == 'bounce'){
+	        if(pos.x - p.radius > 0 && pos.x + p.radius < pJS.canvas.w) p.x = pos.x;
+	        if(pos.y - p.radius > 0 && pos.y + p.radius < pJS.canvas.h) p.y = pos.y;
+	      }else{
+	        p.x = pos.x;
+	        p.y = pos.y;
+	      }
+	    
+	    }
+	
+	
+	    else if(pJS.interactivity.events.onclick.enable && isInArray('repulse', pJS.interactivity.events.onclick.mode)) {
+	
+	      if(!pJS.tmp.repulse_finish){
+	        pJS.tmp.repulse_count++;
+	        if(pJS.tmp.repulse_count == pJS.particles.array.length){
+	          pJS.tmp.repulse_finish = true;
+	        }
+	      }
+	
+	      if(pJS.tmp.repulse_clicking){
+	
+	        var repulseRadius = Math.pow(pJS.interactivity.modes.repulse.distance/6, 3);
+	
+	        var dx = pJS.interactivity.mouse.click_pos_x - p.x,
+	            dy = pJS.interactivity.mouse.click_pos_y - p.y,
+	            d = dx*dx + dy*dy;
+	
+	        var force = -repulseRadius / d * 1;
+	
+	        function process(){
+	
+	          var f = Math.atan2(dy,dx);
+	          p.vx = force * Math.cos(f);
+	          p.vy = force * Math.sin(f);
+	
+	          if(pJS.particles.move.out_mode == 'bounce'){
+	            var pos = {
+	              x: p.x + p.vx,
+	              y: p.y + p.vy
+	            }
+	            if (pos.x + p.radius > pJS.canvas.w) p.vx = -p.vx;
+	            else if (pos.x - p.radius < 0) p.vx = -p.vx;
+	            if (pos.y + p.radius > pJS.canvas.h) p.vy = -p.vy;
+	            else if (pos.y - p.radius < 0) p.vy = -p.vy;
+	          }
+	
+	        }
+	
+	        // default
+	        if(d <= repulseRadius){
+	          process();
+	        }
+	
+	        // bang - slow motion mode
+	        // if(!pJS.tmp.repulse_finish){
+	        //   if(d <= repulseRadius){
+	        //     process();
+	        //   }
+	        // }else{
+	        //   process();
+	        // }
+	        
+	
+	      }else{
+	
+	        if(pJS.tmp.repulse_clicking == false){
+	
+	          p.vx = p.vx_i;
+	          p.vy = p.vy_i;
+	        
+	        }
+	
+	      }
+	
+	    }
+	
+	  }
+	
+	
+	  pJS.fn.modes.grabParticle = function(p){
+	
+	    if(pJS.interactivity.events.onhover.enable && pJS.interactivity.status == 'mousemove'){
+	
+	      var dx_mouse = p.x - pJS.interactivity.mouse.pos_x,
+	          dy_mouse = p.y - pJS.interactivity.mouse.pos_y,
+	          dist_mouse = Math.sqrt(dx_mouse*dx_mouse + dy_mouse*dy_mouse);
+	
+	      /* draw a line between the cursor and the particle if the distance between them is under the config distance */
+	      if(dist_mouse <= pJS.interactivity.modes.grab.distance){
+	
+	        var opacity_line = pJS.interactivity.modes.grab.line_linked.opacity - (dist_mouse / (1/pJS.interactivity.modes.grab.line_linked.opacity)) / pJS.interactivity.modes.grab.distance;
+	
+	        if(opacity_line > 0){
+	
+	          /* style */
+	          var color_line = pJS.particles.line_linked.color_rgb_line;
+	          pJS.canvas.ctx.strokeStyle = 'rgba('+color_line.r+','+color_line.g+','+color_line.b+','+opacity_line+')';
+	          pJS.canvas.ctx.lineWidth = pJS.particles.line_linked.width;
+	          //pJS.canvas.ctx.lineCap = 'round'; /* performance issue */
+	          
+	          /* path */
+	          pJS.canvas.ctx.beginPath();
+	          pJS.canvas.ctx.moveTo(p.x, p.y);
+	          pJS.canvas.ctx.lineTo(pJS.interactivity.mouse.pos_x, pJS.interactivity.mouse.pos_y);
+	          pJS.canvas.ctx.stroke();
+	          pJS.canvas.ctx.closePath();
+	
+	        }
+	
+	      }
+	
+	    }
+	
+	  };
+	
+	
+	
+	  /* ---------- pJS functions - vendors ------------ */
+	
+	  pJS.fn.vendors.eventsListeners = function(){
+	
+	    /* events target element */
+	    if(pJS.interactivity.detect_on == 'window'){
+	      pJS.interactivity.el = window;
+	    }else{
+	      pJS.interactivity.el = pJS.canvas.el;
+	    }
+	
+	
+	    /* detect mouse pos - on hover / click event */
+	    if(pJS.interactivity.events.onhover.enable || pJS.interactivity.events.onclick.enable){
+	
+	      /* el on mousemove */
+	      pJS.interactivity.el.addEventListener('mousemove', function(e){
+	
+	        if(pJS.interactivity.el == window){
+	          var pos_x = e.clientX,
+	              pos_y = e.clientY;
+	        }
+	        else{
+	          var pos_x = e.offsetX || e.clientX,
+	              pos_y = e.offsetY || e.clientY;
+	        }
+	
+	        pJS.interactivity.mouse.pos_x = pos_x;
+	        pJS.interactivity.mouse.pos_y = pos_y;
+	
+	        if(pJS.tmp.retina){
+	          pJS.interactivity.mouse.pos_x *= pJS.canvas.pxratio;
+	          pJS.interactivity.mouse.pos_y *= pJS.canvas.pxratio;
+	        }
+	
+	        pJS.interactivity.status = 'mousemove';
+	
+	      });
+	
+	      /* el on onmouseleave */
+	      pJS.interactivity.el.addEventListener('mouseleave', function(e){
+	
+	        pJS.interactivity.mouse.pos_x = null;
+	        pJS.interactivity.mouse.pos_y = null;
+	        pJS.interactivity.status = 'mouseleave';
+	
+	      });
+	
+	    }
+	
+	    /* on click event */
+	    if(pJS.interactivity.events.onclick.enable){
+	
+	      pJS.interactivity.el.addEventListener('click', function(){
+	
+	        pJS.interactivity.mouse.click_pos_x = pJS.interactivity.mouse.pos_x;
+	        pJS.interactivity.mouse.click_pos_y = pJS.interactivity.mouse.pos_y;
+	        pJS.interactivity.mouse.click_time = new Date().getTime();
+	
+	        if(pJS.interactivity.events.onclick.enable){
+	
+	          switch(pJS.interactivity.events.onclick.mode){
+	
+	            case 'push':
+	              if(pJS.particles.move.enable){
+	                pJS.fn.modes.pushParticles(pJS.interactivity.modes.push.particles_nb, pJS.interactivity.mouse);
+	              }else{
+	                if(pJS.interactivity.modes.push.particles_nb == 1){
+	                  pJS.fn.modes.pushParticles(pJS.interactivity.modes.push.particles_nb, pJS.interactivity.mouse);
+	                }
+	                else if(pJS.interactivity.modes.push.particles_nb > 1){
+	                  pJS.fn.modes.pushParticles(pJS.interactivity.modes.push.particles_nb);
+	                }
+	              }
+	            break;
+	
+	            case 'remove':
+	              pJS.fn.modes.removeParticles(pJS.interactivity.modes.remove.particles_nb);
+	            break;
+	
+	            case 'bubble':
+	              pJS.tmp.bubble_clicking = true;
+	            break;
+	
+	            case 'repulse':
+	              pJS.tmp.repulse_clicking = true;
+	              pJS.tmp.repulse_count = 0;
+	              pJS.tmp.repulse_finish = false;
+	              setTimeout(function(){
+	                pJS.tmp.repulse_clicking = false;
+	              }, pJS.interactivity.modes.repulse.duration*1000)
+	            break;
+	
+	          }
+	
+	        }
+	
+	      });
+	        
+	    }
+	
+	
+	  };
+	
+	  pJS.fn.vendors.densityAutoParticles = function(){
+	
+	    if(pJS.particles.number.density.enable){
+	
+	      /* calc area */
+	      var area = pJS.canvas.el.width * pJS.canvas.el.height / 1000;
+	      if(pJS.tmp.retina){
+	        area = area/(pJS.canvas.pxratio*2);
+	      }
+	
+	      /* calc number of particles based on density area */
+	      var nb_particles = area * pJS.particles.number.value / pJS.particles.number.density.value_area;
+	
+	      /* add or remove X particles */
+	      var missing_particles = pJS.particles.array.length - nb_particles;
+	      if(missing_particles < 0) pJS.fn.modes.pushParticles(Math.abs(missing_particles));
+	      else pJS.fn.modes.removeParticles(missing_particles);
+	
+	    }
+	
+	  };
+	
+	
+	  pJS.fn.vendors.checkOverlap = function(p1, position){
+	    for(var i = 0; i < pJS.particles.array.length; i++){
+	      var p2 = pJS.particles.array[i];
+	
+	      var dx = p1.x - p2.x,
+	          dy = p1.y - p2.y,
+	          dist = Math.sqrt(dx*dx + dy*dy);
+	
+	      if(dist <= p1.radius + p2.radius){
+	        p1.x = position ? position.x : Math.random() * pJS.canvas.w;
+	        p1.y = position ? position.y : Math.random() * pJS.canvas.h;
+	        pJS.fn.vendors.checkOverlap(p1);
+	      }
+	    }
+	  };
+	
+	
+	  pJS.fn.vendors.createSvgImg = function(p){
+	
+	    /* set color to svg element */
+	    var svgXml = pJS.tmp.source_svg,
+	        rgbHex = /#([0-9A-F]{3,6})/gi,
+	        coloredSvgXml = svgXml.replace(rgbHex, function (m, r, g, b) {
+	          if(p.color.rgb){
+	            var color_value = 'rgba('+p.color.rgb.r+','+p.color.rgb.g+','+p.color.rgb.b+','+p.opacity+')';
+	          }else{
+	            var color_value = 'hsla('+p.color.hsl.h+','+p.color.hsl.s+'%,'+p.color.hsl.l+'%,'+p.opacity+')';
+	          }
+	          return color_value;
+	        });
+	
+	    /* prepare to create img with colored svg */
+	    var svg = new Blob([coloredSvgXml], {type: 'image/svg+xml;charset=utf-8'}),
+	        DOMURL = window.URL || window.webkitURL || window,
+	        url = DOMURL.createObjectURL(svg);
+	
+	    /* create particle img obj */
+	    var img = new Image();
+	    img.addEventListener('load', function(){
+	      p.img.obj = img;
+	      p.img.loaded = true;
+	      DOMURL.revokeObjectURL(url);
+	      pJS.tmp.count_svg++;
+	    });
+	    img.src = url;
+	
+	  };
+	
+	
+	  pJS.fn.vendors.destroypJS = function(){
+	    cancelAnimationFrame(pJS.fn.drawAnimFrame);
+	    canvas_el.remove();
+	    pJSDom = null;
+	  };
+	
+	
+	  pJS.fn.vendors.drawShape = function(c, startX, startY, sideLength, sideCountNumerator, sideCountDenominator){
+	
+	    // By Programming Thomas - https://programmingthomas.wordpress.com/2013/04/03/n-sided-shapes/
+	    var sideCount = sideCountNumerator * sideCountDenominator;
+	    var decimalSides = sideCountNumerator / sideCountDenominator;
+	    var interiorAngleDegrees = (180 * (decimalSides - 2)) / decimalSides;
+	    var interiorAngle = Math.PI - Math.PI * interiorAngleDegrees / 180; // convert to radians
+	    c.save();
+	    c.beginPath();
+	    c.translate(startX, startY);
+	    c.moveTo(0,0);
+	    for (var i = 0; i < sideCount; i++) {
+	      c.lineTo(sideLength,0);
+	      c.translate(sideLength,0);
+	      c.rotate(interiorAngle);
+	    }
+	    //c.stroke();
+	    c.fill();
+	    c.restore();
+	
+	  };
+	
+	  pJS.fn.vendors.exportImg = function(){
+	    window.open(pJS.canvas.el.toDataURL('image/png'), '_blank');
+	  };
+	
+	
+	  pJS.fn.vendors.loadImg = function(type){
+	
+	    pJS.tmp.img_error = undefined;
+	
+	    if(pJS.particles.shape.image.src != ''){
+	
+	      if(type == 'svg'){
+	
+	        var xhr = new XMLHttpRequest();
+	        xhr.open('GET', pJS.particles.shape.image.src);
+	        xhr.onreadystatechange = function (data) {
+	          if(xhr.readyState == 4){
+	            if(xhr.status == 200){
+	              pJS.tmp.source_svg = data.currentTarget.response;
+	              pJS.fn.vendors.checkBeforeDraw();
+	            }else{
+	              console.log('Error pJS - Image not found');
+	              pJS.tmp.img_error = true;
+	            }
+	          }
+	        }
+	        xhr.send();
+	
+	      }else{
+	
+	        var img = new Image();
+	        img.addEventListener('load', function(){
+	          pJS.tmp.img_obj = img;
+	          pJS.fn.vendors.checkBeforeDraw();
+	        });
+	        img.src = pJS.particles.shape.image.src;
+	
+	      }
+	
+	    }else{
+	      console.log('Error pJS - No image.src');
+	      pJS.tmp.img_error = true;
+	    }
+	
+	  };
+	
+	
+	  pJS.fn.vendors.draw = function(){
+	
+	    if(pJS.particles.shape.type == 'image'){
+	
+	      if(pJS.tmp.img_type == 'svg'){
+	
+	        if(pJS.tmp.count_svg >= pJS.particles.number.value){
+	          pJS.fn.particlesDraw();
+	          if(!pJS.particles.move.enable) cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
+	          else pJS.fn.drawAnimFrame = requestAnimFrame(pJS.fn.vendors.draw);
+	        }else{
+	          //console.log('still loading...');
+	          if(!pJS.tmp.img_error) pJS.fn.drawAnimFrame = requestAnimFrame(pJS.fn.vendors.draw);
+	        }
+	
+	      }else{
+	
+	        if(pJS.tmp.img_obj != undefined){
+	          pJS.fn.particlesDraw();
+	          if(!pJS.particles.move.enable) cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
+	          else pJS.fn.drawAnimFrame = requestAnimFrame(pJS.fn.vendors.draw);
+	        }else{
+	          if(!pJS.tmp.img_error) pJS.fn.drawAnimFrame = requestAnimFrame(pJS.fn.vendors.draw);
+	        }
+	
+	      }
+	
+	    }else{
+	      pJS.fn.particlesDraw();
+	      if(!pJS.particles.move.enable) cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
+	      else pJS.fn.drawAnimFrame = requestAnimFrame(pJS.fn.vendors.draw);
+	    }
+	
+	  };
+	
+	
+	  pJS.fn.vendors.checkBeforeDraw = function(){
+	
+	    // if shape is image
+	    if(pJS.particles.shape.type == 'image'){
+	
+	      if(pJS.tmp.img_type == 'svg' && pJS.tmp.source_svg == undefined){
+	        pJS.tmp.checkAnimFrame = requestAnimFrame(check);
+	      }else{
+	        //console.log('images loaded! cancel check');
+	        cancelRequestAnimFrame(pJS.tmp.checkAnimFrame);
+	        if(!pJS.tmp.img_error){
+	          pJS.fn.vendors.init();
+	          pJS.fn.vendors.draw();
+	        }
+	        
+	      }
+	
+	    }else{
+	      pJS.fn.vendors.init();
+	      pJS.fn.vendors.draw();
+	    }
+	
+	  };
+	
+	
+	  pJS.fn.vendors.init = function(){
+	
+	    /* init canvas + particles */
+	    pJS.fn.retinaInit();
+	    pJS.fn.canvasInit();
+	    pJS.fn.canvasSize();
+	    pJS.fn.canvasPaint();
+	    pJS.fn.particlesCreate();
+	    pJS.fn.vendors.densityAutoParticles();
+	
+	    /* particles.line_linked - convert hex colors to rgb */
+	    pJS.particles.line_linked.color_rgb_line = hexToRgb(pJS.particles.line_linked.color);
+	
+	  };
+	
+	
+	  pJS.fn.vendors.start = function(){
+	
+	    if(isInArray('image', pJS.particles.shape.type)){
+	      pJS.tmp.img_type = pJS.particles.shape.image.src.substr(pJS.particles.shape.image.src.length - 3);
+	      pJS.fn.vendors.loadImg(pJS.tmp.img_type);
+	    }else{
+	      pJS.fn.vendors.checkBeforeDraw();
+	    }
+	
+	  };
+	
+	
+	
+	
+	  /* ---------- pJS - start ------------ */
+	
+	
+	  pJS.fn.vendors.eventsListeners();
+	
+	  pJS.fn.vendors.start();
+	  
+	
+	
+	};
+	
+	/* ---------- global functions - vendors ------------ */
+	
+	Object.deepExtend = function(destination, source) {
+	  for (var property in source) {
+	    if (source[property] && source[property].constructor &&
+	     source[property].constructor === Object) {
+	      destination[property] = destination[property] || {};
+	      arguments.callee(destination[property], source[property]);
+	    } else {
+	      destination[property] = source[property];
+	    }
+	  }
+	  return destination;
+	};
+	
+	window.requestAnimFrame = (function(){
+	  return  window.requestAnimationFrame ||
+	    window.webkitRequestAnimationFrame ||
+	    window.mozRequestAnimationFrame    ||
+	    window.oRequestAnimationFrame      ||
+	    window.msRequestAnimationFrame     ||
+	    function(callback){
+	      window.setTimeout(callback, 1000 / 60);
+	    };
+	})();
+	
+	window.cancelRequestAnimFrame = ( function() {
+	  return window.cancelAnimationFrame         ||
+	    window.webkitCancelRequestAnimationFrame ||
+	    window.mozCancelRequestAnimationFrame    ||
+	    window.oCancelRequestAnimationFrame      ||
+	    window.msCancelRequestAnimationFrame     ||
+	    clearTimeout
+	} )();
+	
+	function hexToRgb(hex){
+	  // By Tim Down - http://stackoverflow.com/a/5624139/3493650
+	  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+	  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+	  hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+	     return r + r + g + g + b + b;
+	  });
+	  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	  return result ? {
+	      r: parseInt(result[1], 16),
+	      g: parseInt(result[2], 16),
+	      b: parseInt(result[3], 16)
+	  } : null;
+	};
+	
+	function clamp(number, min, max) {
+	  return Math.min(Math.max(number, min), max);
+	};
+	
+	function isInArray(value, array) {
+	  return array.indexOf(value) > -1;
+	}
+	
+	
+	/* ---------- particles.js functions - start ------------ */
+	
+	window.pJSDom = [];
+	
+	window.particlesJS = function(tag_id, params){
+	
+	  //console.log(params);
+	
+	  /* no string id? so it's object params, and set the id with default id */
+	  if(typeof(tag_id) != 'string'){
+	    params = tag_id;
+	    tag_id = 'particles-js';
+	  }
+	
+	  /* no id? set the id to default id */
+	  if(!tag_id){
+	    tag_id = 'particles-js';
+	  }
+	
+	  /* pJS elements */
+	  var pJS_tag = document.getElementById(tag_id),
+	      pJS_canvas_class = 'particles-js-canvas-el',
+	      exist_canvas = pJS_tag.getElementsByClassName(pJS_canvas_class);
+	
+	  /* remove canvas if exists into the pJS target tag */
+	  if(exist_canvas.length){
+	    while(exist_canvas.length > 0){
+	      pJS_tag.removeChild(exist_canvas[0]);
+	    }
+	  }
+	
+	  /* create canvas element */
+	  var canvas_el = document.createElement('canvas');
+	  canvas_el.className = pJS_canvas_class;
+	
+	  /* set size canvas */
+	  canvas_el.style.width = "100%";
+	  canvas_el.style.height = "100%";
+	
+	  /* append canvas */
+	  var canvas = document.getElementById(tag_id).appendChild(canvas_el);
+	
+	  /* launch particle.js */
+	  if(canvas != null){
+	    pJSDom.push(new pJS(tag_id, params));
+	  }
+	
+	};
+	
+	window.particlesJS.load = function(tag_id, path_config_json, callback){
+	
+	  /* load json config */
+	  var xhr = new XMLHttpRequest();
+	  xhr.open('GET', path_config_json);
+	  xhr.onreadystatechange = function (data) {
+	    if(xhr.readyState == 4){
+	      if(xhr.status == 200){
+	        var params = JSON.parse(data.currentTarget.response);
+	        window.particlesJS(tag_id, params);
+	        if(callback) callback();
+	      }else{
+	        console.log('Error pJS - XMLHttpRequest status: '+xhr.status);
+	        console.log('Error pJS - File config not found');
+	      }
+	    }
+	  };
+	  xhr.send();
+	
+	};
 
 /***/ }
 /******/ ]);

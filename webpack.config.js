@@ -1,12 +1,12 @@
-var webpackUglify = require('webpack-uglify-js-plugin');
-var path = require("path");
+const webpackUglify = require('webpack-uglify-js-plugin');
+const path = require("path");
 
 
 function config() {
 	return {
 		devtool: "source-map",
 		entry: {
-			app: __dirname + "/app/assets/js/app.js"
+			bundle: __dirname + "/app/assets/js/app.js"
 		},
 		output: {
 			path: path.join(__dirname, "app/build", "js"),

@@ -1,5 +1,7 @@
 <template>
 		<section class="story">
+			<div id="animate" class="story__background-animation">
+			</div>
 			<h3 class="story__subheading">Tri stuba obuke</h3>
 			<h1 class="story__heading">program obuke u praktičnom streljaštvu</h1>
 				<div class="story__wrapper">

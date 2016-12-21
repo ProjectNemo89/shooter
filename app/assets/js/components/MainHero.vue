@@ -10,15 +10,15 @@
             Vaš brauzer ne podržava video. Molimo Vas skinite najnoviju verziju.
         </video>
         <div class="main-hero__callout">
-            <h1 class="main-hero__main-heading parallax">instruktor praktičnog streljaštva</h1>
-            <h2 class="main-hero__subheading parallax">Naučite da bezbedno rukujete oružjem</h2> 
-            <div class="btn__wrap parallax">
+            <h1 class="main-hero__main-heading parallax-up">instruktor praktičnog streljaštva</h1>
+            <h2 class="main-hero__subheading parallax-up">Naučite da bezbedno rukujete oružjem</h2>
+            <div class="btn__wrap parallax-up">
                 <a id="video__play" class="btn btn--blue" href="#" data-text="pogledaj video">
                     <span class="btn__overlay"></span>
                     <span class="btn__text">pogledaj video</span>
                 </a>
             </div> 
-            <div class="btn__wrap parallax">
+            <div class="btn__wrap parallax-up">
                 <a class="btn btn--primary" href="#" data-text="prijavi se">
                     <span class="btn__overlay"></span>
                     <span class="btn__text">prijavi se</span>
