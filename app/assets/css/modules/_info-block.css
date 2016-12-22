@@ -50,3 +50,10 @@
 
 	}
 }
+
+.no-flexbox .info-section {
+   &__info-block {
+    float: left;
+    }
+
+}

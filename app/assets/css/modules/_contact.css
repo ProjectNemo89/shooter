@@ -18,8 +18,7 @@
         font-family: "Exo 2", sans-serif;
         height: 600px;
         width: 50%;
-        padding-left: 5%;
-        padding-top: 15%;
+        padding-left: 0;
         border-top: 2px solid #e0e0e0;
         border-bottom: 1px solid #e0e0e0;
 
@@ -27,12 +26,14 @@
             text-align: center;
             width: 100%;
             padding-top: 10%;
+            padding-left: 0;
         }
 
         @mixin atLarge {
             width: 50%;
             text-align: left;
             padding-top: 5%;
+            padding-left: 5%;
         }
 
         &>p {

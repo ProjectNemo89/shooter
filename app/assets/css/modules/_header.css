@@ -216,17 +216,23 @@
 		position: absolute;
 		top: 20px;
 		left: 20px;
-		z-index: 100;
+		z-index: 97;
 		
 
 		@mixin atSmall {
-			width: 200px;
+			width: 10.5rem;
 			height: auto;
+			top: 30px;
+		}
+
+		@mixin atMedium {
+			width: 14rem;
+			height: auto;
+			top: 20px;
 		}
 
 		@mixin atLarge {
-			width: 15%;
-			height: auto;
+			width: 17rem;
 		}
 	}
 

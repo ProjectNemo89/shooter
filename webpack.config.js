@@ -6,11 +6,12 @@ function config() {
 	return {
 		devtool: "source-map",
 		entry: {
-			bundle: __dirname + "/app/assets/js/app.js"
+			bundle: __dirname + "/app/assets/js/app.js",
+			vendors: __dirname + "/app/assets/js/vendors/vendors.js"
 		},
 		output: {
 			path: path.join(__dirname, "app/build", "js"),
-			filename: "bundle.js"
+			filename: "[name].js"
 
 		},
 

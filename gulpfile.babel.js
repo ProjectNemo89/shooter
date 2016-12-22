@@ -9,6 +9,7 @@ import del from 'del';
 import sync from 'browser-sync';
 import webpackUglify from "webpack-uglify-js-plugin";
 import path from "path";
+import modernizer from "gulp-modernizr";
 const webpackConfig = require("./webpack.config.js");
 
 const syncOpts = {
@@ -26,7 +27,8 @@ const config = {
 	js: {
 		webpackConfig,
 		srcDir: "./app/assets/js/**/*.js",
-		dest: "./app/build/js/bundle.js"
+		dest: "./app/build/js/bundle.js",
+        vendors: "./app/assets/js/vendors"
 	},
 	html: {
 		src: "./app/index.html"
@@ -42,6 +44,7 @@ gulp.task("dev", devWatch);
 gulp.task("prod", gulp.parallel(jsProd, styleMin));
 gulp.task("clean", clean);
 gulp.task("dev:refresh", pageRefresh);
+gulp.task("modernizer", modernize);
 
 
 function styleDev() {
@@ -98,6 +101,16 @@ function jsProd(done) {
 	});	
 	done();
 
+}
+
+function modernize() {
+    return gulp.src([config.style.srcDir, config.js.srcDir])
+        .pipe(modernizer({
+            "options": [
+                "setClasses"
+            ]
+        }))
+        .pipe(gulp.dest(config.js.vendors));
 }
 
 function clean() {

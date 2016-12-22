@@ -59,7 +59,7 @@
 	&__main-heading {
 		text-transform: uppercase;
 		color: #fff;
-		margin-bottom: 0;
+		margin-bottom: 4rem;
 		font-family: "Exo 2", sans-serif;
 		font-weight: 700;
 		font-size: 4vw;
@@ -71,11 +71,13 @@
 		@mixin atSmall {
 			text-align: center;
 			font-size: 6vw;
+			margin-bottom: 4rem;
 		}
 
 		@mixin atMedium {
 			text-align: center;
 			font-size: 4vw;
+            margin-bottom: 0;
 		}
 
 		@mixin atLarge {
@@ -95,7 +97,7 @@
 		backface-visibility: hidden;
 
 		@mixin atSmall {
-			font-size: 1.2rem;
+			display: none;
 			text-align: center;
 		}
 
@@ -103,6 +105,7 @@
 			font-size: 1.4rem;
 			text-align: center;
 			padding: 1rem 0;
+            display: block;
 		}
 
 		@mixin atLarge {
